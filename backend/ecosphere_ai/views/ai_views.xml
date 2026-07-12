@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- AI Session Tree View -->
+    <record id="view_ai_session_tree" model="ir.ui.view">
+      <field name="name">ecosphere.ai.session.tree</field>
+      <field name="model">ecosphere.ai.session</field>
+      <field name="arch" type="xml">
+        <tree string="AI Conversations">
+          <field name="title"/>
+          <field name="user_id"/>
+          <field name="create_date"/>
+          <field name="message_count"/>
+          <field name="context_module"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Carbon Prediction Tree View -->
+    <record id="view_carbon_prediction_tree" model="ir.ui.view">
+      <field name="name">ecosphere.carbon.prediction.tree</field>
+      <field name="model">ecosphere.carbon.prediction</field>
+      <field name="arch" type="xml">
+        <tree string="Carbon Predictions" create="false" edit="false">
+          <field name="name"/>
+          <field name="department_id"/>
+          <field name="prediction_date"/>
+          <field name="predicted_co2_kg"/>
+          <field name="confidence_pct"/>
+          <field name="actual_co2_kg"/>
+          <field name="accuracy_pct"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Score Prediction Tree View -->
+    <record id="view_score_prediction_tree" model="ir.ui.view">
+      <field name="name">ecosphere.score.prediction.tree</field>
+      <field name="model">ecosphere.score.prediction</field>
+      <field name="arch" type="xml">
+        <tree string="ESG Score Predictions" create="false" edit="false">
+          <field name="name"/>
+          <field name="department_id"/>
+          <field name="prediction_date"/>
+          <field name="predicted_esg_score" widget="progressbar"/>
+          <field name="confidence_pct"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_ai_sessions" model="ir.actions.act_window">
+      <field name="name">AI Conversations</field>
+      <field name="res_model">ecosphere.ai.session</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <record id="action_carbon_predictions" model="ir.actions.act_window">
+      <field name="name">AI Carbon Predictions</field>
+      <field name="res_model">ecosphere.carbon.prediction</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <record id="action_score_predictions" model="ir.actions.act_window">
+      <field name="name">AI Score Predictions</field>
+      <field name="res_model">ecosphere.score.prediction</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <!-- Menu Links -->
+    <menuitem id="menu_ai_sessions"
+              name="AI Assistant Chat"
+              parent="menu_ecosphere_ai"
+              action="action_ai_sessions"
+              sequence="10"/>
+
+    <menuitem id="menu_carbon_predictions"
+              name="Carbon Predictions"
+              parent="menu_ecosphere_ai"
+              action="action_carbon_predictions"
+              sequence="20"/>
+
+    <menuitem id="menu_score_predictions"
+              name="ESG Score Predictions"
+              parent="menu_ecosphere_ai"
+              action="action_score_predictions"
+              sequence="30"/>
+  </data>
+</odoo>

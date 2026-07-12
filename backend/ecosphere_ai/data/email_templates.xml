@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <!-- Email template for policy acknowledgement request -->
+    <record id="email_template_policy_ack" model="mail.template">
+      <field name="name">EcoSphere: Policy Acknowledgement Request</field>
+      <field name="model_id" ref="model_ecosphere_policy_acknowledgement"/>
+      <field name="subject">Action Required: Policy Acknowledgement for "${object.policy_id.name}"</field>
+      <field name="email_to">${object.employee_id.work_email}</field>
+      <field name="body_html" type="html">
+        <div style="font-family: 'Inter', Arial, sans-serif; font-size: 14px; color: #1e293b;">
+          <p>Hello ${object.employee_id.name},</p>
+          <p>A new corporate sustainability/ESG policy has been published that requires your review and acknowledgement.</p>
+          <div style="background-color: #f8fafc; border-left: 4px solid #10b981; padding: 12px; margin: 16px 0;">
+            <strong>Policy:</strong> ${object.policy_id.name}<br/>
+            <strong>Due Date:</strong> ${object.due_date}
+          </div>
+          <p>Please log in to your EcoSphere AI portal to review and sign this policy document.</p>
+          <p>Best regards,<br/>EcoSphere AI Compliance Team</p>
+        </div>
+      </field>
+    </record>
+
+    <!-- Email template for compliance alert -->
+    <record id="email_template_compliance_alert" model="mail.template">
+      <field name="name">EcoSphere: Compliance Incident Alert</field>
+      <field name="model_id" ref="model_ecosphere_compliance_issue"/>
+      <field name="subject">CRITICAL: Compliance Issue Detected - "${object.name}"</field>
+      <field name="email_to">${object.owner_id.email or 'admin@ecosphere.local'}</field>
+      <field name="body_html" type="html">
+        <div style="font-family: 'Inter', Arial, sans-serif; font-size: 14px; color: #1e293b;">
+          <p>Dear Compliance Officer,</p>
+          <p>A new ESG compliance issue has been logged in the system requiring immediate review.</p>
+          <div style="background-color: #fff1f2; border-left: 4px solid #ef4444; padding: 12px; margin: 16px 0;">
+            <strong>Issue:</strong> ${object.name}<br/>
+            <strong>Severity:</strong> ${object.severity}<br/>
+            <strong>Type:</strong> ${object.issue_type}
+          </div>
+          <p>Please review and remediate this breach immediately in the compliance dashboard.</p>
+          <p>Best regards,<br/>EcoSphere AI Automated Guard</p>
+        </div>
+      </field>
+    </record>
+  </data>
+</odoo>

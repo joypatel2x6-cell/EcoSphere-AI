@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Challenge Tree View -->
+    <record id="view_challenge_tree" model="ir.ui.view">
+      <field name="name">ecosphere.challenge.tree</field>
+      <field name="model">ecosphere.challenge</field>
+      <field name="arch" type="xml">
+        <tree string="ESG Challenges">
+          <field name="challenge_code"/>
+          <field name="name"/>
+          <field name="challenge_type"/>
+          <field name="category"/>
+          <field name="xp_reward"/>
+          <field name="green_coins_reward"/>
+          <field name="total_participants"/>
+          <field name="completion_rate" widget="progressbar"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Challenge Form View -->
+    <record id="view_challenge_form" model="ir.ui.view">
+      <field name="name">ecosphere.challenge.form</field>
+      <field name="model">ecosphere.challenge</field>
+      <field name="arch" type="xml">
+        <form string="ESG Challenge">
+          <header>
+            <button name="action_publish" string="Publish Challenge" type="object" class="oe_highlight" states="draft" groups="group_ecosphere_manager"/>
+            <button name="action_end" string="End Challenge &amp; Reward" type="object" class="oe_highlight" states="published" groups="group_ecosphere_manager"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,published,ended"/>
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <h1><field name="name"/></h1>
+            </div>
+            <group>
+              <group>
+                <field name="challenge_code"/>
+                <field name="challenge_type"/>
+                <field name="category"/>
+                <field name="difficulty"/>
+              </group>
+              <group>
+                <field name="start_date"/>
+                <field name="deadline_date"/>
+                <field name="xp_reward"/>
+                <field name="green_coins_reward"/>
+                <field name="badge_id"/>
+              </group>
+            </group>
+            <notebook>
+              <page string="Target / Criteria">
+                <group>
+                  <field name="target_type"/>
+                  <field name="target_value"/>
+                  <field name="target_unit"/>
+                </group>
+              </page>
+              <page string="Participants">
+                <field name="participation_ids">
+                  <tree editable="bottom">
+                    <field name="user_id"/>
+                    <field name="status"/>
+                    <field name="progress_value"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Badge Tree View -->
+    <record id="view_badge_tree" model="ir.ui.view">
+      <field name="name">ecosphere.badge.tree</field>
+      <field name="model">ecosphere.badge</field>
+      <field name="arch" type="xml">
+        <tree string="Badges">
+          <field name="icon_emoji"/>
+          <field name="name"/>
+          <field name="code"/>
+          <field name="badge_level"/>
+          <field name="category"/>
+          <field name="xp_value"/>
+          <field name="green_coins_value"/>
+          <field name="total_grants"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Reward Tree View -->
+    <record id="view_reward_tree" model="ir.ui.view">
+      <field name="name">ecosphere.reward.tree</field>
+      <field name="model">ecosphere.reward</field>
+      <field name="arch" type="xml">
+        <tree string="Rewards Shop">
+          <field name="icon_emoji"/>
+          <field name="name"/>
+          <field name="reward_type"/>
+          <field name="cost_coins"/>
+          <field name="stock_quantity"/>
+          <field name="is_unlimited"/>
+          <field name="is_active"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_challenges" model="ir.actions.act_window">
+      <field name="name">Challenges</field>
+      <field name="res_model">ecosphere.challenge</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_badges" model="ir.actions.act_window">
+      <field name="name">Badges Gallery</field>
+      <field name="res_model">ecosphere.badge</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <record id="action_rewards" model="ir.actions.act_window">
+      <field name="name">Rewards Marketplace</field>
+      <field name="res_model">ecosphere.reward</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Links -->
+    <menuitem id="menu_challenges"
+              name="ESG Challenges"
+              parent="menu_ecosphere_gamification"
+              action="action_challenges"
+              sequence="10"/>
+
+    <menuitem id="menu_badges"
+              name="Badges Gallery"
+              parent="menu_ecosphere_gamification"
+              action="action_badges"
+              sequence="20"/>
+
+    <menuitem id="menu_rewards"
+              name="Rewards Marketplace"
+              parent="menu_ecosphere_gamification"
+              action="action_rewards"
+              sequence="30"/>
+  </data>
+</odoo>

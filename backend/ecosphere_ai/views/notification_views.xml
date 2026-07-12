@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Notification Tree View -->
+    <record id="view_notification_tree" model="ir.ui.view">
+      <field name="name">ecosphere.notification.tree</field>
+      <field name="model">ecosphere.notification</field>
+      <field name="arch" type="xml">
+        <tree string="In-App Notifications" create="false" edit="false">
+          <field name="create_date" string="Time"/>
+          <field name="title"/>
+          <field name="message"/>
+          <field name="notification_type"/>
+          <field name="is_read"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_notifications" model="ir.actions.act_window">
+      <field name="name">My Notifications</field>
+      <field name="res_model">ecosphere.notification</field>
+      <field name="view_mode">tree</field>
+      <field name="domain">[('user_id', '=', uid)]</field>
+    </record>
+
+    <!-- Menu Links -->
+    <menuitem id="menu_notifications_action"
+              name="My Notifications"
+              parent="menu_ecosphere_dashboard"
+              action="action_notifications"
+              sequence="20"/>
+  </data>
+</odoo>

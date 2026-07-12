@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- EcoSphere AI Root Menu -->
+    <menuitem id="menu_ecosphere_root"
+              name="EcoSphere AI"
+              web_icon="ecosphere_ai,static/description/icon.png"
+              sequence="10"/>
+
+    <!-- Module Sections (Sub-Menus) -->
+    <menuitem id="menu_ecosphere_dashboard"
+              name="Dashboard"
+              parent="menu_ecosphere_root"
+              sequence="10"/>
+
+    <menuitem id="menu_ecosphere_environmental"
+              name="Environmental"
+              parent="menu_ecosphere_root"
+              sequence="20"/>
+
+    <menuitem id="menu_ecosphere_social"
+              name="Social Impact"
+              parent="menu_ecosphere_root"
+              sequence="30"/>
+
+    <menuitem id="menu_ecosphere_governance"
+              name="Governance"
+              parent="menu_ecosphere_root"
+              sequence="40"/>
+
+    <menuitem id="menu_ecosphere_gamification"
+              name="Gamification"
+              parent="menu_ecosphere_root"
+              sequence="50"/>
+
+    <menuitem id="menu_ecosphere_ai"
+              name="AI Assistant"
+              parent="menu_ecosphere_root"
+              sequence="60"/>
+
+    <menuitem id="menu_ecosphere_reports"
+              name="Reports"
+              parent="menu_ecosphere_root"
+              sequence="70"/>
+
+    <menuitem id="menu_ecosphere_admin"
+              name="Settings &amp; Audit"
+              parent="menu_ecosphere_root"
+              sequence="100"
+              groups="group_ecosphere_admin"/>
+  </data>
+</odoo>

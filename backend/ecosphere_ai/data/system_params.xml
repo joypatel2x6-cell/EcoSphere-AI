@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <!-- Maximum login attempts before temporary account lock -->
+    <record id="param_max_login_attempts" model="ir.config_parameter">
+      <field name="key">ecosphere.max_login_attempts</field>
+      <field name="value">5</field>
+    </record>
+
+    <!-- Default currency unit for ESG reward shop -->
+    <record id="param_esg_currency_name" model="ir.config_parameter">
+      <field name="key">ecosphere.currency_name</field>
+      <field name="value">Green Coins</field>
+    </record>
+  </data>
+</odoo>

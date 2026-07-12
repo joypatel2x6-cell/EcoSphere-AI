@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- AI Configuration Form View -->
+    <record id="view_ai_config_form" model="ir.ui.view">
+      <field name="name">ecosphere.ai.config.form</field>
+      <field name="model">ecosphere.ai.config</field>
+      <field name="arch" type="xml">
+        <form string="AI Integration Settings">
+          <sheet>
+            <group>
+              <group>
+                <field name="provider"/>
+                <field name="model_name"/>
+                <field name="api_key" password="True"/>
+              </group>
+              <group>
+                <field name="base_url"/>
+                <field name="temperature"/>
+                <field name="max_tokens"/>
+                <field name="timeout_seconds"/>
+              </group>
+            </group>
+            <group string="System &amp; Budget Limits">
+              <field name="monthly_token_budget"/>
+              <field name="tokens_used_this_month" readonly="1"/>
+            </group>
+            <group string="System Persona Guidelines">
+              <field name="system_prompt" placeholder="AI instructions..."/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Activity Log Tree View -->
+    <record id="view_activity_log_tree" model="ir.ui.view">
+      <field name="name">ecosphere.activity.log.tree</field>
+      <field name="model">ecosphere.activity.log</field>
+      <field name="arch" type="xml">
+        <tree string="Activity Logs" create="false" edit="false" delete="false">
+          <field name="create_date" string="Timestamp"/>
+          <field name="user_id"/>
+          <field name="action"/>
+          <field name="description"/>
+          <field name="ip_address"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Login History Tree View -->
+    <record id="view_login_history_tree" model="ir.ui.view">
+      <field name="name">ecosphere.login.history.tree</field>
+      <field name="model">ecosphere.login.history</field>
+      <field name="arch" type="xml">
+        <tree string="Login Audit Trails" create="false" edit="false" delete="false">
+          <field name="login_at"/>
+          <field name="user_id"/>
+          <field name="ip_address"/>
+          <field name="status"/>
+          <field name="failure_reason"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_ai_configs" model="ir.actions.act_window">
+      <field name="name">AI Engine Configurations</field>
+      <field name="res_model">ecosphere.ai.config</field>
+      <field name="view_mode">form</field>
+    </record>
+
+    <record id="action_activity_logs" model="ir.actions.act_window">
+      <field name="name">ESG Activity Logs</field>
+      <field name="res_model">ecosphere.activity.log</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <record id="action_login_histories" model="ir.actions.act_window">
+      <field name="name">Login History Logs</field>
+      <field name="res_model">ecosphere.login.history</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <!-- Menu Links -->
+    <menuitem id="menu_ai_configs"
+              name="AI Integration Settings"
+              parent="menu_ecosphere_admin"
+              action="action_ai_configs"
+              sequence="10"/>
+
+    <menuitem id="menu_activity_logs"
+              name="User Activity Logs"
+              parent="menu_ecosphere_admin"
+              action="action_activity_logs"
+              sequence="20"/>
+
+    <menuitem id="menu_login_histories"
+              name="Login History Trails"
+              parent="menu_ecosphere_admin"
+              action="action_login_histories"
+              sequence="30"/>
+  </data>
+</odoo>

@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    image: ecosphere-odoo:18.0
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    volumes:
+      - odoo-web-data:/var/lib/odoo
+      - ./ecosphere_ai:/mnt/extra-addons/ecosphere_ai
+    environment:
+      - HOST=db
+      - USER=odoo
+      - PASSWORD=odoo_secure_db_pass
+    networks:
+      - ecosphere-network
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=odoo
+      - POSTGRES_PASSWORD=odoo_secure_db_pass
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - odoo-db-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - ecosphere-network
+
+  flask-client:
+    image: python:3.10-slim
+    working_dir: /app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ..:/app
+    command: sh -c "pip install -r backend/requirements.txt && python backend/app.py"
+    depends_on:
+      - web
+    networks:
+      - ecosphere-network
+
+volumes:
+  odoo-web-data:
+  odoo-db-data:
+
+networks:
+  ecosphere-network:
+    driver: bridge

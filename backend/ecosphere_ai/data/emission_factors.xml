@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <!-- Initial seed values are handled in post_init_hook, but we can register reference templates here too -->
+    <record id="factor_electricity_default" model="ecosphere.emission.factor">
+      <field name="name">Standard Grid Electricity</field>
+      <field name="code">ELEC-DEF</field>
+      <field name="category">electricity</field>
+      <field name="scope">scope2</field>
+      <field name="unit">kWh</field>
+      <field name="factor_value">0.421</field>
+      <field name="source">Ghg Protocol 2024</field>
+    </record>
+
+    <record id="factor_fuel_gasoline" model="ecosphere.emission.factor">
+      <field name="name">Gasoline Combustion (Vehicle)</field>
+      <field name="code">FUEL-GAS</field>
+      <field name="category">fuel</field>
+      <field name="scope">scope1</field>
+      <field name="unit">litres</field>
+      <field name="factor_value">2.31</field>
+      <field name="source">EPA 2024</field>
+    </record>
+
+    <record id="factor_waste_landfill" model="ecosphere.emission.factor">
+      <field name="name">Mixed Waste to Landfill</field>
+      <field name="code">WST-LF</field>
+      <field name="category">waste</field>
+      <field name="scope">scope3</field>
+      <field name="unit">kg</field>
+      <field name="factor_value">0.587</field>
+      <field name="source">DEFRA 2024</field>
+    </record>
+  </data>
+</odoo>

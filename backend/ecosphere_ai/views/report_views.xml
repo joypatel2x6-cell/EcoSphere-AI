@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- ESG Report Tree View -->
+    <record id="view_report_tree" model="ir.ui.view">
+      <field name="name">ecosphere.report.tree</field>
+      <field name="model">ecosphere.report</field>
+      <field name="arch" type="xml">
+        <tree string="ESG Reports">
+          <field name="name"/>
+          <field name="report_type"/>
+          <field name="period_start"/>
+          <field name="period_end"/>
+          <field name="format"/>
+          <field name="generated_by"/>
+          <field name="create_date"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_reports" model="ir.actions.act_window">
+      <field name="name">Generated Reports</field>
+      <field name="res_model">ecosphere.report</field>
+      <field name="view_mode">tree</field>
+    </record>
+
+    <!-- Menu Links -->
+    <menuitem id="menu_reports_action"
+              name="Generated Reports"
+              parent="menu_ecosphere_reports"
+              action="action_reports"
+              sequence="10"/>
+  </data>
+</odoo>

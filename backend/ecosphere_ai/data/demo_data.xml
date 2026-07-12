@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <!-- Demo Departments -->
+    <record id="dept_rnd" model="hr.department">
+      <field name="name">Research &amp; Development</field>
+    </record>
+
+    <record id="dept_ops" model="hr.department">
+      <field name="name">Operations &amp; Logistics</field>
+    </record>
+
+    <!-- Demo Employees -->
+    <record id="emp_john" model="hr.employee">
+      <field name="name">John Sustainability</field>
+      <field name="work_email">john@ecosphere.local</field>
+      <field name="department_id" ref="dept_rnd"/>
+    </record>
+
+    <!-- Demo Challenges -->
+    <record id="challenge_zero_waste" model="ecosphere.challenge">
+      <field name="name">Zero Waste July</field>
+      <field name="challenge_type">weekly</field>
+      <field name="category">waste</field>
+      <field name="start_date" eval="time.strftime('%Y-%m-01')"/>
+      <field name="deadline_date" eval="time.strftime('%Y-%m-28')"/>
+      <field name="xp_reward">150</field>
+      <field name="green_coins_reward">30</field>
+      <field name="difficulty">medium</field>
+      <field name="state">published</field>
+    </record>
+  </data>
+</odoo>

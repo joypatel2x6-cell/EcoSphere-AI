@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- CSR Activity Tree View -->
+    <record id="view_csr_activity_tree" model="ir.ui.view">
+      <field name="name">ecosphere.csr.activity.tree</field>
+      <field name="model">ecosphere.csr.activity</field>
+      <field name="arch" type="xml">
+        <tree string="CSR Activities">
+          <field name="name"/>
+          <field name="activity_type"/>
+          <field name="event_date"/>
+          <field name="duration_hours"/>
+          <field name="actual_participants"/>
+          <field name="total_volunteer_hours"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- CSR Activity Form View -->
+    <record id="view_csr_activity_form" model="ir.ui.view">
+      <field name="name">ecosphere.csr.activity.form</field>
+      <field name="model">ecosphere.csr.activity</field>
+      <field name="arch" type="xml">
+        <form string="CSR Activity">
+          <header>
+            <button name="action_complete" string="Complete &amp; Reward" type="object" class="oe_highlight" states="planned,ongoing"/>
+            <field name="state" widget="statusbar" statusbar_visible="planned,ongoing,completed"/>
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <h1><field name="name"/></h1>
+            </div>
+            <group>
+              <group>
+                <field name="activity_type"/>
+                <field name="organizer_id"/>
+                <field name="department_id"/>
+                <field name="event_date"/>
+                <field name="event_end_date"/>
+              </group>
+              <group>
+                <field name="duration_hours"/>
+                <field name="max_participants"/>
+                <field name="xp_reward"/>
+                <field name="green_coins_reward"/>
+              </group>
+            </group>
+            <notebook>
+              <page string="Participants">
+                <field name="participation_ids">
+                  <tree editable="bottom">
+                    <field name="employee_id"/>
+                    <field name="status"/>
+                    <field name="hours_contributed"/>
+                    <field name="rating"/>
+                  </tree>
+                </field>
+              </page>
+              <page string="Impact Metrics">
+                <group>
+                  <field name="trees_planted"/>
+                  <field name="co2_offset_kg"/>
+                  <field name="beneficiaries_count"/>
+                  <field name="funds_raised"/>
+                </group>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- DEI Diversity Metric Tree View -->
+    <record id="view_diversity_metric_tree" model="ir.ui.view">
+      <field name="name">ecosphere.diversity.metric.tree</field>
+      <field name="model">ecosphere.diversity.metric</field>
+      <field name="arch" type="xml">
+        <tree string="DEI Metrics">
+          <field name="name"/>
+          <field name="metric_type"/>
+          <field name="period_date"/>
+          <field name="metric_value"/>
+          <field name="unit"/>
+          <field name="target_value"/>
+          <field name="pct_achievement" widget="progressbar"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_csr_activities" model="ir.actions.act_window">
+      <field name="name">CSR Activities</field>
+      <field name="res_model">ecosphere.csr.activity</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_diversity_metrics" model="ir.actions.act_window">
+      <field name="name">DEI Metrics</field>
+      <field name="res_model">ecosphere.diversity.metric</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Links -->
+    <menuitem id="menu_csr_activities"
+              name="CSR &amp; Volunteering"
+              parent="menu_ecosphere_social"
+              action="action_csr_activities"
+              sequence="10"/>
+
+    <menuitem id="menu_diversity_metrics"
+              name="Diversity &amp; Equity"
+              parent="menu_ecosphere_social"
+              action="action_diversity_metrics"
+              sequence="20"/>
+  </data>
+</odoo>

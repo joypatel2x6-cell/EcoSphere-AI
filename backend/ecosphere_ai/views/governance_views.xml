@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Policy Tree View -->
+    <record id="view_policy_tree" model="ir.ui.view">
+      <field name="name">ecosphere.policy.tree</field>
+      <field name="model">ecosphere.policy</field>
+      <field name="arch" type="xml">
+        <tree string="ESG Policies">
+          <field name="policy_code"/>
+          <field name="name"/>
+          <field name="policy_type"/>
+          <field name="owner_id"/>
+          <field name="version"/>
+          <field name="effective_date"/>
+          <field name="acknowledgement_rate" widget="progressbar"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Policy Form View -->
+    <record id="view_policy_form" model="ir.ui.view">
+      <field name="name">ecosphere.policy.form</field>
+      <field name="model">ecosphere.policy</field>
+      <field name="arch" type="xml">
+        <form string="ESG Policy">
+          <header>
+            <button name="action_submit_review" string="Submit for Review" type="object" class="oe_highlight" states="draft"/>
+            <button name="action_approve" string="Approve Policy" type="object" class="oe_highlight" states="in_review" groups="group_ecosphere_compliance"/>
+            <button name="action_publish" string="Publish Policy" type="object" class="oe_highlight" states="approved" groups="group_ecosphere_compliance"/>
+            <field name="state" widget="statusbar" statusbar_visible="draft,in_review,approved,published"/>
+          </header>
+          <sheet>
+            <div class="oe_title">
+              <h1><field name="name"/></h1>
+            </div>
+            <group>
+              <group>
+                <field name="policy_code"/>
+                <field name="policy_type"/>
+                <field name="owner_id"/>
+                <field name="approver_id"/>
+                <field name="department_id"/>
+              </group>
+              <group>
+                <field name="version"/>
+                <field name="effective_date"/>
+                <field name="review_date"/>
+                <field name="acknowledgement_required"/>
+                <field name="target_audience"/>
+              </group>
+            </group>
+            <notebook>
+              <page string="Executive Summary">
+                <field name="summary" placeholder="Executive summary of this governance guidelines..."/>
+              </page>
+              <page string="Policy Content">
+                <field name="content" placeholder="Full policy content html..."/>
+              </page>
+              <page string="Acknowledgements">
+                <field name="acknowledgement_ids" readonly="1">
+                  <tree>
+                    <field name="employee_id"/>
+                    <field name="status"/>
+                    <field name="acknowledged_date"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Audit Tree View -->
+    <record id="view_audit_tree" model="ir.ui.view">
+      <field name="name">ecosphere.audit.tree</field>
+      <field name="model">ecosphere.audit</field>
+      <field name="arch" type="xml">
+        <tree string="ESG Audits">
+          <field name="audit_code"/>
+          <field name="name"/>
+          <field name="audit_type"/>
+          <field name="audit_scope"/>
+          <field name="audit_date"/>
+          <field name="total_findings"/>
+          <field name="open_findings"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Compliance Issue Tree View -->
+    <record id="view_compliance_issue_tree" model="ir.ui.view">
+      <field name="name">ecosphere.compliance.issue.tree</field>
+      <field name="model">ecosphere.compliance.issue</field>
+      <field name="arch" type="xml">
+        <tree string="Compliance Issues">
+          <field name="issue_ref"/>
+          <field name="name"/>
+          <field name="issue_type"/>
+          <field name="severity"/>
+          <field name="detected_date"/>
+          <field name="owner_id"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Risk Assessment Tree View -->
+    <record id="view_risk_assessment_tree" model="ir.ui.view">
+      <field name="name">ecosphere.risk.assessment.tree</field>
+      <field name="model">ecosphere.risk.assessment</field>
+      <field name="arch" type="xml">
+        <tree string="Risk Register">
+          <field name="name"/>
+          <field name="risk_category"/>
+          <field name="owner_id"/>
+          <field name="likelihood"/>
+          <field name="impact"/>
+          <field name="risk_score"/>
+          <field name="risk_level"/>
+          <field name="state"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Actions -->
+    <record id="action_policies" model="ir.actions.act_window">
+      <field name="name">ESG Policies</field>
+      <field name="res_model">ecosphere.policy</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_audits" model="ir.actions.act_window">
+      <field name="name">ESG Audits</field>
+      <field name="res_model">ecosphere.audit</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_compliance_issues" model="ir.actions.act_window">
+      <field name="name">Compliance Issues</field>
+      <field name="res_model">ecosphere.compliance.issue</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_risk_assessments" model="ir.actions.act_window">
+      <field name="name">Risk Register</field>
+      <field name="res_model">ecosphere.risk.assessment</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menu Links -->
+    <menuitem id="menu_policies"
+              name="ESG Policies"
+              parent="menu_ecosphere_governance"
+              action="action_policies"
+              sequence="10"/>
+
+    <menuitem id="menu_audits"
+              name="Audits &amp; Findings"
+              parent="menu_ecosphere_governance"
+              action="action_audits"
+              sequence="20"/>
+
+    <menuitem id="menu_compliance_issues"
+              name="Compliance Issues"
+              parent="menu_ecosphere_governance"
+              action="action_compliance_issues"
+              sequence="30"/>
+
+    <menuitem id="menu_risk_assessments"
+              name="Risk Register"
+              parent="menu_ecosphere_governance"
+              action="action_risk_assessments"
+              sequence="40"/>
+  </data>
+</odoo>

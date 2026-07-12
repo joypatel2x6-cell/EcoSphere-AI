@@ -1,0 +1,7 @@
+/* EcoSphere AI — Backend Style Overrides */
+
+.o_ecosphere_dashboard {
+    background-color: #f8fafc;
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+}

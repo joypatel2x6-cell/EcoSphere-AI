@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="1">
+    <!-- Category for ESG Roles -->
+    <record id="module_category_ecosphere_esg" model="ir.module.category">
+      <field name="name">EcoSphere ESG Management</field>
+      <field name="description">Access rights for EcoSphere ESG modules</field>
+      <field name="sequence">99</field>
+    </record>
+
+    <!-- Group Definitions representing standard roles -->
+    <record id="group_ecosphere_employee" model="res.groups">
+      <field name="name">Employee / User</field>
+      <field name="category_id" ref="module_category_ecosphere_esg"/>
+      <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+    </record>
+
+    <record id="group_ecosphere_dept_manager" model="res.groups">
+      <field name="name">Department Manager</field>
+      <field name="category_id" ref="module_category_ecosphere_esg"/>
+      <field name="implied_ids" eval="[(4, ref('group_ecosphere_employee'))]"/>
+    </record>
+
+    <record id="group_ecosphere_hr_manager" model="res.groups">
+      <field name="name">HR Manager</field>
+      <field name="category_id" ref="module_category_ecosphere_esg"/>
+      <field name="implied_ids" eval="[(4, ref('group_ecosphere_employee'))]"/>
+    </record>
+
+    <record id="group_ecosphere_compliance" model="res.groups">
+      <field name="name">Compliance Officer</field>
+      <field name="category_id" ref="module_category_ecosphere_esg"/>
+      <field name="implied_ids" eval="[(4, ref('group_ecosphere_employee'))]"/>
+    </record>
+
+    <record id="group_ecosphere_auditor" model="res.groups">
+      <field name="name">Auditor</field>
+      <field name="category_id" ref="module_category_ecosphere_esg"/>
+      <field name="implied_ids" eval="[(4, ref('group_ecosphere_employee'))]"/>
+    </record>
+
+    <record id="group_ecosphere_manager" model="res.groups">
+      <field name="name">ESG Manager</field>
+      <field name="category_id" ref="module_category_ecosphere_esg"/>
+      <field name="implied_ids" eval="[(4, ref('group_ecosphere_dept_manager')), (4, ref('group_ecosphere_compliance')), (4, ref('group_ecosphere_auditor'))]"/>
+    </record>
+
+    <record id="group_ecosphere_admin" model="res.groups">
+      <field name="name">Super Admin</field>
+      <field name="category_id" ref="module_category_ecosphere_esg"/>
+      <field name="implied_ids" eval="[(4, ref('group_ecosphere_manager'))]"/>
+      <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+  </data>
+</odoo>
