@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSphere AI — Welcome & Authenticate</title>
+  <meta name="description" content="Access the EcoSphere AI sustainability management suite. Experience premium AI carbon analytics, gamified tracking, and ESG telemetry.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="insights.css">
+</head>
+<body class="auth-body">
+
+  <!-- Background Orbs -->
+  <div class="auth-bg-glow orb-1"></div>
+  <div class="auth-bg-glow orb-2"></div>
+  
+  <!-- Floating Leaves / Eco Particles Container -->
+  <div class="particles-container" id="particles-container"></div>
+
+  <!-- Header Nav -->
+  <header class="auth-header">
+    <div class="auth-logo" onclick="window.location.href='index.html'">
+      <div class="logo-box">ES</div>
+      <span>EcoSphere <strong style="color: var(--primary);">AI</strong></span>
+    </div>
+    <nav class="auth-nav">
+      <a href="index.html" data-lang-en="Home" data-lang-es="Inicio">Home</a>
+      <a href="index.html#features" data-lang-en="Features" data-lang-es="Funciones">Features</a>
+      <a href="index.html#about" data-lang-en="About" data-lang-es="Sobre nosotros">About</a>
+      <a href="index.html#contact" data-lang-en="Contact" data-lang-es="Contacto">Contact</a>
+    </nav>
+    <div class="auth-header-actions">
+      <!-- Language Selector -->
+      <div class="lang-selector">
+        <select id="lang-select" onchange="toggleLanguage(this.value)">
+          <option value="en">EN</option>
+          <option value="es">ES</option>
+        </select>
+      </div>
+      <!-- Theme Toggle -->
+      <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Split Screen Layout -->
+  <main class="auth-main-container">
+    
+    <!-- Left Screen: Glowing 3D Earth Map / Why EcoSphere AI -->
+    <section class="auth-visual-side">
+      <div class="canvas-wrapper">
+        <canvas id="globe-canvas" class="globe-three-canvas"></canvas>
+        <div class="hologram-grid"></div>
+      </div>
+      
+      <div class="why-us-panel">
+        <h3 class="why-title" data-lang-en="Why EcoSphere AI?" data-lang-es="¿Por qué EcoSphere AI?">Why EcoSphere AI?</h3>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-icon"><i data-lucide="cpu"></i></div>
+            <div>
+              <h5 data-lang-en="AI-Powered ESG Analytics" data-lang-es="Análisis ESG con IA">AI-Powered ESG Analytics</h5>
+              <p data-lang-en="Predict compliance pathways and generate carbon forecasting models instantly." data-lang-es="Prediga rutas de cumplimiento y genere modelos de emisiones al instante.">Predict compliance pathways and generate carbon forecasting models instantly.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon"><i data-lucide="leaf"></i></div>
+            <div>
+              <h5 data-lang-en="Carbon Footprint Tracking" data-lang-es="Seguimiento de huella de carbono">Carbon Footprint Tracking</h5>
+              <p data-lang-en="Automate Scope 1, 2, and 3 calculations across all operational ledgers." data-lang-es="Automatice cálculos de Alcance 1, 2 y 3 en todos los registros operativos.">Automate Scope 1, 2, and 3 calculations across all operational ledgers.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon"><i data-lucide="shield-check"></i></div>
+            <div>
+              <h5 data-lang-en="Compliance Management" data-lang-es="Gestión de cumplimiento">Compliance Management</h5>
+              <p data-lang-en="Audit workflows and board approvals matched to SEC and CSRD regulations." data-lang-es="Flujos de auditoría y aprobaciones alineados con regulaciones de la SEC y CSRD.">Audit workflows and board approvals matched to SEC and CSRD regulations.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-icon"><i data-lucide="trophy"></i></div>
+            <div>
+              <h5 data-lang-en="Employee Gamification" data-lang-es="Gamificación de empleados">Employee Gamification</h5>
+              <p data-lang-en="Level up teams, earn XP badges, and redeem sustainability reward vouchers." data-lang-es="Suba de nivel, gane medallas de XP y canjee vales de recompensas ecológicas.">Level up teams, earn XP badges, and redeem sustainability reward vouchers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Screen: Auth Card -->
+    <section class="auth-card-side">
+      <div class="auth-card glass-panel" id="auth-card">
+        
+        <!-- ================== LOGIN FORM ================== -->
+        <div class="auth-form-panel active" id="login-panel">
+          <div class="auth-form-header">
+            <h2 data-lang-en="Welcome Back 👋" data-lang-es="Bienvenido de vuelta 👋">Welcome Back 👋</h2>
+            <p data-lang-en="Login to continue your sustainability journey." data-lang-es="Inicie sesión para continuar su viaje de sostenibilidad.">Login to continue your sustainability journey.</p>
+          </div>
+
+          <form id="login-form" class="auth-form" onsubmit="handleLoginSubmit(event)">
+            <!-- Email -->
+            <div class="form-group-custom">
+              <label for="login-email" data-lang-en="Email Address" data-lang-es="Dirección de correo">Email Address</label>
+              <div class="input-wrapper">
+                <i data-lucide="mail" class="input-icon"></i>
+                <input type="email" id="login-email" required placeholder="name@company.com" oninput="validateEmailField(this)">
+                <span class="validity-indicator"></span>
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group-custom">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <label for="login-password" data-lang-en="Password" data-lang-es="Contraseña">Password</label>
+                <a href="#" class="form-link-small" onclick="triggerForgotPassword()" data-lang-en="Forgot Password?" data-lang-es="¿Olvidó su contraseña?">Forgot Password?</a>
+              </div>
+              <div class="input-wrapper">
+                <i data-lucide="lock" class="input-icon"></i>
+                <input type="password" id="login-password" required placeholder="••••••••">
+                <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('login-password')">
+                  <i data-lucide="eye" class="eye-open"></i>
+                  <i data-lucide="eye-off" class="eye-closed" style="display:none;"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Remember & Action -->
+            <div class="form-checkbox-row">
+              <label class="checkbox-container">
+                <input type="checkbox" id="login-remember">
+                <span class="checkmark"></span>
+                <span class="checkbox-label" data-lang-en="Remember Me" data-lang-es="Recordarme">Remember Me</span>
+              </label>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="auth-submit-btn">
+              <span class="btn-text" data-lang-en="Login" data-lang-es="Iniciar Sesión">Login</span>
+              <div class="loading-spinner-wrap" style="display:none;">
+                <i data-lucide="loader" class="spinner-icon"></i>
+              </div>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="auth-divider">
+            <span data-lang-en="or continue with" data-lang-es="o continuar con">or continue with</span>
+          </div>
+
+          <!-- Social Buttons -->
+          <div class="social-auth-grid">
+            <button class="social-auth-btn" onclick="handleSocialAuth('Google')">
+              <svg viewBox="0 0 24 24" width="16" height="16"><path fill="#ea4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.99 5.99 0 0 1 8 12.5a5.99 5.99 0 0 1 5.991-6.014c1.49 0 2.9.522 4.004 1.488l3.136-3.136C19.227 3.01 16.718 2 13.99 2 8.473 2 4 6.473 4 12s4.473 10 9.99 10c5.38 0 9.814-3.89 9.814-9.314 0-.584-.055-1.168-.166-1.7H12.24z"/></svg>
+              <span>Google</span>
+            </button>
+            <button class="social-auth-btn" onclick="handleSocialAuth('Microsoft')">
+              <svg viewBox="0 0 23 23" width="16" height="16"><path fill="#f35325" d="M0 0h11v11H0z"/><path fill="#81bc06" d="M12 0h11v11H12z"/><path fill="#05a6f0" d="M0 12h11v11H0z"/><path fill="#ffba08" d="M12 12h11v11H12z"/></svg>
+              <span>Microsoft</span>
+            </button>
+            <button class="social-auth-btn" onclick="handleSocialAuth('GitHub')">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+              <span>GitHub</span>
+            </button>
+          </div>
+
+          <div class="auth-card-footer">
+            <span data-lang-en="Don't have an account?" data-lang-es="¿No tiene una cuenta?">Don't have an account?</span>
+            <a href="#" onclick="toggleAuthPanel('signup')" data-lang-en="Sign Up" data-lang-es="Registrarse">Sign Up</a>
+          </div>
+        </div>
+
+        <!-- ================== SIGNUP FORM ================== -->
+        <div class="auth-form-panel" id="signup-panel">
+          <div class="auth-form-header">
+            <h2 data-lang-en="Join EcoSphere AI" data-lang-es="Únase a EcoSphere AI">Join EcoSphere AI</h2>
+            <p data-lang-en="Build a sustainable future with AI." data-lang-es="Construya un futuro sostenible con inteligencia artificial.">Build a sustainable future with AI.</p>
+          </div>
+
+          <form id="signup-form" class="auth-form" onsubmit="handleSignupSubmit(event)">
+            <!-- Full Name & Company Name -->
+            <div class="form-row-2col">
+              <div class="form-group-custom">
+                <label for="signup-name" data-lang-en="Full Name" data-lang-es="Nombre completo">Full Name</label>
+                <div class="input-wrapper">
+                  <i data-lucide="user" class="input-icon"></i>
+                  <input type="text" id="signup-name" required placeholder="Joy Patel">
+                </div>
+              </div>
+              <div class="form-group-custom">
+                <label for="signup-company" data-lang-en="Company Name" data-lang-es="Nombre de la empresa">Company Name</label>
+                <div class="input-wrapper">
+                  <i data-lucide="building" class="input-icon"></i>
+                  <input type="text" id="signup-company" required placeholder="EcoSphere Inc.">
+                </div>
+              </div>
+            </div>
+
+            <!-- Email & Phone -->
+            <div class="form-row-2col">
+              <div class="form-group-custom">
+                <label for="signup-email" data-lang-en="Email Address" data-lang-es="Correo electrónico">Email Address</label>
+                <div class="input-wrapper">
+                  <i data-lucide="mail" class="input-icon"></i>
+                  <input type="email" id="signup-email" required placeholder="name@company.com" oninput="validateEmailField(this)">
+                  <span class="validity-indicator"></span>
+                </div>
+              </div>
+              <div class="form-group-custom">
+                <label for="signup-phone" data-lang-en="Phone Number" data-lang-es="Teléfono">Phone Number</label>
+                <div class="input-wrapper">
+                  <i data-lucide="phone" class="input-icon"></i>
+                  <input type="tel" id="signup-phone" required placeholder="+1 (555) 019-2834">
+                </div>
+              </div>
+            </div>
+
+            <!-- Password & Confirm -->
+            <div class="form-row-2col">
+              <div class="form-group-custom">
+                <label for="signup-password" data-lang-en="Password" data-lang-es="Contraseña">Password</label>
+                <div class="input-wrapper">
+                  <i data-lucide="lock" class="input-icon"></i>
+                  <input type="password" id="signup-password" required placeholder="••••••••" oninput="checkPasswordStrength(this.value)">
+                  <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility('signup-password')">
+                    <i data-lucide="eye" class="eye-open"></i>
+                    <i data-lucide="eye-off" class="eye-closed" style="display:none;"></i>
+                  </button>
+                </div>
+                <!-- Password Strength Meter -->
+                <div class="password-strength-container">
+                  <div class="strength-bar-wrap">
+                    <div class="strength-bar-fill" id="strength-fill"></div>
+                  </div>
+                  <span class="strength-label" id="strength-label" data-lang-en="Too weak" data-lang-es="Muy débil">Too weak</span>
+                </div>
+              </div>
+              <div class="form-group-custom">
+                <label for="signup-confirm-password" data-lang-en="Confirm Password" data-lang-es="Confirmar contraseña">Confirm Password</label>
+                <div class="input-wrapper">
+                  <i data-lucide="lock" class="input-icon"></i>
+                  <input type="password" id="signup-confirm-password" required placeholder="••••••••" oninput="validatePasswordMatch()">
+                </div>
+              </div>
+            </div>
+
+            <!-- Agreement -->
+            <div class="form-checkbox-row" style="margin-top: 4px;">
+              <label class="checkbox-container">
+                <input type="checkbox" id="signup-agree" required>
+                <span class="checkmark"></span>
+                <span class="checkbox-label" style="font-size:11px;">
+                  <span data-lang-en="I agree to the" data-lang-es="Acepto los">I agree to the</span> 
+                  <a href="#" class="form-link-small" style="font-size:11px;" data-lang-en="Terms & Privacy Policy" data-lang-es="Términos y Política de Privacidad">Terms & Privacy Policy</a>
+                </span>
+              </label>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="auth-submit-btn">
+              <span class="btn-text" data-lang-en="Create Account" data-lang-es="Crear Cuenta">Create Account</span>
+              <div class="loading-spinner-wrap" style="display:none;">
+                <i data-lucide="loader" class="spinner-icon"></i>
+              </div>
+            </button>
+          </form>
+
+          <!-- Divider -->
+          <div class="auth-divider" style="margin: 14px 0;">
+            <span data-lang-en="or signup with" data-lang-es="o registrarse con">or signup with</span>
+          </div>
+
+          <!-- Social signup -->
+          <div class="social-auth-grid">
+            <button class="social-auth-btn" onclick="handleSocialAuth('Google')">
+              <svg viewBox="0 0 24 24" width="16" height="16"><path fill="#ea4335" d="M12.24 10.285V14.4h6.887c-.648 2.41-2.519 4.114-5.136 4.114A5.99 5.99 0 0 1 8 12.5a5.99 5.99 0 0 1 5.991-6.014c1.49 0 2.9.522 4.004 1.488l3.136-3.136C19.227 3.01 16.718 2 13.99 2 8.473 2 4 6.473 4 12s4.473 10 9.99 10c5.38 0 9.814-3.89 9.814-9.314 0-.584-.055-1.168-.166-1.7H12.24z"/></svg>
+              <span>Google</span>
+            </button>
+            <button class="social-auth-btn" onclick="handleSocialAuth('Microsoft')">
+              <svg viewBox="0 0 23 23" width="16" height="16"><path fill="#f35325" d="M0 0h11v11H0z"/><path fill="#81bc06" d="M12 0h11v11H12z"/><path fill="#05a6f0" d="M0 12h11v11H0z"/><path fill="#ffba08" d="M12 12h11v11H12z"/></svg>
+              <span>Microsoft</span>
+            </button>
+          </div>
+
+          <div class="auth-card-footer">
+            <span data-lang-en="Already have an account?" data-lang-es="¿Ya tiene una cuenta?">Already have an account?</span>
+            <a href="#" onclick="toggleAuthPanel('login')" data-lang-en="Login" data-lang-es="Iniciar sesión">Login</a>
+          </div>
+        </div>
+
+        <!-- Submit success checkmark -->
+        <div class="success-overlay" id="success-overlay">
+          <div class="success-icon-wrap">
+            <svg class="checkmark-svg" viewBox="0 0 52 52">
+              <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+              <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+          </div>
+          <h4 id="success-title">Success!</h4>
+          <p id="success-msg">Redirecting to sustainability hub...</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast stack -->
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <!-- Floating AI Chatbot overlay -->
+  <div class="floating-chat-widget" id="floating-chat-widget">
+    <button class="chat-widget-fab" onclick="toggleFloatingChat()" aria-label="Open AI helper">
+      <i data-lucide="sparkles"></i>
+    </button>
+    <div class="chat-widget-drawer glass-panel" id="chat-widget-drawer">
+      <div class="chat-drawer-header">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="user-avatar" style="width:28px;height:28px;font-size:11px;display:flex;align-items:center;justify-content:center;background:rgba(16,185,129,0.12);border:1px solid #10b981;color:#10b981;">AI</div>
+          <div>
+            <h6 style="font-size:12px;font-weight:700;color:#ffffff;line-height:1.2;">EcoSphere Assistant</h6>
+            <span style="font-size:9px;color:#10b981;font-weight:600;">Active Online</span>
+          </div>
+        </div>
+        <button class="theme-toggle-btn" onclick="toggleFloatingChat()" style="color:#ffffff;"><i data-lucide="x" style="width:14px;height:14px;"></i></button>
+      </div>
+      <div class="chat-drawer-body" id="chat-drawer-messages">
+        <div class="chat-msg assistant-msg">
+          <p>Welcome! I'm the EcoSphere AI onboarding guide. Need assistance registering your enterprise profile or learning about ESG frameworks?</p>
+        </div>
+      </div>
+      <div class="chat-drawer-footer">
+        <input type="text" id="chat-drawer-input" placeholder="Ask AI helper..." onkeydown="handleDrawerKeyPress(event)">
+        <button class="action-icon-btn" onclick="sendDrawerMessage()" style="color:var(--primary);"><i data-lucide="send" style="width:14px;height:14px;"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="insights.js"></script>
+  <script src="auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSphere AI - Innovations Lab</title>
+  
+  <!-- SEO & Icons -->
+  <meta name="description" content="EcoSphere AI Innovations Lab. Adjust parameters to predict ESG scores, test waste image recognition models, monitor global carbon maps, and watch virtual forests grow.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="innovations.css">
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+
+  <!-- Offline Status Banner -->
+  <div class="offline-banner" id="offline-banner">
+    <i data-lucide="wifi-off" style="width: 16px; height: 16px;"></i>
+    <span>OFFLINE MODE ACTIVE · Displaying Local Cached ESG Data</span>
+  </div>
+
+  <!-- Interactive Particle Background Canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="dash-wrapper">
+    
+    <!-- 1. LEFT SIDEBAR NAVIGATION -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-brand">
+        <div class="workspace-selector">
+          <div class="workspace-avatar-group">
+            <div class="workspace-logo">ES</div>
+            <span class="workspace-name">EcoSphere AI</span>
+          </div>
+          <i data-lucide="chevrons-up-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item"><a href="dashboard.html"><div class="sidebar-nav-icon"><i data-lucide="layout-dashboard"></i><span>Overview</span></div></a></li>
+        <li class="sidebar-nav-item"><a href="environmental.html"><div class="sidebar-nav-icon"><i data-lucide="leaf"></i><span>Climate Analytics</span></div></a></li>
+        <li class="sidebar-nav-item"><a href="social.html"><div class="sidebar-nav-icon"><i data-lucide="users"></i><span>Social Impact</span></div><span class="sidebar-badge">120+</span></a></li>
+        <li class="sidebar-nav-item"><a href="governance.html"><div class="sidebar-nav-icon"><i data-lucide="gavel"></i><span>Governance Log</span></div><span class="sidebar-badge alert">1 flag</span></a></li>
+        <li class="sidebar-nav-item"><a href="insights.html"><div class="sidebar-nav-icon"><i data-lucide="sparkles"></i><span>AI Insights</span></div><span class="sidebar-badge" style="background:rgba(168,85,247,0.15);color:#a855f7;">New</span></a></li>
+        <li class="sidebar-nav-item"><a href="reports.html"><div class="sidebar-nav-icon"><i data-lucide="file-bar-chart-2"></i><span>Report Center</span></div><span class="sidebar-badge" style="background:rgba(59,130,246,0.15);color:#3b82f6;">New</span></a></li>
+        <li class="sidebar-nav-item"><a href="gamification.html"><div class="sidebar-nav-icon"><i data-lucide="trophy"></i><span>Eco League</span></div><span class="sidebar-badge" style="background:rgba(234,179,8,0.15);color:#eab308;">LVL 4</span></a></li>
+        <li class="sidebar-nav-item active"><a href="innovations.html"><div class="sidebar-nav-icon"><i data-lucide="beaker"></i><span>Innovations Lab</span></div><span class="sidebar-badge" style="background:rgba(16,185,129,0.15);color:#10b981;">Beta</span></a></li>
+        <li class="sidebar-nav-item"><a href="admin.html"><div class="sidebar-nav-icon"><i data-lucide="shield-half"></i><span>Admin Portal</span></div><span class="sidebar-badge" style="background:rgba(239,68,68,0.15);color:#ef4444;">Admin</span></a></li>
+        <li class="sidebar-nav-item"><a href="#"><div class="sidebar-nav-icon"><i data-lucide="settings"></i><span>Settings</span></div></a></li>
+      </ul>
+
+      <div class="sidebar-user">
+        <div class="user-info">
+          <div class="user-avatar">JP</div>
+          <div class="user-text">
+            <h5>Joy Patel</h5>
+            <p>CSO, EcoSphere Enterprise</p>
+          </div>
+        </div>
+        <button class="user-logout-btn" onclick="window.location.href='index.html'" aria-label="Log Out to landing">
+          <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. MAIN WORKSPACE -->
+    <main class="dash-main">
+      
+      <!-- Topbar Header -->
+      <div class="dash-topbar">
+        <div class="topbar-left">
+          <div class="search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="lab-search" class="search-input" placeholder="Search parameters, simulators or widgets...">
+            <span class="cmd-shortcut">⌘ K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Install App (PWA) -->
+          <button class="btn btn-secondary" id="pwa-install-btn" style="display: none;">
+            <i data-lucide="download-cloud" style="width: 14px; height: 14px; margin-right: 6px;"></i> Install App
+          </button>
+          
+          <div class="date-selector" style="cursor: pointer;" onclick="toggleMockConnection()">
+            <i data-lucide="wifi"></i>
+            <span id="conn-status-text">Online Mode</span>
+          </div>
+
+          <!-- Theme Toggle -->
+          <div class="topbar-actions-group">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle light/dark mode">
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Innovations Content -->
+      <div class="dash-content">
+        <div style="margin-bottom: 24px;">
+          <h1 style="font-family:'Space Grotesk',sans-serif; font-size: 26px; font-weight:800; margin-bottom: 4px;">Innovations & Simulation Lab</h1>
+          <p style="font-size: 13px; color: var(--text-muted);">Configure sandbox parameters to forecast carbon curves, evaluate ESG criteria, track offset forests, and test neural network classifiers.</p>
+        </div>
+
+        <div class="lab-grid">
+          
+          <!-- LEFT HAND SIDE: Main Simulators & Interactive Charts -->
+          <div style="display:flex; flex-direction:column; gap: 20px;">
+            
+            <!-- Widget 1: Interactive World Carbon Map & Supply Hotspots -->
+            <div class="lab-card">
+              <h2 class="lab-card-title"><i data-lucide="globe"></i> Supply Chain Hotspots & Carbon Map</h2>
+              <p class="lab-card-desc">Real-time emission footprint across global processing offices and third-party shipping routes.</p>
+              
+              <div class="world-map-wrapper">
+                <svg id="world-map-svg" viewBox="0 0 1000 500">
+                  <!-- Mock background outlines -->
+                  <path d="M150,150 L250,130 L280,180 L230,220 Z M350,100 L450,120 L480,240 L380,250 Z M650,120 L800,100 L850,220 L700,280 L620,200 Z M200,320 L280,300 L320,400 L210,420 Z M750,350 L880,320 L860,420 L730,410 Z M520,240 L610,260 L580,380 L490,340 Z" />
+                </svg>
+
+                <!-- Hotspot 1: North America -->
+                <div class="map-hotspot high-emission" style="top: 30%; left: 22%;">
+                  <div class="hotspot-dot"></div>
+                  <div class="hotspot-popup">
+                    <div class="hotspot-title">North America Hub</div>
+                    <div class="hotspot-detail"><span>Emissions:</span> <strong style="color:#ef4444;">1,840 tCO2e</strong></div>
+                    <div class="hotspot-detail"><span>Offset Index:</span> <span>42%</span></div>
+                  </div>
+                </div>
+
+                <!-- Hotspot 2: Europe Hub -->
+                <div class="map-hotspot mid-emission" style="top: 25%; left: 52%;">
+                  <div class="hotspot-dot"></div>
+                  <div class="hotspot-popup">
+                    <div class="hotspot-title">Europe HQ (London)</div>
+                    <div class="hotspot-detail"><span>Emissions:</span> <strong style="color:#eab308;">920 tCO2e</strong></div>
+                    <div class="hotspot-detail"><span>Offset Index:</span> <span>78%</span></div>
+                  </div>
+                </div>
+
+                <!-- Hotspot 3: APAC HQ -->
+                <div class="map-hotspot" style="top: 45%; left: 78%;">
+                  <div class="hotspot-dot"></div>
+                  <div class="hotspot-popup">
+                    <div class="hotspot-title">APAC Processing Center</div>
+                    <div class="hotspot-detail"><span>Emissions:</span> <strong style="color:var(--neon-green);">410 tCO2e</strong></div>
+                    <div class="hotspot-detail"><span>Offset Index:</span> <span>96%</span></div>
+                  </div>
+                </div>
+
+                <!-- Hotspot 4: Latin America -->
+                <div class="map-hotspot" style="top: 65%; left: 32%;">
+                  <div class="hotspot-dot"></div>
+                  <div class="hotspot-popup">
+                    <div class="hotspot-title">LATAM Logistics</div>
+                    <div class="hotspot-detail"><span>Emissions:</span> <strong style="color:var(--neon-green);">220 tCO2e</strong></div>
+                    <div class="hotspot-detail"><span>Offset Index:</span> <span>89%</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Widget 2: AI ESG Predictor & Real-time Sliders -->
+            <div class="lab-card">
+              <h2 class="lab-card-title"><i data-lucide="sliders"></i> Neural ESG Index Predictor</h2>
+              <p class="lab-card-desc">Slide operation targets to run neural network simulations on projected ESG indices.</p>
+              
+              <div class="predictor-container">
+                <div class="predictor-row">
+                  <div class="predictor-header">
+                    <span>Renewable Energy Sourcing Ratio</span>
+                    <span id="slide-val-renew">62%</span>
+                  </div>
+                  <input type="range" class="predictor-slider" id="slide-renew" min="0" max="100" value="62">
+                </div>
+
+                <div class="predictor-row">
+                  <div class="predictor-header">
+                    <span>Third-Party Supply Chain ESG Audit Rate</span>
+                    <span id="slide-val-supply">78%</span>
+                  </div>
+                  <input type="range" class="predictor-slider" id="slide-supply" min="0" max="100" value="78">
+                </div>
+
+                <div class="predictor-row">
+                  <div class="predictor-header">
+                    <span>Corporate Board Diversity Index</span>
+                    <span id="slide-val-diversity">45%</span>
+                  </div>
+                  <input type="range" class="predictor-slider" id="slide-diversity" min="0" max="100" value="45">
+                </div>
+
+                <div class="predictor-row">
+                  <div class="predictor-header">
+                    <span>Social Welfare & Volunteer Budget Allocation</span>
+                    <span id="slide-val-social">4.2%</span>
+                  </div>
+                  <input type="range" class="predictor-slider" id="slide-social" min="0.5" max="15" step="0.1" value="4.2">
+                </div>
+
+                <div class="predictor-score-box">
+                  <div class="score-hud">
+                    <div style="font-size: 10px; text-transform: uppercase; color: var(--text-muted);">Current Score</div>
+                    <div style="font-size: 22px; font-weight: 700;">94.2</div>
+                  </div>
+                  <div style="font-size: 20px; color: var(--border-subtle);">➜</div>
+                  <div class="score-hud">
+                    <div style="font-size: 10px; text-transform: uppercase; color: var(--text-muted);">Projected AI Index</div>
+                    <div class="score-hud-num" id="projected-esg-score">94.2</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Widget 3: AI Carbon Forecast Projections -->
+            <div class="lab-card">
+              <h2 class="lab-card-title"><i data-lucide="trending-up"></i> Dynamic Carbon Emissions Forecast</h2>
+              <p class="lab-card-desc">Predictive modeling for Scope 1, 2 & 3 greenhouse gas output over the next 12 months.</p>
+              <div id="dynamic-carbon-chart" style="width: 100%; height: 260px;"></div>
+            </div>
+
+          </div>
+
+          <!-- RIGHT HAND SIDE: Co-pilots, Image Recognition & Badges -->
+          <div style="display:flex; flex-direction:column; gap: 20px;">
+            
+            <!-- Widget 4: AI Sustainability Coach & TTS Reader -->
+            <div class="lab-card" style="--card-bg-gradient: rgba(168, 85, 247, 0.05);">
+              <h2 class="lab-card-title"><i data-lucide="smile" style="color: var(--neon-purple);"></i> AI Sustainability Coach</h2>
+              <p class="lab-card-desc">Active recommendations compiled by EcoSphere's LLM engine to hit 2030 Net Zero deadlines.</p>
+              
+              <div class="coach-bubble">
+                <div class="coach-header">
+                  <i data-lucide="sparkles" style="color: var(--neon-purple); width: 14px; height:14px;"></i>
+                  <span>Coach Recommendation</span>
+                </div>
+                <div class="coach-text" id="coach-advice">
+                  Optimizing thermal load on manufacturing systems during peak utility grid rates (1 PM to 4 PM) will save approximately 14.5 tCO2e monthly and improve score parameters by 0.35 pts.
+                </div>
+                <div class="coach-actions">
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size:11px;" onclick="speakCoachAdvice()">
+                    <i data-lucide="volume-2" style="width: 12px; height:12px; margin-right: 4px;"></i> Listen to Audio
+                  </button>
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size:11px;" onclick="cycleCoachAdvice()">
+                    <i data-lucide="refresh-cw" style="width: 12px; height:12px; margin-right: 4px;"></i> Cycle Tip
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Widget 5: Waste Image Recognition Simulator (Vision API Mockup) -->
+            <div class="lab-card" style="--card-bg-gradient: rgba(6, 182, 212, 0.05);">
+              <h2 class="lab-card-title"><i data-lucide="scan-face" style="color: var(--neon-cyan);"></i> Neural Waste Classifier</h2>
+              <p class="lab-card-desc">Simulated Vision API system. Select a mock item to trigger a high-tech laser grid scan.</p>
+              
+              <div class="scan-dropzone" id="scan-dropzone">
+                <div class="scanner-laser" id="scanner-laser"></div>
+                <div id="dropzone-prompt">
+                  <i data-lucide="camera" style="width: 32px; height: 32px; color: var(--neon-cyan); margin-bottom: 12px; display:inline-block;"></i>
+                  <p style="font-size: 13px; font-weight: 700;">Drag or click mock items below to scan</p>
+                </div>
+                <div id="scanning-prompt" style="display:none;">
+                  <i data-lucide="refresh-cw" class="loader-circle" style="width: 32px; height: 32px; color: var(--neon-green); margin-bottom: 12px; display:inline-block;"></i>
+                  <p style="font-weight: 700; font-family:'Space Mono', monospace;">Scanning Object Grid...</p>
+                </div>
+              </div>
+
+              <!-- Quick Selector Targets -->
+              <div style="display:flex; justify-content:center; gap: 8px; margin-top: 14px;">
+                <button class="btn btn-secondary" style="padding: 6px 10px; font-size: 11px;" onclick="simulateScan('bottle')">🧴 Plastic Bottle</button>
+                <button class="btn btn-secondary" style="padding: 6px 10px; font-size: 11px;" onclick="simulateScan('battery')">🔋 Lithium Battery</button>
+                <button class="btn btn-secondary" style="padding: 6px 10px; font-size: 11px;" onclick="simulateScan('cardboard')">📦 Cardboard Box</button>
+              </div>
+
+              <!-- Results Block -->
+              <div class="scan-results" id="scan-results">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 8px;">
+                  <span style="font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--text-muted);">Result Summary</span>
+                  <span style="font-size: 10px; font-weight: 800; background:rgba(16,185,129,0.15); color:var(--neon-green); padding:2px 6px; border-radius:10px;" id="scan-confidence">98% Match</span>
+                </div>
+                <h4 style="font-family:'Space Grotesk',sans-serif; font-size: 14px; font-weight: 800; margin-bottom: 4px;" id="scan-title">PET 1 Bottle detected</h4>
+                <p style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.4; margin-bottom: 12px;" id="scan-desc">Recyclable polymer composite. Dispose of in plastic waste containers. Reduces Scope 3 manufacturing indices.</p>
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-size: 11px; font-weight: 700; color:#eab308;"><i data-lucide="coins" style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:3px;"></i> +15 Green Coins Awarded</span>
+                  <span style="font-size: 11px; font-weight: 700; color:var(--neon-green);"><i data-lucide="leaf" style="width:12px; height:12px; display:inline-block; vertical-align:middle; margin-right:3px;"></i> -0.2 kg CO2e</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Widget 6: Tree Plantation Tracker (Interactive Growing Canvas) -->
+            <div class="lab-card">
+              <h2 class="lab-card-title"><i data-lucide="leaf"></i> Virtual Offset Forest</h2>
+              <p class="lab-card-desc">Interactive carbon sink rendering. Planting trees directly matches real-world offsets.</p>
+              
+              <div class="forest-container">
+                <div class="forest-stats">
+                  🌳 <span id="forest-tree-count">12</span> Active Trees planted
+                </div>
+                
+                <canvas class="forest-canvas" id="forest-canvas"></canvas>
+
+                <div class="forest-actions">
+                  <button class="btn btn-primary" style="padding: 6px 12px; font-size: 11px;" onclick="plantVirtualTree()">
+                    <i data-lucide="plus" style="width:12px; height:12px; margin-right: 4px;"></i> Plant Tree
+                  </button>
+                  <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 11px;" onclick="waterVirtualForest()">
+                    <i data-lucide="droplet" style="width:12px; height:12px; margin-right: 4px;"></i> Water Forest
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Widget 7: Department ESG Battle Board -->
+            <div class="lab-card">
+              <h2 class="lab-card-title"><i data-lucide="swords"></i> Department ESG Battle Board</h2>
+              <p class="lab-card-desc">Live competitive sustainability duels between operational teams.</p>
+              
+              <div class="battle-card-container">
+                <div class="battle-match">
+                  <div style="display:flex; justify-content:space-between; font-size:11px; font-weight: 700; color:var(--text-muted);">
+                    <span>ACTIVE WEEKLY DUEL</span>
+                    <span style="color:#ef4444;" id="battle-timer">2d 14h remaining</span>
+                  </div>
+                  <div class="battle-teams">
+                    <div class="battle-team">
+                      <div class="battle-team-icon"><i data-lucide="cpu"></i></div>
+                      <span style="font-size:12px; font-weight:700; text-align:center;">Engineering</span>
+                      <strong style="font-size:14px; color:var(--neon-blue);" id="battle-team-a-xp">4,280 XP</strong>
+                    </div>
+                    <div class="battle-vs">VS</div>
+                    <div class="battle-team team-right">
+                      <div class="battle-team-icon"><i data-lucide="truck"></i></div>
+                      <span style="font-size:12px; font-weight:700; text-align:center;">Operations</span>
+                      <strong style="font-size:14px; color:#ef4444;" id="battle-team-b-xp">4,120 XP</strong>
+                    </div>
+                  </div>
+
+                  <div class="battle-progress-track">
+                    <div class="battle-progress-left" id="battle-progress-a" style="width: 51%;"></div>
+                    <div class="battle-progress-right" id="battle-progress-b" style="width: 49%;"></div>
+                  </div>
+
+                  <div style="display:flex; gap: 8px;">
+                    <button class="btn btn-secondary" style="flex:1; padding:6px; font-size:11px;" onclick="cheerTeam('a')">📣 Support Eng</button>
+                    <button class="btn btn-secondary" style="flex:1; padding:6px; font-size:11px;" onclick="cheerTeam('b')">📣 Support Ops</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="innovations.js"></script>
+  <script src="avatar-voice.js"></script>
+</body>
+</html>

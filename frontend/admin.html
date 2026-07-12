@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSphere AI — Admin Portal</title>
+  <meta name="description" content="EcoSphere AI Admin Portal. Manage departments, employees, emission factors, rewards, policies, system health and more.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<div class="glow-orb glow-orb-1"></div>
+<div class="glow-orb glow-orb-2"></div>
+
+<div class="admin-wrapper">
+
+  <!-- ══ ADMIN SIDEBAR ════════════════════════════════════════ -->
+  <aside class="admin-sidebar">
+    <div class="admin-brand">
+      <div class="admin-logo-badge">⚙</div>
+      <div class="admin-brand-text">
+        <span class="admin-brand-title">Admin Portal</span>
+        <span class="admin-brand-sub">EcoSphere AI</span>
+      </div>
+    </div>
+
+    <!-- Overview -->
+    <div class="admin-nav-group">
+      <div class="admin-nav-group-label">Overview</div>
+      <div class="admin-nav-item active" data-section="overview" onclick="switchSection('overview')">
+        <i data-lucide="layout-dashboard"></i> Dashboard
+      </div>
+      <div class="admin-nav-item" data-section="analytics" onclick="switchSection('analytics')">
+        <i data-lucide="bar-chart-3"></i> Analytics
+        <span class="admin-nav-badge success">Live</span>
+      </div>
+      <div class="admin-nav-item" data-section="activity-logs" onclick="switchSection('activity-logs')">
+        <i data-lucide="activity"></i> Activity Logs
+      </div>
+      <div class="admin-nav-item" data-section="audit-logs" onclick="switchSection('audit-logs')">
+        <i data-lucide="shield-check"></i> Audit Logs
+        <span class="admin-nav-badge">12</span>
+      </div>
+    </div>
+
+    <!-- Data Management -->
+    <div class="admin-nav-group">
+      <div class="admin-nav-group-label">Data Management</div>
+      <div class="admin-nav-item" data-section="departments" onclick="switchSection('departments')">
+        <i data-lucide="building-2"></i> Departments
+      </div>
+      <div class="admin-nav-item" data-section="employees" onclick="switchSection('employees')">
+        <i data-lucide="users"></i> Employees
+        <span class="admin-nav-badge success">324</span>
+      </div>
+      <div class="admin-nav-item" data-section="categories" onclick="switchSection('categories')">
+        <i data-lucide="tag"></i> Categories
+      </div>
+      <div class="admin-nav-item" data-section="emission-factors" onclick="switchSection('emission-factors')">
+        <i data-lucide="zap"></i> Emission Factors
+      </div>
+    </div>
+
+    <!-- ESG Modules -->
+    <div class="admin-nav-group">
+      <div class="admin-nav-group-label">ESG Modules</div>
+      <div class="admin-nav-item" data-section="policies" onclick="switchSection('policies')">
+        <i data-lucide="file-text"></i> Policies
+        <span class="admin-nav-badge warn">3 pending</span>
+      </div>
+      <div class="admin-nav-item" data-section="challenges" onclick="switchSection('challenges')">
+        <i data-lucide="trophy"></i> Challenges
+      </div>
+      <div class="admin-nav-item" data-section="csr" onclick="switchSection('csr')">
+        <i data-lucide="heart-handshake"></i> CSR Activities
+      </div>
+      <div class="admin-nav-item" data-section="rewards" onclick="switchSection('rewards')">
+        <i data-lucide="gift"></i> Rewards
+      </div>
+      <div class="admin-nav-item" data-section="badges" onclick="switchSection('badges')">
+        <i data-lucide="award"></i> Badges
+      </div>
+    </div>
+
+    <!-- System -->
+    <div class="admin-nav-group">
+      <div class="admin-nav-group-label">System</div>
+      <div class="admin-nav-item" data-section="notifications" onclick="switchSection('notifications')">
+        <i data-lucide="bell"></i> Notifications
+        <span class="admin-nav-badge">5</span>
+      </div>
+      <div class="admin-nav-item" data-section="role-permissions" onclick="switchSection('role-permissions')">
+        <i data-lucide="lock-keyhole"></i> Role Permissions
+      </div>
+      <div class="admin-nav-item" data-section="system-health" onclick="switchSection('system-health')">
+        <i data-lucide="heart-pulse"></i> System Health
+        <span class="admin-nav-badge success">Online</span>
+      </div>
+      <div class="admin-nav-item" data-section="database" onclick="switchSection('database')">
+        <i data-lucide="database"></i> Database Status
+      </div>
+      <div class="admin-nav-item" data-section="backup" onclick="switchSection('backup')">
+        <i data-lucide="hard-drive-download"></i> Backup
+      </div>
+      <div class="admin-nav-item" data-section="settings" onclick="switchSection('settings')">
+        <i data-lucide="settings-2"></i> Settings
+      </div>
+    </div>
+
+    <!-- Back to App -->
+    <div style="margin-top:auto; padding-bottom:12px;">
+      <button class="admin-back-btn" onclick="window.location.href='dashboard.html'">
+        <i data-lucide="arrow-left" style="width:14px;height:14px;"></i> Back to App
+      </button>
+    </div>
+  </aside>
+
+  <!-- ══ MAIN CONTENT ══════════════════════════════════════════ -->
+  <main class="admin-main">
+
+    <!-- Topbar -->
+    <div class="admin-topbar">
+      <h2 class="admin-topbar-title" id="topbar-title">Admin Dashboard</h2>
+      <div style="display:flex;gap:12px;align-items:center;">
+        <span style="font-size:11px;color:var(--text-muted);">Logged in as <strong style="color:var(--text-primary);">Admin · Joy Patel</strong></span>
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <div class="user-avatar" style="cursor:default;">JP</div>
+      </div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- ══════════════ 1. OVERVIEW DASHBOARD ══════════════ -->
+      <div class="admin-section active" id="section-overview">
+        <div class="section-header">
+          <div>
+            <h1 class="section-title">Admin Dashboard</h1>
+            <p class="section-subtitle">System overview · Last updated: just now</p>
+          </div>
+          <button class="btn-admin-secondary" onclick="adminToast('Dashboard refreshed','#10b981')"><i data-lucide="refresh-cw" style="width:13px;height:13px;"></i> Refresh</button>
+        </div>
+
+        <div class="admin-stat-row">
+          <div class="admin-stat-card" style="--sc-accent:#10b981;--sc-icon-bg:rgba(16,185,129,0.1);">
+            <div class="sc-icon"><i data-lucide="users"></i></div>
+            <div><div class="sc-value" data-target="324" id="ov-emp">0</div><div class="sc-label">Total Employees</div></div>
+          </div>
+          <div class="admin-stat-card" style="--sc-accent:#3b82f6;--sc-icon-bg:rgba(59,130,246,0.1);">
+            <div class="sc-icon" style="color:#3b82f6;"><i data-lucide="building-2"></i></div>
+            <div><div class="sc-value" data-target="12" id="ov-dept">0</div><div class="sc-label">Departments</div></div>
+          </div>
+          <div class="admin-stat-card" style="--sc-accent:#a855f7;--sc-icon-bg:rgba(168,85,247,0.1);">
+            <div class="sc-icon" style="color:#a855f7;"><i data-lucide="trophy"></i></div>
+            <div><div class="sc-value" data-target="42" id="ov-chall">0</div><div class="sc-label">Active Challenges</div></div>
+          </div>
+          <div class="admin-stat-card" style="--sc-accent:#ef4444;--sc-icon-bg:rgba(239,68,68,0.1);">
+            <div class="sc-icon" style="color:#ef4444;"><i data-lucide="shield-alert"></i></div>
+            <div><div class="sc-value" data-target="7" id="ov-pend">0</div><div class="sc-label">Pending Actions</div></div>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>Recent System Activity</h4>
+            <span style="font-size:11px;color:var(--text-muted);">Last 24 hours</span>
+          </div>
+          <div style="padding:16px 20px;">
+            <div id="overview-activity-log"></div>
+          </div>
+        </div>
+
+        <!-- Quick Links Grid -->
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+          <div class="admin-stat-card" style="cursor:pointer;--sc-accent:#10b981;--sc-icon-bg:rgba(16,185,129,0.08);" onclick="switchSection('departments')">
+            <div class="sc-icon"><i data-lucide="building-2"></i></div>
+            <div><div style="font-size:12.5px;font-weight:700;">Manage Departments</div><div class="sc-label">12 active</div></div>
+          </div>
+          <div class="admin-stat-card" style="cursor:pointer;--sc-accent:#3b82f6;--sc-icon-bg:rgba(59,130,246,0.08);" onclick="switchSection('policies')">
+            <div class="sc-icon" style="color:#3b82f6;"><i data-lucide="file-text"></i></div>
+            <div><div style="font-size:12.5px;font-weight:700;">Review Policies</div><div class="sc-label">3 pending approval</div></div>
+          </div>
+          <div class="admin-stat-card" style="cursor:pointer;--sc-accent:#a855f7;--sc-icon-bg:rgba(168,85,247,0.08);" onclick="switchSection('system-health')">
+            <div class="sc-icon" style="color:#a855f7;"><i data-lucide="heart-pulse"></i></div>
+            <div><div style="font-size:12.5px;font-weight:700;">System Health</div><div class="sc-label" style="color:#10b981;">All services online</div></div>
+          </div>
+          <div class="admin-stat-card" style="cursor:pointer;--sc-accent:#ef4444;--sc-icon-bg:rgba(239,68,68,0.08);" onclick="switchSection('audit-logs')">
+            <div class="sc-icon" style="color:#ef4444;"><i data-lucide="shield-check"></i></div>
+            <div><div style="font-size:12.5px;font-weight:700;">Audit Logs</div><div class="sc-label">12 new entries</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════ 2. DEPARTMENTS ══════════════════════ -->
+      <div class="admin-section" id="section-departments">
+        <div class="section-header">
+          <div><h1 class="section-title">Department Management</h1><p class="section-subtitle">Manage organizational departments and their ESG targets.</p></div>
+          <button class="btn-admin-primary" onclick="openModal('dept')"><i data-lucide="plus" style="width:13px;height:13px;"></i> Add Department</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>All Departments <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(12 total)</span></h4>
+            <div class="admin-table-actions">
+              <div class="admin-search"><i data-lucide="search"></i><input type="text" placeholder="Search…" oninput="filterAdminTable('dept-tbody', this.value)"></div>
+            </div>
+          </div>
+          <table class="admin-table"><thead><tr><th>Department</th><th>Head</th><th>Employees</th><th>Carbon Target</th><th>ESG Score</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="dept-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 3. EMPLOYEES ════════════════════════ -->
+      <div class="admin-section" id="section-employees">
+        <div class="section-header">
+          <div><h1 class="section-title">Employee Management</h1><p class="section-subtitle">Manage employee profiles, roles, and ESG participation.</p></div>
+          <button class="btn-admin-primary" onclick="openModal('emp')"><i data-lucide="user-plus" style="width:13px;height:13px;"></i> Add Employee</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>All Employees <span style="font-size:11px;color:var(--text-muted);font-weight:400;">(324 total)</span></h4>
+            <div class="admin-table-actions">
+              <select class="admin-search" style="padding:7px 10px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:9px;color:var(--text-primary);font-size:12px;width:auto;" onchange="filterByDept(this.value)">
+                <option value="">All Departments</option>
+                <option>Engineering</option><option>Operations</option><option>HR & People</option><option>Finance</option><option>Manufacturing</option><option>Supply Chain</option>
+              </select>
+              <div class="admin-search"><i data-lucide="search"></i><input type="text" placeholder="Search employees…" oninput="filterAdminTable('emp-tbody', this.value)"></div>
+            </div>
+          </div>
+          <table class="admin-table"><thead><tr><th>Name</th><th>Email</th><th>Department</th><th>Role</th><th>ESG Level</th><th>XP</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="emp-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 4. CATEGORIES ═══════════════════════ -->
+      <div class="admin-section" id="section-categories">
+        <div class="section-header">
+          <div><h1 class="section-title">Category Management</h1><p class="section-subtitle">Manage emission and ESG activity categories.</p></div>
+          <button class="btn-admin-primary" onclick="openModal('cat')"><i data-lucide="plus" style="width:13px;height:13px;"></i> Add Category</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>Emission Categories</h4>
+            <div class="admin-search"><i data-lucide="search"></i><input type="text" placeholder="Search…" oninput="filterAdminTable('cat-tbody', this.value)"></div>
+          </div>
+          <table class="admin-table"><thead><tr><th>Category</th><th>Scope</th><th>Unit</th><th>Emission Factor</th><th>Last Updated</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="cat-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 5. EMISSION FACTORS ═════════════════ -->
+      <div class="admin-section" id="section-emission-factors">
+        <div class="section-header">
+          <div><h1 class="section-title">Emission Factors</h1><p class="section-subtitle">Configure GHG emission factors by scope and category (kgCO₂e per unit).</p></div>
+          <button class="btn-admin-primary" onclick="openModal('ef')"><i data-lucide="plus" style="width:13px;height:13px;"></i> Add Factor</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>Emission Factor Library</h4>
+            <div class="admin-table-actions">
+              <select style="padding:7px 10px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:9px;color:var(--text-primary);font-size:12px;">
+                <option>All Scopes</option><option>Scope 1</option><option>Scope 2</option><option>Scope 3</option>
+              </select>
+              <div class="admin-search"><i data-lucide="search"></i><input type="text" placeholder="Search factors…" oninput="filterAdminTable('ef-tbody', this.value)"></div>
+            </div>
+          </div>
+          <table class="admin-table"><thead><tr><th>Factor Name</th><th>Scope</th><th>Category</th><th>Value (kgCO₂e)</th><th>Unit</th><th>Source</th><th>Year</th><th>Actions</th></tr></thead>
+          <tbody id="ef-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 6. REWARDS ═══════════════════════════ -->
+      <div class="admin-section" id="section-rewards">
+        <div class="section-header">
+          <div><h1 class="section-title">Rewards Management</h1><p class="section-subtitle">Manage the Eco League reward catalog and redemption rules.</p></div>
+          <button class="btn-admin-primary" onclick="openModal('rew')"><i data-lucide="plus" style="width:13px;height:13px;"></i> Add Reward</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>Reward Catalog</h4>
+            <div class="admin-search"><i data-lucide="search"></i><input type="text" placeholder="Search rewards…" oninput="filterAdminTable('rew-tbody', this.value)"></div>
+          </div>
+          <table class="admin-table"><thead><tr><th>Reward</th><th>Type</th><th>Green Coins</th><th>Stock</th><th>Redeemed</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="rew-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 7. BADGES ════════════════════════════ -->
+      <div class="admin-section" id="section-badges">
+        <div class="section-header">
+          <div><h1 class="section-title">Badge Management</h1><p class="section-subtitle">Create and manage achievement badges and rarity tiers.</p></div>
+          <button class="btn-admin-primary" onclick="openModal('badge')"><i data-lucide="plus" style="width:13px;height:13px;"></i> Create Badge</button>
+        </div>
+        <div class="badge-gallery" id="badge-gallery"></div>
+      </div>
+
+      <!-- ══════════════ 8. POLICIES ══════════════════════════ -->
+      <div class="admin-section" id="section-policies">
+        <div class="section-header">
+          <div><h1 class="section-title">Policy Management</h1><p class="section-subtitle">Manage corporate ESG policies, acknowledgements, and approval workflows.</p></div>
+          <button class="btn-admin-primary" onclick="openModal('pol')"><i data-lucide="file-plus" style="width:13px;height:13px;"></i> New Policy</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>Policy Repository</h4>
+            <div class="admin-search"><i data-lucide="search"></i><input type="text" placeholder="Search policies…" oninput="filterAdminTable('pol-tbody', this.value)"></div>
+          </div>
+          <table class="admin-table"><thead><tr><th>Policy Name</th><th>Category</th><th>Owner</th><th>Version</th><th>Due Date</th><th>Acknowledgements</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="pol-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 9. CHALLENGES ════════════════════════ -->
+      <div class="admin-section" id="section-challenges">
+        <div class="section-header">
+          <div><h1 class="section-title">Challenge Management</h1><p class="section-subtitle">Create and manage daily, weekly, and monthly sustainability missions.</p></div>
+          <button class="btn-admin-primary" onclick="openModal('chal')"><i data-lucide="plus" style="width:13px;height:13px;"></i> New Challenge</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>All Challenges</h4>
+            <div class="admin-table-actions">
+              <select style="padding:7px 10px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:9px;color:var(--text-primary);font-size:12px;">
+                <option>All Types</option><option>Daily</option><option>Weekly</option><option>Monthly</option><option>Team</option>
+              </select>
+              <div class="admin-search"><i data-lucide="search"></i><input type="text" placeholder="Search…" oninput="filterAdminTable('chal-tbody', this.value)"></div>
+            </div>
+          </div>
+          <table class="admin-table"><thead><tr><th>Challenge</th><th>Type</th><th>XP Reward</th><th>Participants</th><th>Completion %</th><th>Deadline</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="chal-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 10. CSR ══════════════════════════════ -->
+      <div class="admin-section" id="section-csr">
+        <div class="section-header">
+          <div><h1 class="section-title">CSR Activity Management</h1><p class="section-subtitle">Manage corporate social responsibility programmes, events, and budgets.</p></div>
+          <button class="btn-admin-primary" onclick="openModal('csr')"><i data-lucide="plus" style="width:13px;height:13px;"></i> New CSR Activity</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>CSR Activities</h4>
+            <div class="admin-search"><i data-lucide="search"></i><input type="text" placeholder="Search…" oninput="filterAdminTable('csr-tbody', this.value)"></div>
+          </div>
+          <table class="admin-table"><thead><tr><th>Activity</th><th>Category</th><th>Date</th><th>Volunteers</th><th>Budget (USD)</th><th>Impact Score</th><th>Status</th><th>Actions</th></tr></thead>
+          <tbody id="csr-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 11. NOTIFICATIONS ════════════════════ -->
+      <div class="admin-section" id="section-notifications">
+        <div class="section-header">
+          <div><h1 class="section-title">Notification Center</h1><p class="section-subtitle">Compose and broadcast system-wide notifications to users.</p></div>
+        </div>
+
+        <!-- Compose Panel -->
+        <div class="notif-compose-card">
+          <h4 style="font-size:13.5px;font-weight:800;margin-bottom:16px;font-family:'Space Grotesk',sans-serif;">Compose Notification</h4>
+          <div class="admin-form-grid">
+            <div class="admin-form-group">
+              <label>Title</label>
+              <input type="text" id="notif-title" placeholder="Notification title…">
+            </div>
+            <div class="admin-form-group">
+              <label>Target Audience</label>
+              <select id="notif-audience">
+                <option>All Employees</option><option>Managers Only</option><option>Specific Department</option><option>Admin Only</option>
+              </select>
+            </div>
+            <div class="admin-form-group">
+              <label>Priority</label>
+              <select id="notif-priority"><option>Normal</option><option>High</option><option>Critical</option></select>
+            </div>
+            <div class="admin-form-group">
+              <label>Type</label>
+              <select id="notif-type"><option>Info</option><option>Warning</option><option>Success</option><option>Action Required</option></select>
+            </div>
+            <div class="admin-form-group full">
+              <label>Message</label>
+              <textarea id="notif-msg" rows="3" placeholder="Type your notification message here…"></textarea>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn-admin-primary" onclick="sendNotification()"><i data-lucide="send" style="width:13px;height:13px;"></i> Send Now</button>
+            <button class="btn-admin-secondary"><i data-lucide="clock" style="width:13px;height:13px;"></i> Schedule</button>
+          </div>
+        </div>
+
+        <!-- Sent Notifications Log -->
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar"><h4>Notification History</h4></div>
+          <table class="admin-table"><thead><tr><th>Title</th><th>Audience</th><th>Priority</th><th>Sent At</th><th>Reach</th><th>Read %</th><th>Actions</th></tr></thead>
+          <tbody id="notif-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 12. ROLE PERMISSIONS ═════════════════ -->
+      <div class="admin-section" id="section-role-permissions">
+        <div class="section-header">
+          <div><h1 class="section-title">Role & Permissions</h1><p class="section-subtitle">Configure access rights for each user role across all modules.</p></div>
+          <button class="btn-admin-primary" onclick="adminToast('Permissions saved!','#10b981')"><i data-lucide="save" style="width:13px;height:13px;"></i> Save Changes</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar"><h4>Permission Matrix</h4><span style="font-size:11px;color:var(--text-muted);">Toggle switches to grant/revoke module access</span></div>
+          <div style="overflow-x:auto;padding:0 20px 16px;">
+            <table class="permission-matrix" id="perm-matrix"></table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════ 13. AUDIT LOGS ═══════════════════════ -->
+      <div class="admin-section" id="section-audit-logs">
+        <div class="section-header">
+          <div><h1 class="section-title">Audit Logs</h1><p class="section-subtitle">Immutable record of all security-sensitive actions across the platform.</p></div>
+          <button class="btn-admin-secondary" onclick="adminToast('Audit log exported','#3b82f6')"><i data-lucide="download" style="width:13px;height:13px;"></i> Export CSV</button>
+        </div>
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar">
+            <h4>Security Audit Trail</h4>
+            <div class="admin-table-actions">
+              <select style="padding:7px 10px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:9px;color:var(--text-primary);font-size:12px;"><option>All Actions</option><option>Login</option><option>Delete</option><option>Export</option><option>Permission Change</option></select>
+              <div class="admin-search"><i data-lucide="search"></i><input type="text" placeholder="Search logs…" oninput="filterAdminTable('audit-tbody', this.value)"></div>
+            </div>
+          </div>
+          <table class="admin-table"><thead><tr><th>Timestamp</th><th>User</th><th>Action</th><th>Module</th><th>IP Address</th><th>Risk Level</th><th>Details</th></tr></thead>
+          <tbody id="audit-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 14. ACTIVITY LOGS ════════════════════ -->
+      <div class="admin-section" id="section-activity-logs">
+        <div class="section-header">
+          <div><h1 class="section-title">Activity Logs</h1><p class="section-subtitle">Real-time feed of user activity and system events.</p></div>
+          <button class="btn-admin-secondary" onclick="adminToast('Logs refreshed','#10b981')"><i data-lucide="refresh-cw" style="width:13px;height:13px;"></i> Refresh</button>
+        </div>
+        <div class="admin-table-card">
+          <div style="padding:16px 20px;" id="activity-log-container"></div>
+        </div>
+      </div>
+
+      <!-- ══════════════ 15. SYSTEM HEALTH ════════════════════ -->
+      <div class="admin-section" id="section-system-health">
+        <div class="section-header">
+          <div><h1 class="section-title">System Health</h1><p class="section-subtitle">Real-time server metrics, API status, and performance indicators.</p></div>
+          <span class="a-pill pill-active"><span style="width:6px;height:6px;border-radius:50%;background:#10b981;display:inline-block;"></span> All Systems Operational</span>
+        </div>
+
+        <div class="health-grid">
+          <div class="health-metric-card">
+            <div class="health-metric-header">
+              <span class="health-metric-name">CPU Usage</span>
+              <i data-lucide="cpu" style="width:16px;height:16px;color:var(--text-muted);"></i>
+            </div>
+            <div class="health-metric-value" id="cpu-val">34%</div>
+            <div class="health-progress-bar"><div class="health-progress-fill fill-green" id="cpu-bar" style="width:34%;"></div></div>
+          </div>
+          <div class="health-metric-card">
+            <div class="health-metric-header">
+              <span class="health-metric-name">Memory Usage</span>
+              <i data-lucide="memory-stick" style="width:16px;height:16px;color:var(--text-muted);"></i>
+            </div>
+            <div class="health-metric-value" id="mem-val">62%</div>
+            <div class="health-progress-bar"><div class="health-progress-fill fill-yellow" id="mem-bar" style="width:62%;"></div></div>
+          </div>
+          <div class="health-metric-card">
+            <div class="health-metric-header">
+              <span class="health-metric-name">Disk Usage</span>
+              <i data-lucide="hard-drive" style="width:16px;height:16px;color:var(--text-muted);"></i>
+            </div>
+            <div class="health-metric-value" id="disk-val">48%</div>
+            <div class="health-progress-bar"><div class="health-progress-fill fill-blue" id="disk-bar" style="width:48%;"></div></div>
+          </div>
+          <div class="health-metric-card">
+            <div class="health-metric-header">
+              <span class="health-metric-name">Network I/O</span>
+              <i data-lucide="wifi" style="width:16px;height:16px;color:var(--text-muted);"></i>
+            </div>
+            <div class="health-metric-value" id="net-val">12 MB/s</div>
+            <div class="health-progress-bar"><div class="health-progress-fill fill-purple" id="net-bar" style="width:24%;"></div></div>
+          </div>
+        </div>
+
+        <!-- Service Status -->
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar"><h4>Service Status</h4></div>
+          <table class="admin-table" id="service-table">
+            <thead><tr><th>Service</th><th>Status</th><th>Uptime</th><th>Response Time</th><th>Last Check</th></tr></thead>
+            <tbody id="service-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 16. DATABASE STATUS ══════════════════ -->
+      <div class="admin-section" id="section-database">
+        <div class="section-header">
+          <div><h1 class="section-title">Database Status</h1><p class="section-subtitle">Monitor database connections, table sizes, and query performance.</p></div>
+          <button class="btn-admin-secondary" onclick="adminToast('Connection pool refreshed','#10b981')"><i data-lucide="refresh-cw" style="width:13px;height:13px;"></i> Refresh</button>
+        </div>
+
+        <div class="db-status-grid">
+          <div class="db-status-card">
+            <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">PRIMARY DB</div>
+            <div style="font-size:15px;font-weight:800;margin-bottom:4px;"><span class="db-status-dot dot-online"></span>Connected</div>
+            <div style="font-size:11px;color:var(--text-muted);">PostgreSQL 16.2 · ecosphere_prod</div>
+          </div>
+          <div class="db-status-card">
+            <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">REPLICA DB</div>
+            <div style="font-size:15px;font-weight:800;margin-bottom:4px;"><span class="db-status-dot dot-online"></span>Synced</div>
+            <div style="font-size:11px;color:var(--text-muted);">Lag: 0.2s · Read replicas: 2</div>
+          </div>
+          <div class="db-status-card">
+            <div style="font-size:11px;font-weight:700;color:var(--text-muted);margin-bottom:8px;">CACHE (REDIS)</div>
+            <div style="font-size:15px;font-weight:800;margin-bottom:4px;"><span class="db-status-dot dot-online"></span>Online</div>
+            <div style="font-size:11px;color:var(--text-muted);">Hit rate: 94.2% · 1.2 GB used</div>
+          </div>
+        </div>
+
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar"><h4>Table Statistics</h4></div>
+          <table class="admin-table" id="db-table">
+            <thead><tr><th>Table Name</th><th>Rows</th><th>Size</th><th>Indexes</th><th>Last Vacuum</th><th>Status</th></tr></thead>
+            <tbody id="db-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 17. BACKUP ════════════════════════════ -->
+      <div class="admin-section" id="section-backup">
+        <div class="section-header">
+          <div><h1 class="section-title">Backup Management</h1><p class="section-subtitle">Schedule, manage, and restore system backups.</p></div>
+          <button class="btn-admin-primary" onclick="adminToast('Manual backup initiated…','#3b82f6')"><i data-lucide="hard-drive-download" style="width:13px;height:13px;"></i> Run Backup Now</button>
+        </div>
+
+        <div class="backup-grid">
+          <div class="backup-card">
+            <div style="font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Last Full Backup</div>
+            <div style="font-size:18px;font-weight:800;color:var(--text-primary);">Jul 12, 2026</div>
+            <div style="font-size:11px;color:var(--text-muted);">02:00 AM · 4.2 GB · ✅ Success</div>
+            <button class="btn-admin-secondary" style="margin-top:8px;" onclick="adminToast('Download started','#10b981')"><i data-lucide="download" style="width:12px;height:12px;"></i> Download</button>
+          </div>
+          <div class="backup-card">
+            <div style="font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Auto-Backup Schedule</div>
+            <div style="font-size:18px;font-weight:800;color:var(--text-primary);">Daily @ 02:00</div>
+            <div style="font-size:11px;color:var(--text-muted);">Next run: Jul 13, 2026 · Retention: 30 days</div>
+            <button class="btn-admin-secondary" style="margin-top:8px;" onclick="adminToast('Schedule updated','#10b981')"><i data-lucide="edit" style="width:12px;height:12px;"></i> Configure</button>
+          </div>
+          <div class="backup-card">
+            <div style="font-size:10px;font-weight:700;color:var(--text-muted);text-transform:uppercase;">Storage Used</div>
+            <div style="font-size:18px;font-weight:800;color:var(--text-primary);">38.4 GB / 100 GB</div>
+            <div class="health-progress-bar" style="margin-top:8px;"><div class="health-progress-fill fill-blue" style="width:38%;"></div></div>
+            <div style="font-size:11px;color:var(--text-muted);margin-top:6px;">61.6 GB available · S3 Bucket</div>
+          </div>
+        </div>
+
+        <div class="admin-table-card">
+          <div class="admin-table-toolbar"><h4>Backup History</h4></div>
+          <table class="admin-table" id="bk-table">
+            <thead><tr><th>Date</th><th>Type</th><th>Size</th><th>Duration</th><th>Status</th><th>Actions</th></tr></thead>
+            <tbody id="bk-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ══════════════ 18. SETTINGS ══════════════════════════ -->
+      <div class="admin-section" id="section-settings">
+        <div class="section-header">
+          <div><h1 class="section-title">System Settings</h1><p class="section-subtitle">Configure platform-wide defaults, integrations, and policies.</p></div>
+          <button class="btn-admin-primary" onclick="adminToast('Settings saved!','#10b981')"><i data-lucide="save" style="width:13px;height:13px;"></i> Save All</button>
+        </div>
+
+        <div class="settings-grid">
+          <div class="settings-card">
+            <h4>Organisation</h4>
+            <div class="admin-form-group" style="margin-bottom:12px;"><label>Company Name</label><input type="text" value="EcoSphere Enterprise Ltd."></div>
+            <div class="admin-form-group" style="margin-bottom:12px;"><label>Reporting Currency</label><select><option>USD</option><option>EUR</option><option>INR</option></select></div>
+            <div class="admin-form-group"><label>Fiscal Year Start</label><select><option>January</option><option>April</option><option>July</option></select></div>
+          </div>
+          <div class="settings-card">
+            <h4>ESG Configuration</h4>
+            <div class="settings-row"><div><div class="settings-row-label">Enable Gamification</div><div class="settings-row-hint">Eco League XP & badges</div></div><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+            <div class="settings-row"><div><div class="settings-row-label">AI Recommendations</div><div class="settings-row-hint">Auto-generate ESG insights</div></div><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+            <div class="settings-row"><div><div class="settings-row-label">Carbon Calculator</div><div class="settings-row-hint">Employee self-reporting</div></div><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+            <div class="settings-row"><div><div class="settings-row-label">Public ESG Dashboard</div><div class="settings-row-hint">Visible to stakeholders</div></div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label></div>
+          </div>
+          <div class="settings-card">
+            <h4>Notifications</h4>
+            <div class="settings-row"><div><div class="settings-row-label">Email Notifications</div></div><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+            <div class="settings-row"><div><div class="settings-row-label">Push Notifications</div></div><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+            <div class="settings-row"><div><div class="settings-row-label">Audit Alert Emails</div></div><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+            <div class="settings-row"><div><div class="settings-row-label">Weekly Digest</div></div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label></div>
+          </div>
+          <div class="settings-card">
+            <h4>Security</h4>
+            <div class="settings-row"><div><div class="settings-row-label">Two-Factor Auth (2FA)</div></div><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+            <div class="settings-row"><div><div class="settings-row-label">Single Sign-On (SSO)</div></div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label></div>
+            <div class="settings-row"><div><div class="settings-row-label">Session Timeout</div></div><select style="padding:4px 8px;background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;color:var(--text-primary);font-size:11px;"><option>30 min</option><option>1 hour</option><option>4 hours</option></select></div>
+            <div class="settings-row"><div><div class="settings-row-label">IP Allowlist</div></div><label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════ 19. ANALYTICS ═════════════════════════ -->
+      <div class="admin-section" id="section-analytics">
+        <div class="section-header">
+          <div><h1 class="section-title">Admin Analytics</h1><p class="section-subtitle">Platform usage metrics, module adoption, and user engagement data.</p></div>
+        </div>
+
+        <div class="admin-stat-row">
+          <div class="admin-stat-card" style="--sc-accent:#10b981;--sc-icon-bg:rgba(16,185,129,0.1);">
+            <div class="sc-icon"><i data-lucide="mouse-pointer-click"></i></div>
+            <div><div class="sc-value">12,840</div><div class="sc-label">Daily Active Users</div></div>
+          </div>
+          <div class="admin-stat-card" style="--sc-accent:#3b82f6;--sc-icon-bg:rgba(59,130,246,0.1);">
+            <div class="sc-icon" style="color:#3b82f6;"><i data-lucide="file-text"></i></div>
+            <div><div class="sc-value">3,420</div><div class="sc-label">Reports Generated</div></div>
+          </div>
+          <div class="admin-stat-card" style="--sc-accent:#a855f7;--sc-icon-bg:rgba(168,85,247,0.1);">
+            <div class="sc-icon" style="color:#a855f7;"><i data-lucide="zap"></i></div>
+            <div><div class="sc-value">94.7%</div><div class="sc-label">API Uptime (30d)</div></div>
+          </div>
+          <div class="admin-stat-card" style="--sc-accent:#eab308;--sc-icon-bg:rgba(234,179,8,0.1);">
+            <div class="sc-icon" style="color:#eab308;"><i data-lucide="clock"></i></div>
+            <div><div class="sc-value">1.2s</div><div class="sc-label">Avg. Response Time</div></div>
+          </div>
+        </div>
+
+        <div class="analytics-charts-grid">
+          <div class="analytics-chart-card">
+            <h4>Daily Active Users</h4><p>Platform login activity over last 30 days</p>
+            <div class="analytics-chart-dom" id="chart-dau"></div>
+          </div>
+          <div class="analytics-chart-card">
+            <h4>Module Usage</h4><p>Sessions per module this month</p>
+            <div class="analytics-chart-dom" id="chart-modules"></div>
+          </div>
+          <div class="analytics-chart-card">
+            <h4>Report Generation</h4><p>Reports created per day (last 14 days)</p>
+            <div class="analytics-chart-dom" id="chart-reports"></div>
+          </div>
+          <div class="analytics-chart-card">
+            <h4>ESG Score Trend</h4><p>Average company ESG score over 12 months</p>
+            <div class="analytics-chart-dom" id="chart-esg-trend"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </main>
+</div><!-- /admin-wrapper -->
+
+<!-- ── Modals ──────────────────────────────────────────────── -->
+<div class="admin-modal-overlay" id="admin-modal">
+  <div class="admin-modal">
+    <div class="admin-modal-header">
+      <h3 id="modal-title">Add Record</h3>
+      <button class="btn-icon-action" onclick="closeModal()"><i data-lucide="x" style="width:14px;height:14px;"></i></button>
+    </div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<!-- ── Toast Stack ─────────────────────────────────────────── -->
+<div class="admin-toast-stack" id="admin-toast-stack"></div>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="admin.js"></script>
+</body>
+</html>

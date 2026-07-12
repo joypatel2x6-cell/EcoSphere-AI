@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSphere AI — Report Center</title>
+  <meta name="description" content="EcoSphere AI Report Center. Generate, filter, and export Environmental, Social, Governance, and Custom ESG reports with AI-powered insights.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="reports.css">
+  <link rel="stylesheet" href="insights.css">
+</head>
+<body>
+
+  <!-- Background Orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Dashboard Wrapper -->
+  <div class="dash-wrapper">
+
+    <!-- ══ SIDEBAR ═══════════════════════════════════════════ -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-brand">
+        <div class="workspace-switcher">
+          <div class="workspace-details">
+            <div class="workspace-logo">ES</div>
+            <span class="workspace-name">EcoSphere AI</span>
+          </div>
+          <i data-lucide="chevrons-up-down" style="width:14px;height:14px;color:var(--text-muted);"></i>
+        </div>
+      </div>
+
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item"><a href="dashboard.html"><div class="sidebar-nav-icon"><i data-lucide="layout-dashboard"></i><span>Overview</span></div></a></li>
+        <li class="sidebar-nav-item"><a href="environmental.html"><div class="sidebar-nav-icon"><i data-lucide="leaf"></i><span>Climate Analytics</span></div></a></li>
+        <li class="sidebar-nav-item"><a href="social.html"><div class="sidebar-nav-icon"><i data-lucide="users"></i><span>Social Impact</span></div><span class="sidebar-badge">120+</span></a></li>
+        <li class="sidebar-nav-item"><a href="governance.html"><div class="sidebar-nav-icon"><i data-lucide="gavel"></i><span>Governance Log</span></div><span class="sidebar-badge alert">1 flag</span></a></li>
+        <li class="sidebar-nav-item"><a href="insights.html"><div class="sidebar-nav-icon"><i data-lucide="sparkles"></i><span>AI Insights</span></div><span class="sidebar-badge" style="background:rgba(168,85,247,0.15);color:#a855f7;">New</span></a></li>
+        <li class="sidebar-nav-item active"><a href="reports.html"><div class="sidebar-nav-icon"><i data-lucide="file-bar-chart-2"></i><span>Report Center</span></div><span class="sidebar-badge" style="background:rgba(59,130,246,0.15);color:#3b82f6;">New</span></a></li>
+        <li class="sidebar-nav-item"><a href="gamification.html"><div class="sidebar-nav-icon"><i data-lucide="trophy"></i><span>Eco League</span></div><span class="sidebar-badge" style="background:rgba(234,179,8,0.15);color:#eab308;">LVL 4</span></a></li>
+        <li class="sidebar-nav-item"><a href="admin.html"><div class="sidebar-nav-icon"><i data-lucide="shield-half"></i><span>Admin Portal</span></div><span class="sidebar-badge" style="background:rgba(239,68,68,0.15);color:#ef4444;">Admin</span></a></li>
+        <li class="sidebar-nav-item"><a href="innovations.html"><div class="sidebar-nav-icon"><i data-lucide="beaker"></i><span>Innovations Lab</span></div><span class="sidebar-badge" style="background:rgba(16,185,129,0.15);color:#10b981;">Beta</span></a></li>
+        <li class="sidebar-nav-item"><a href="#"><div class="sidebar-nav-icon"><i data-lucide="settings"></i><span>Settings</span></div></a></li>
+      </ul>
+
+      <div class="sidebar-user">
+        <div class="user-info">
+          <div class="user-avatar">JP</div>
+          <div class="user-text"><h5>Joy Patel</h5><p>CSO, EcoSphere Enterprise</p></div>
+        </div>
+        <button class="user-logout-btn" onclick="window.location.href='index.html'" aria-label="Back to landing">
+          <i data-lucide="log-out" style="width:16px;height:16px;"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ══ MAIN CONTENT ══════════════════════════════════════ -->
+    <main class="dash-main">
+
+      <!-- Topbar -->
+      <div class="dash-topbar">
+        <div class="topbar-left">
+          <div class="search-container">
+            <i data-lucide="search"></i>
+            <input type="text" class="search-input" placeholder="Search reports, metrics, departments…">
+            <span class="cmd-shortcut">⌘ K</span>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="date-selector">
+            <i data-lucide="calendar"></i>
+            <span id="date-range-label">Q2 2026 (Apr–Jun)</span>
+            <i data-lucide="chevron-down" style="width:14px;height:14px;color:var(--text-muted);"></i>
+          </div>
+          <div class="topbar-actions-group">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Page Content ─────────────────────────────────── -->
+      <div class="dash-content" style="padding:28px 32px;overflow-y:auto;">
+
+        <!-- Page Heading -->
+        <div style="margin-bottom:24px;display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <h1 style="font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;margin-bottom:4px;">Report Center</h1>
+            <p style="font-size:12.5px;color:var(--text-muted);">Generate, export, and share ESG intelligence across all departments and modules.</p>
+          </div>
+          <div style="display:flex;gap:10px;">
+            <button class="btn btn-secondary" onclick="openBuilder()" style="display:flex;align-items:center;gap:6px;">
+              <i data-lucide="sliders-horizontal" style="width:14px;height:14px;"></i> Custom Builder
+            </button>
+            <button class="btn btn-primary" onclick="generateAllReports()" style="display:flex;align-items:center;gap:6px;">
+              <i data-lucide="zap" style="width:14px;height:14px;"></i> Generate All
+            </button>
+          </div>
+        </div>
+
+        <!-- ① KPI Banner -->
+        <div class="report-kpi-strip">
+          <div class="report-kpi-card" style="--kpi-accent:#10b981;--kpi-icon-bg:rgba(16,185,129,0.12);">
+            <div class="kpi-icon-wrap"><i data-lucide="file-text" style="width:22px;height:22px;"></i></div>
+            <div>
+              <div class="report-kpi-value" data-target="148" id="kpi-total">0</div>
+              <div class="report-kpi-label">Total Reports</div>
+              <span class="report-kpi-delta delta-up">+12 this quarter</span>
+            </div>
+          </div>
+          <div class="report-kpi-card" style="--kpi-accent:#eab308;--kpi-icon-bg:rgba(234,179,8,0.12);">
+            <div class="kpi-icon-wrap" style="color:#eab308;"><i data-lucide="clock" style="width:22px;height:22px;"></i></div>
+            <div>
+              <div class="report-kpi-value" data-target="7" id="kpi-pending">0</div>
+              <div class="report-kpi-label">Pending Generation</div>
+              <span class="report-kpi-delta delta-down">Needs attention</span>
+            </div>
+          </div>
+          <div class="report-kpi-card" style="--kpi-accent:#3b82f6;--kpi-icon-bg:rgba(59,130,246,0.12);">
+            <div class="kpi-icon-wrap" style="color:#3b82f6;"><i data-lucide="download" style="width:22px;height:22px;"></i></div>
+            <div>
+              <div class="report-kpi-value" data-target="93" id="kpi-exported">0</div>
+              <div class="report-kpi-label">Exported Reports</div>
+              <span class="report-kpi-delta delta-up">+8 this month</span>
+            </div>
+          </div>
+          <div class="report-kpi-card" style="--kpi-accent:#a855f7;--kpi-icon-bg:rgba(168,85,247,0.12);">
+            <div class="kpi-icon-wrap" style="color:#a855f7;"><i data-lucide="sparkles" style="width:22px;height:22px;"></i></div>
+            <div>
+              <div class="report-kpi-value" data-target="34" id="kpi-ai">0</div>
+              <div class="report-kpi-label">AI Summaries</div>
+              <span class="report-kpi-delta delta-up">Powered by EcoSphere AI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ② Report Type Tab Pills -->
+        <div class="report-tab-bar" id="report-tabs">
+          <button class="report-tab active" data-tab="all">All Reports</button>
+          <button class="report-tab" data-tab="environmental">🌱 Environmental</button>
+          <button class="report-tab" data-tab="social">🤝 Social</button>
+          <button class="report-tab" data-tab="governance">⚖️ Governance</button>
+          <button class="report-tab" data-tab="esg">📊 ESG Summary</button>
+          <button class="report-tab" data-tab="department">🏢 Department</button>
+          <button class="report-tab" data-tab="employee">👤 Employee</button>
+          <button class="report-tab" data-tab="challenge">🏆 Challenges</button>
+        </div>
+
+        <!-- ③ Report Cards Grid -->
+        <div class="report-cards-grid" id="report-cards-grid">
+
+          <!-- Environmental Report -->
+          <div class="report-card" data-category="environmental" style="--rc-border:#10b981;--rc-glow:rgba(16,185,129,0.06);">
+            <div class="report-card-header">
+              <div class="report-card-icon" style="background:rgba(16,185,129,0.12);">🌱</div>
+              <canvas class="report-mini-chart" id="mini-env"></canvas>
+            </div>
+            <div>
+              <div class="report-card-title">Environmental Report</div>
+              <div class="report-card-meta">Carbon emissions, energy usage, water consumption, waste metrics & renewable energy targets.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="table-status-pill pill-complete">✓ Ready</span>
+              <span style="font-size:10.5px;color:var(--text-muted);">Updated 2h ago</span>
+            </div>
+            <div class="report-card-actions">
+              <button class="rc-btn rc-btn-primary" onclick="generateReport('Environmental')"><i data-lucide="zap" style="width:11px;height:11px;"></i> Generate</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('PDF','Environmental')">PDF</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('Excel','Environmental')">XLS</button>
+            </div>
+          </div>
+
+          <!-- Social Report -->
+          <div class="report-card" data-category="social" style="--rc-border:#3b82f6;--rc-glow:rgba(59,130,246,0.06);">
+            <div class="report-card-header">
+              <div class="report-card-icon" style="background:rgba(59,130,246,0.12);">🤝</div>
+              <canvas class="report-mini-chart" id="mini-soc"></canvas>
+            </div>
+            <div>
+              <div class="report-card-title">Social Report</div>
+              <div class="report-card-meta">Volunteer hours, CSR activities, diversity metrics, employee wellness & community projects.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="table-status-pill pill-complete">✓ Ready</span>
+              <span style="font-size:10.5px;color:var(--text-muted);">Updated 4h ago</span>
+            </div>
+            <div class="report-card-actions">
+              <button class="rc-btn rc-btn-primary" onclick="generateReport('Social')"><i data-lucide="zap" style="width:11px;height:11px;"></i> Generate</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('PDF','Social')">PDF</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('Excel','Social')">XLS</button>
+            </div>
+          </div>
+
+          <!-- Governance Report -->
+          <div class="report-card" data-category="governance" style="--rc-border:#a855f7;--rc-glow:rgba(168,85,247,0.06);">
+            <div class="report-card-header">
+              <div class="report-card-icon" style="background:rgba(168,85,247,0.12);">⚖️</div>
+              <canvas class="report-mini-chart" id="mini-gov"></canvas>
+            </div>
+            <div>
+              <div class="report-card-title">Governance Report</div>
+              <div class="report-card-meta">Policy compliance, audit trails, risk scores, board approvals & anti-bribery status.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="table-status-pill pill-review">⚑ In Review</span>
+              <span style="font-size:10.5px;color:var(--text-muted);">G3.2 flag open</span>
+            </div>
+            <div class="report-card-actions">
+              <button class="rc-btn rc-btn-primary" onclick="generateReport('Governance')"><i data-lucide="zap" style="width:11px;height:11px;"></i> Generate</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('PDF','Governance')">PDF</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('Excel','Governance')">XLS</button>
+            </div>
+          </div>
+
+          <!-- ESG Summary -->
+          <div class="report-card" data-category="esg" style="--rc-border:#10b981;--rc-glow:rgba(16,185,129,0.04);">
+            <div class="report-card-header">
+              <div class="report-card-icon" style="background:rgba(16,185,129,0.1);">📊</div>
+              <canvas class="report-mini-chart" id="mini-esg"></canvas>
+            </div>
+            <div>
+              <div class="report-card-title">ESG Summary Report</div>
+              <div class="report-card-meta">Consolidated E, S & G score breakdown, peer benchmark, trend analysis & executive summary.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="table-status-pill pill-complete">✓ Ready</span>
+              <span style="font-size:10.5px;color:var(--text-muted);">Overall: 91.2</span>
+            </div>
+            <div class="report-card-actions">
+              <button class="rc-btn rc-btn-primary" onclick="generateReport('ESG Summary')"><i data-lucide="zap" style="width:11px;height:11px;"></i> Generate</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('PDF','ESG Summary')">PDF</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('Excel','ESG Summary')">XLS</button>
+            </div>
+          </div>
+
+          <!-- Department Report -->
+          <div class="report-card" data-category="department" style="--rc-border:#f97316;--rc-glow:rgba(249,115,22,0.06);">
+            <div class="report-card-header">
+              <div class="report-card-icon" style="background:rgba(249,115,22,0.12);">🏢</div>
+              <canvas class="report-mini-chart" id="mini-dept"></canvas>
+            </div>
+            <div>
+              <div class="report-card-title">Department Report</div>
+              <div class="report-card-meta">Per-department carbon footprint, CSR participation, compliance scores & sustainability goals.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="table-status-pill pill-pending">⏳ Pending</span>
+              <span style="font-size:10.5px;color:var(--text-muted);">7 depts pending</span>
+            </div>
+            <div class="report-card-actions">
+              <button class="rc-btn rc-btn-primary" onclick="generateReport('Department')"><i data-lucide="zap" style="width:11px;height:11px;"></i> Generate</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('PDF','Department')">PDF</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('CSV','Department')">CSV</button>
+            </div>
+          </div>
+
+          <!-- Employee Report -->
+          <div class="report-card" data-category="employee" style="--rc-border:#06b6d4;--rc-glow:rgba(6,182,212,0.06);">
+            <div class="report-card-header">
+              <div class="report-card-icon" style="background:rgba(6,182,212,0.12);">👤</div>
+              <canvas class="report-mini-chart" id="mini-emp"></canvas>
+            </div>
+            <div>
+              <div class="report-card-title">Employee Report</div>
+              <div class="report-card-meta">Individual ESG scores, training completion, volunteer hours, XP levels & leaderboard ranks.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="table-status-pill pill-complete">✓ Ready</span>
+              <span style="font-size:10.5px;color:var(--text-muted);">324 employees</span>
+            </div>
+            <div class="report-card-actions">
+              <button class="rc-btn rc-btn-primary" onclick="generateReport('Employee')"><i data-lucide="zap" style="width:11px;height:11px;"></i> Generate</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('Excel','Employee')">XLS</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('CSV','Employee')">CSV</button>
+            </div>
+          </div>
+
+          <!-- Challenge Report -->
+          <div class="report-card" data-category="challenge" style="--rc-border:#eab308;--rc-glow:rgba(234,179,8,0.06);">
+            <div class="report-card-header">
+              <div class="report-card-icon" style="background:rgba(234,179,8,0.12);">🏆</div>
+              <canvas class="report-mini-chart" id="mini-chal"></canvas>
+            </div>
+            <div>
+              <div class="report-card-title">Challenge Report</div>
+              <div class="report-card-meta">Mission completion rates, XP earned, badge distributions, team rankings & reward redemptions.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="table-status-pill pill-complete">✓ Ready</span>
+              <span style="font-size:10.5px;color:var(--text-muted);">42 challenges</span>
+            </div>
+            <div class="report-card-actions">
+              <button class="rc-btn rc-btn-primary" onclick="generateReport('Challenges')"><i data-lucide="zap" style="width:11px;height:11px;"></i> Generate</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('PDF','Challenges')">PDF</button>
+              <button class="rc-btn rc-btn-ghost" onclick="exportReport('Excel','Challenges')">XLS</button>
+            </div>
+          </div>
+
+          <!-- Custom Report -->
+          <div class="report-card" data-category="all" style="--rc-border:#94a3b8;--rc-glow:rgba(148,163,184,0.04);border-style:dashed;">
+            <div class="report-card-header">
+              <div class="report-card-icon" style="background:rgba(148,163,184,0.1);">🛠️</div>
+            </div>
+            <div>
+              <div class="report-card-title">Custom Report</div>
+              <div class="report-card-meta">Build your own report by selecting metrics, applying filters, and choosing your output format.</div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <span class="table-status-pill pill-draft">Builder</span>
+              <span style="font-size:10.5px;color:var(--text-muted);">Unlimited templates</span>
+            </div>
+            <div class="report-card-actions">
+              <button class="rc-btn rc-btn-primary" onclick="openBuilder()" style="width:100%;justify-content:center;background:rgba(148,163,184,0.15);color:var(--text-primary);">
+                <i data-lucide="plus" style="width:11px;height:11px;"></i> Open Builder
+              </button>
+            </div>
+          </div>
+
+        </div><!-- /report-cards-grid -->
+
+        <!-- ④ Charts Row -->
+        <div class="report-charts-row">
+          <div class="report-chart-card">
+            <div class="report-chart-title">ESG Score Trend</div>
+            <div class="report-chart-sub">Monthly composite score over the last 12 months</div>
+            <div class="chart-dom" id="chart-trend"></div>
+          </div>
+          <div class="report-chart-card">
+            <div class="report-chart-title">Score Composition</div>
+            <div class="report-chart-sub">E · S · G weight distribution</div>
+            <div class="chart-dom" id="chart-donut"></div>
+          </div>
+          <div class="report-chart-card">
+            <div class="report-chart-title">Department Comparison</div>
+            <div class="report-chart-sub">Carbon index by dept (tCO₂e)</div>
+            <div class="chart-dom" id="chart-bar"></div>
+          </div>
+        </div>
+
+        <!-- ⑤ Custom Report Builder Wizard -->
+        <div class="report-builder-card" id="builder-section" style="display:none;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;">
+            <div>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:800;">Custom Report Builder</h3>
+              <p style="font-size:11.5px;color:var(--text-muted);margin-top:2px;">Select metrics, apply filters, then preview and export your report.</p>
+            </div>
+            <button class="rc-btn rc-btn-ghost" onclick="closeBuilder()"><i data-lucide="x" style="width:13px;height:13px;"></i> Close</button>
+          </div>
+
+          <!-- Step indicator -->
+          <div class="wizard-steps-bar">
+            <div class="wizard-step-item active" id="ws-1">
+              <div class="wizard-step-num">1</div>
+              <span class="wizard-step-label">Select Metrics</span>
+            </div>
+            <div class="wizard-step-item" id="ws-2">
+              <div class="wizard-step-num">2</div>
+              <span class="wizard-step-label">Apply Filters</span>
+            </div>
+            <div class="wizard-step-item" id="ws-3">
+              <div class="wizard-step-num">3</div>
+              <span class="wizard-step-label">Preview & Export</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Metric Selection -->
+          <div class="wizard-panel active" id="wizard-step-1">
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:14px;">Choose Report Metrics</h4>
+            <div class="wizard-metrics-grid" id="metrics-grid">
+              <!-- Populated by JS -->
+            </div>
+            <div class="wizard-actions">
+              <span style="font-size:12px;color:var(--text-muted);" id="selected-count">0 metrics selected</span>
+              <button class="btn btn-primary" onclick="wizardNext(2)">Next: Filters <i data-lucide="arrow-right" style="width:13px;height:13px;display:inline;"></i></button>
+            </div>
+          </div>
+
+          <!-- Step 2: Filters -->
+          <div class="wizard-panel" id="wizard-step-2">
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:14px;">Apply Report Filters</h4>
+            <div class="wizard-filter-row">
+              <div>
+                <label style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:6px;">Date Range</label>
+                <select class="form-control" id="filter-date">
+                  <option>Q1 2026 (Jan–Mar)</option>
+                  <option selected>Q2 2026 (Apr–Jun)</option>
+                  <option>Q3 2026 (Jul–Sep)</option>
+                  <option>Full Year 2025</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:6px;">Department</label>
+                <select class="form-control" id="filter-dept">
+                  <option>All Departments</option>
+                  <option>Engineering</option>
+                  <option>Operations</option>
+                  <option>HR & People</option>
+                  <option>Finance</option>
+                  <option>Manufacturing</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:6px;">Report Format</label>
+                <select class="form-control" id="filter-format">
+                  <option>PDF Report</option>
+                  <option>Excel Workbook</option>
+                  <option>CSV Data</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:6px;">Scope</label>
+                <select class="form-control" id="filter-scope">
+                  <option>Scope 1 + 2 + 3</option>
+                  <option>Scope 1 only</option>
+                  <option>Scope 2 only</option>
+                  <option>Scope 3 only</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:6px;">Include AI Summary</label>
+                <select class="form-control" id="filter-ai">
+                  <option>Yes — include AI analysis</option>
+                  <option>No — data only</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase;display:block;margin-bottom:6px;">Baseline Year</label>
+                <select class="form-control" id="filter-baseline">
+                  <option>2020</option>
+                  <option>2021</option>
+                  <option>2022</option>
+                  <option selected>2023</option>
+                </select>
+              </div>
+            </div>
+            <div class="wizard-actions">
+              <button class="btn btn-secondary" onclick="wizardNext(1)">← Back</button>
+              <button class="btn btn-primary" onclick="wizardNext(3)">Preview Report <i data-lucide="arrow-right" style="width:13px;height:13px;display:inline;"></i></button>
+            </div>
+          </div>
+
+          <!-- Step 3: Preview & Export -->
+          <div class="wizard-panel" id="wizard-step-3">
+            <h4 style="font-size:13px;font-weight:700;margin-bottom:14px;">Report Preview</h4>
+            <div style="background:rgba(255,255,255,0.015);border:1px solid var(--border-subtle);border-radius:14px;padding:16px;margin-bottom:18px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                <span style="font-size:12px;font-weight:700;color:var(--text-secondary);">CUSTOM REPORT PREVIEW — <span id="preview-dept-label">All Departments</span></span>
+                <span style="font-size:10.5px;color:var(--text-muted);" id="preview-date-label">Q2 2026</span>
+              </div>
+              <table class="wizard-preview-table" id="preview-table">
+                <thead>
+                  <tr><th>Metric</th><th>Value</th><th>Target</th><th>Variance</th><th>Status</th></tr>
+                </thead>
+                <tbody id="preview-tbody"></tbody>
+              </table>
+            </div>
+            <div class="wizard-actions">
+              <button class="btn btn-secondary" onclick="wizardNext(2)">← Back to Filters</button>
+              <div style="display:flex;gap:10px;">
+                <button class="export-btn export-btn-pdf" onclick="exportCustomReport('PDF')"><i data-lucide="file-text" style="width:13px;height:13px;"></i> Export PDF</button>
+                <button class="export-btn export-btn-xlsx" onclick="exportCustomReport('Excel')"><i data-lucide="table-2" style="width:13px;height:13px;"></i> Export Excel</button>
+                <button class="export-btn export-btn-csv" onclick="exportCustomReport('CSV')"><i data-lucide="file-spreadsheet" style="width:13px;height:13px;"></i> Export CSV</button>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /builder -->
+
+        <!-- ⑥ AI Summary Panel -->
+        <div class="ai-summary-card">
+          <div class="ai-summary-header">
+            <div>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:800;margin-bottom:2px;">AI Report Summary</h3>
+              <p style="font-size:11.5px;color:var(--text-muted);">Generated by EcoSphere AI · <span id="ai-gen-time">Just now</span></p>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;">
+              <span class="ai-summary-badge"><i data-lucide="sparkles" style="width:12px;height:12px;"></i> EcoSphere AI</span>
+              <button class="rc-btn rc-btn-ghost" onclick="regenerateAISummary()" id="btn-regen" style="padding:7px 14px;">
+                <i data-lucide="refresh-cw" style="width:12px;height:12px;"></i> Regenerate
+              </button>
+            </div>
+          </div>
+
+          <p class="ai-summary-text" id="ai-summary-text"></p>
+
+          <div class="ai-summary-bullets" id="ai-bullets"></div>
+
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            <button class="export-btn export-btn-pdf" onclick="exportReport('PDF','AI Summary')">
+              <i data-lucide="file-text" style="width:13px;height:13px;"></i> Export PDF
+            </button>
+            <button class="export-btn export-btn-xlsx" onclick="exportReport('Excel','AI Summary')">
+              <i data-lucide="table-2" style="width:13px;height:13px;"></i> Export Excel
+            </button>
+            <button class="export-btn export-btn-csv" onclick="exportReport('CSV','AI Summary')">
+              <i data-lucide="file-spreadsheet" style="width:13px;height:13px;"></i> Export CSV
+            </button>
+          </div>
+        </div>
+
+        <!-- ⑦ Interactive Data Table -->
+        <div class="report-table-card">
+          <div class="table-toolbar">
+            <div>
+              <h3 style="font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:800;margin-bottom:2px;">All Reports Log</h3>
+              <p style="font-size:11px;color:var(--text-muted);">Click column headers to sort · Use search to filter</p>
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <div class="table-search-wrap">
+                <i data-lucide="search"></i>
+                <input type="text" class="table-search-input" id="table-search" placeholder="Search reports…" oninput="filterTable()">
+              </div>
+              <div class="export-btn-group">
+                <button class="export-btn export-btn-pdf" onclick="exportReport('PDF','All Reports')">
+                  <i data-lucide="file-text" style="width:13px;height:13px;"></i> PDF
+                </button>
+                <button class="export-btn export-btn-xlsx" onclick="exportReport('Excel','All Reports')">
+                  <i data-lucide="table-2" style="width:13px;height:13px;"></i> Excel
+                </button>
+                <button class="export-btn export-btn-csv" onclick="exportReport('CSV','All Reports')">
+                  <i data-lucide="file-spreadsheet" style="width:13px;height:13px;"></i> CSV
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <table class="data-table" id="reports-data-table">
+            <thead>
+              <tr>
+                <th onclick="sortTable(0)" data-col="0">Report Name</th>
+                <th onclick="sortTable(1)" data-col="1">Category</th>
+                <th onclick="sortTable(2)" data-col="2">Department</th>
+                <th onclick="sortTable(3)" data-col="3">Generated</th>
+                <th onclick="sortTable(4)" data-col="4">Period</th>
+                <th onclick="sortTable(5)" data-col="5">Score</th>
+                <th onclick="sortTable(6)" data-col="6">Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+          </table>
+
+          <div class="table-pagination">
+            <span class="pagination-info" id="pagination-info">Showing 1–10 of 20</span>
+            <div class="pagination-btns" id="pagination-btns"></div>
+          </div>
+        </div>
+
+      </div><!-- /dash-content -->
+    </main>
+  </div><!-- /dash-wrapper -->
+
+  <!-- Toast Stack -->
+  <div class="toast-stack" id="toast-stack"></div>
+
+  <!-- Floating AI Chatbot -->
+  <div class="floating-chat-widget" id="floating-chat-widget">
+    <button class="chat-widget-fab" id="chat-widget-fab" onclick="toggleFloatingChat()" aria-label="Open EcoSphere AI chat">
+      <i data-lucide="sparkles"></i>
+    </button>
+    <div class="chat-widget-drawer glass-panel" id="chat-widget-drawer">
+      <div class="chat-drawer-header">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="user-avatar" style="width:28px;height:28px;font-size:11px;display:flex;align-items:center;justify-content:center;background:rgba(168,85,247,0.12);border:1px solid #a855f7;color:#a855f7;">AI</div>
+          <div>
+            <h6 style="font-size:12px;font-weight:700;color:#ffffff;line-height:1.2;">EcoSphere Assistant</h6>
+            <span style="font-size:9px;color:#10b981;font-weight:600;">Active Online</span>
+          </div>
+        </div>
+        <button class="theme-toggle-btn" onclick="toggleFloatingChat()" style="color:#ffffff;"><i data-lucide="x" style="width:14px;height:14px;"></i></button>
+      </div>
+      <div class="chat-drawer-body" id="chat-drawer-messages">
+        <div class="chat-msg assistant-msg">
+          <p>Hi! I'm EcoSphere AI. Want me to summarize any report or explain a metric?</p>
+        </div>
+      </div>
+      <div class="chat-drawer-footer">
+        <input type="text" id="chat-drawer-input" placeholder="Ask about any report…" onkeydown="handleDrawerKeyPress(event)">
+        <button class="action-icon-btn" onclick="sendDrawerMessage()" style="color:var(--primary);"><i data-lucide="send" style="width:14px;height:14px;"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="insights.js"></script>
+  <script src="reports.js"></script>
+  <script src="avatar-voice.js"></script>
+</body>
+</html>

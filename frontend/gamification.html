@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSphere AI - Sustainability Eco League Hub</title>
+  <meta name="description" content="EcoSphere Gamification module. Challenges, XP points, Lucky Spin Wheels, Diamond Leagues leaderboards, and rewards redemption.">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="gamification.css">
+  <link rel="stylesheet" href="insights.css">
+</head>
+<body>
+
+  <!-- Overlay Confetti Canvas -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Background Orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Dashboard Wrapper -->
+  <div class="dash-wrapper">
+    
+    <!-- 1. Left Sidebar Navigation (Linear/Stripe Inspired) -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-brand">
+        <div class="workspace-switcher">
+          <div class="workspace-details">
+            <div class="workspace-logo">ES</div>
+            <span class="workspace-name">EcoSphere AI</span>
+          </div>
+          <i data-lucide="chevrons-up-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+        </div>
+      </div>
+      
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item">
+          <a href="dashboard.html">
+            <div class="sidebar-nav-icon"><i data-lucide="layout-dashboard"></i> <span>Overview</span></div>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="environmental.html">
+            <div class="sidebar-nav-icon"><i data-lucide="leaf"></i> <span>Climate Analytics</span></div>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="social.html">
+            <div class="sidebar-nav-icon"><i data-lucide="users"></i> <span>Social Impact</span></div>
+            <span class="sidebar-badge">120+</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="governance.html">
+            <div class="sidebar-nav-icon"><i data-lucide="gavel"></i> <span>Governance Log</span></div>
+            <span class="sidebar-badge alert">1 flag</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="insights.html">
+            <div class="sidebar-nav-icon"><i data-lucide="sparkles"></i> <span>AI Insights</span></div>
+            <span class="sidebar-badge" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">New</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="reports.html">
+            <div class="sidebar-nav-icon"><i data-lucide="file-bar-chart-2"></i> <span>Report Center</span></div>
+            <span class="sidebar-badge" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">New</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item active">
+          <a href="gamification.html">
+            <div class="sidebar-nav-icon"><i data-lucide="trophy"></i> <span>Eco League</span></div>
+            <span class="sidebar-badge" style="background: rgba(234, 179, 8, 0.15); color: #eab308;">LVL 4</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="innovations.html">
+            <div class="sidebar-nav-icon"><i data-lucide="beaker"></i> <span>Innovations Lab</span></div>
+            <span class="sidebar-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Beta</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="admin.html">
+            <div class="sidebar-nav-icon"><i data-lucide="shield-half"></i> <span>Admin Portal</span></div>
+            <span class="sidebar-badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">Admin</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <div class="sidebar-nav-icon"><i data-lucide="settings"></i> <span>Settings</span></div>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Profile at bottom -->
+      <div class="sidebar-user">
+        <div class="user-info">
+          <div class="user-avatar">JP</div>
+          <div class="user-text">
+            <h5>Joy Patel</h5>
+            <p>CSO, EcoSphere Enterprise</p>
+          </div>
+        </div>
+        <button class="user-logout-btn" onclick="window.location.href='index.html'" aria-label="Log Out to landing page">
+          <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Area -->
+    <main class="dash-main">
+      
+      <!-- Topbar Header -->
+      <div class="dash-topbar">
+        <div class="topbar-left">
+          <div class="search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="social-search" class="search-input" placeholder="Search rewards, missions or trophies...">
+            <span class="cmd-shortcut">⌘ K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Coins Counter Widget (Duolingo Style) -->
+          <div class="coin-cost-badge" style="padding: 6px 14px; font-size: 13.5px; display: flex; align-items: center; gap: 6px;" id="profile-coins-badge">
+            <i data-lucide="coins" style="width: 16px; height: 16px; fill: currentColor;"></i>
+            <span id="green-coins-count">350</span> Green Coins
+          </div>
+
+          <div class="topbar-actions-group">
+            <!-- Theme Toggle -->
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle light/dark mode">
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Dashboard Grid Content Workspace -->
+      <div class="dash-content">
+        
+        <!-- Row 1: XP Profile Card Level Progress (Full Width) -->
+        <div class="xp-profile-card glass-panel" style="margin-bottom: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="display: flex; align-items: center; gap: 16px;">
+              <div style="font-size: 32px;">🏆</div>
+              <div>
+                <h4 style="font-size: 18px; font-weight: 800; color: var(--primary);">LEVEL 4: CARBON CRUSADER</h4>
+                <p style="font-size: 12px; color: var(--text-secondary);">Earn 580 more XP to unlock Level 5 "Eco-Legend" rank!</p>
+              </div>
+            </div>
+            <div style="text-align: right;">
+              <span style="font-size: 13.5px; font-weight: 700; color: var(--text-primary);" id="profile-xp-text">420 / 1000 XP</span>
+            </div>
+          </div>
+          <div class="xp-progress-bar-chunky">
+            <div class="xp-progress-fill-chunky" id="xp-progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- Row 2: Missions List & Lucky Spin Wheel (55/45) -->
+        <div class="dash-row-grid-primary" style="grid-template-columns: 1.2fr 1fr;">
+          
+          <!-- Missions Panel -->
+          <div class="chart-panel-card glass-panel" style="height: 480px; display: flex; flex-direction: column; padding: 24px;">
+            <div class="chart-panel-header" style="margin-bottom: 20px;">
+              <span class="chart-panel-title">Active sustainability Missions</span>
+              <i data-lucide="check-square" style="color: var(--secondary); width: 18px; height: 18px;"></i>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 16px; flex: 1; overflow-y: auto;">
+              <!-- Daily Mission -->
+              <div class="mission-card" id="mission-daily">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="sidebar-badge" style="background: rgba(88, 204, 2, 0.15); color: var(--secondary);">Daily</span>
+                    <h6 style="font-size: 13.5px; font-weight: 700;">Acknowledge ethical policies</h6>
+                  </div>
+                  <p style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">Acknowledge Code of Ethical Conduct document guidelines.</p>
+                </div>
+                <button class="btn-duo btn-duo-green" id="btn-claim-daily" onclick="claimMission('daily', 50, 100)">Claim <span style="font-size: 10px;">+50c</span></button>
+              </div>
+
+              <!-- Weekly Mission -->
+              <div class="mission-card" id="mission-weekly">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="sidebar-badge" style="background: rgba(0, 112, 209, 0.15); color: var(--primary);">Weekly</span>
+                    <h6 style="font-size: 13.5px; font-weight: 700;">Participate in CSR Volunteering</h6>
+                  </div>
+                  <p style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">Register and participate in the July River Clean-up event. Progress: <span id="mission-weekly-progress">0/1</span></p>
+                </div>
+                <button class="btn-duo btn-duo-blue" id="btn-claim-weekly" disabled>Claims <span style="font-size: 10px;">+150c</span></button>
+              </div>
+
+              <!-- Monthly Mission -->
+              <div class="mission-card" id="mission-monthly">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="sidebar-badge" style="background: rgba(255, 194, 0, 0.15); color: var(--gold);">Monthly</span>
+                    <h6 style="font-size: 13.5px; font-weight: 700;">Complete SEC Regulatory Filings</h6>
+                  </div>
+                  <p style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">Run compliance audits and approve board Anti-Bribery files.</p>
+                </div>
+                <button class="btn-duo btn-duo-gold" id="btn-claim-monthly" onclick="claimMission('monthly', 100, 200)">Claim <span style="font-size: 10px;">+100c</span></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lucky Spin Wheel Card -->
+          <div class="wheel-card glass-panel">
+            <div class="chart-panel-header" style="width: 100%;">
+              <span class="chart-panel-title">Eco lucky Spin Wheel</span>
+              <i data-lucide="compass" style="color: var(--gold); width: 18px; height: 18px;"></i>
+            </div>
+            
+            <div class="wheel-container-outer">
+              <div class="wheel-pointer"></div>
+              <canvas id="wheel-canvas" width="280" height="280"></canvas>
+            </div>
+
+            <button class="btn-duo btn-duo-gold" style="width: 100%; justify-content: center; font-size: 14px;" id="btn-spin" onclick="spinWheel()">
+              Spin Wheel (Costs 50 Coins) <i data-lucide="play" style="width: 14px; height: 14px; fill: currentColor;"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Row 3: Achievements Trophies & Diamond League Standings (60/40) -->
+        <div class="dash-row-grid-secondary">
+          
+          <!-- Trophies Badges Grid -->
+          <div class="chart-panel-card glass-panel" style="height: 480px; padding: 24px; display: flex; flex-direction: column;">
+            <div class="chart-panel-header" style="margin-bottom: 20px;">
+              <span class="chart-panel-title">Trophy Cabinet & Achievement Badges</span>
+              <i data-lucide="award" style="color: var(--gold); width: 18px; height: 18px;"></i>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; flex: 1; overflow-y: auto;">
+              <!-- Badge 1: Carbon Crusader -->
+              <div class="badge-item-gaming unlocked">
+                <div class="badge-icon-gaming">🌎</div>
+                <h6 style="font-size: 13px; font-weight: 700;">Carbon Crusader</h6>
+                <p style="font-size: 10px; color: var(--text-secondary);">Log first Scope 1 calculator</p>
+              </div>
+
+              <!-- Badge 2: Social Pioneer -->
+              <div class="badge-item-gaming unlocked">
+                <div class="badge-icon-gaming">🤝</div>
+                <h6 style="font-size: 13px; font-weight: 700;">Social Pioneer</h6>
+                <p style="font-size: 10px; color: var(--text-secondary);">Join volunteer calendar event</p>
+              </div>
+
+              <!-- Badge 3: Compliance Guardian -->
+              <div class="badge-item-gaming unlocked">
+                <div class="badge-icon-gaming">🛡️</div>
+                <h6 style="font-size: 13px; font-weight: 700;">Compliance Guardian</h6>
+                <p style="font-size: 10px; color: var(--text-secondary);">Approve anti-bribery policies</p>
+              </div>
+
+              <!-- Badge 4: Wheel Master -->
+              <div class="badge-item-gaming" id="badge-wheel">
+                <div class="badge-icon-gaming">🎡</div>
+                <h6 style="font-size: 13px; font-weight: 700;">Wheel Master</h6>
+                <p style="font-size: 10px; color: var(--text-secondary);">Spin the Lucky wheel once</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Diamond League Standings -->
+          <div class="chart-panel-card glass-panel" style="height: 480px; padding: 24px; display: flex; flex-direction: column;">
+            <div class="chart-panel-header" style="margin-bottom: 12px;">
+              <span class="chart-panel-title">Diamond League Leaderboard</span>
+              <span class="sidebar-badge" style="background: rgba(255, 194, 0, 0.15); color: var(--gold);">Tier 1</span>
+            </div>
+            
+            <div class="logs-table-container" style="flex: 1; overflow-y: auto;">
+              <table class="logs-table">
+                <thead>
+                  <tr>
+                    <th>Rank</th>
+                    <th>Colleague Player</th>
+                    <th>Division</th>
+                    <th>Weekly XP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><div class="rank-badge-gaming rank-badge-gold">1</div></td>
+                    <td style="font-weight: 600;">Sarah Jenkins</td>
+                    <td>Facilities</td>
+                    <td>2,400 XP</td>
+                  </tr>
+                  <tr>
+                    <td><div class="rank-badge-gaming rank-badge-silver">2</div></td>
+                    <td style="font-weight: 600;">David Vance</td>
+                    <td>Logistics</td>
+                    <td>1,850 XP</td>
+                  </tr>
+                  <tr style="background: rgba(0, 112, 209, 0.05);">
+                    <td><div class="rank-badge-gaming rank-badge-bronze" style="background: var(--primary); color:#ffffff; border-color:var(--primary-hover);">3</div></td>
+                    <td style="font-weight: 700; color: var(--primary);">Joy Patel (You)</td>
+                    <td>CSO Admin</td>
+                    <td style="font-weight: 700;" id="leaderboard-xp-val">1,420 XP</td>
+                  </tr>
+                  <tr>
+                    <td><div class="rank-badge-gaming" style="background: var(--border-subtle); color: var(--text-primary);">4</div></td>
+                    <td style="font-weight: 600;">Bob Vance</td>
+                    <td>Refrigeration</td>
+                    <td>980 XP</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Row 4: Rewards Redemption Shop (Full Width) -->
+        <div class="recent-logs-card glass-panel" style="height: auto; padding: 24px;">
+          <div class="chart-panel-header" style="margin-bottom: 20px;">
+            <span class="chart-panel-title">Eco Rewards Redemption Shop</span>
+            <i data-lucide="shopping-bag" style="color: var(--secondary); width: 18px; height: 18px;"></i>
+          </div>
+
+          <div class="shop-grid">
+            <!-- Shop item 1 -->
+            <div class="shop-item-card">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span class="sidebar-badge" style="background: rgba(0, 112, 209, 0.15); color: var(--primary);">Pass</span>
+                  <div class="coin-cost-badge">200 Coins</div>
+                </div>
+                <h6 style="font-size: 14px; font-weight: 700;">1-Day Remote Work Voucher</h6>
+                <p style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">Exchange coins for a board approved home office day.</p>
+              </div>
+              <button class="btn-duo btn-duo-blue" style="width: 100%; justify-content: center;" onclick="redeemShopReward('work-voucher', 200, '1-Day Remote Work Pass')">Redeem Reward</button>
+            </div>
+
+            <!-- Shop item 2 -->
+            <div class="shop-item-card">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span class="sidebar-badge" style="background: rgba(88, 204, 2, 0.15); color: var(--secondary);">Media</span>
+                  <div class="coin-cost-badge">400 Coins</div>
+                </div>
+                <h6 style="font-size: 14px; font-weight: 700;">EcoSphere Thermal Bottle</h6>
+                <p style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">Premium double-walled thermal bamboo coffee flask.</p>
+              </div>
+              <button class="btn-duo btn-duo-green" style="width: 100%; justify-content: center;" onclick="redeemShopReward('flask', 400, 'EcoSphere Thermal Bottle')">Redeem Reward</button>
+            </div>
+
+            <!-- Shop item 3 -->
+            <div class="shop-item-card">
+              <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                  <span class="sidebar-badge" style="background: rgba(255, 194, 0, 0.15); color: var(--gold);">Carbon</span>
+                  <div class="coin-cost-badge">150 Coins</div>
+                </div>
+                <h6 style="font-size: 14px; font-weight: 700;">Plant 10 Trees Certificate</h6>
+                <p style="font-size: 11px; color: var(--text-secondary); margin-top: 4px;">EcoSphere plants 10 native trees in local forestry blocks.</p>
+              </div>
+              <button class="btn-duo btn-duo-gold" style="width: 100%; justify-content: center;" onclick="redeemShopReward('plant-trees', 150, 'Plant 10 Trees Cert')">Redeem Reward</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- PlayStation Style Victory Trophy Modal -->
+  <div class="glass-modal" id="victory-modal">
+    <div class="modal-card glass-panel" style="max-width: 420px; border: 2px solid var(--gold); box-shadow: 0 0 35px rgba(255,194,0,0.3); text-align: center; padding: 32px 24px;">
+      <div style="font-size: 54px; margin-bottom: 12px; filter: drop-shadow(0 0 10px rgba(255,194,0,0.5)); animation: bounce 1.5s infinite;">🏆</div>
+      <span style="font-family: 'Space Grotesk', sans-serif; font-size: 11px; font-weight: 800; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase;">Trophy Earned!</span>
+      <h3 style="font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 800; margin-top: 8px; color: var(--text-primary);" id="victory-title">Trophy Title</h3>
+      <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.5; margin: 12px 0 24px 0;" id="victory-description">Trophy description detail text goes here.</p>
+      
+      <button class="btn-duo btn-duo-gold" style="width: 100%; justify-content: center;" onclick="closeVictoryModal()">Collect Reward <i data-lucide="check"></i></button>
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Floating AI Assistant Widget -->
+  <div class="floating-chat-widget" id="floating-chat-widget">
+    <button class="chat-widget-fab" id="chat-widget-fab" onclick="toggleFloatingChat()" aria-label="Open EcoSphere AI chat">
+      <i data-lucide="sparkles"></i>
+    </button>
+    
+    <div class="chat-widget-drawer glass-panel" id="chat-widget-drawer">
+      <div class="chat-drawer-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div class="user-avatar" style="width: 28px; height: 28px; font-size: 11px; display: flex; align-items: center; justify-content: center; background: var(--primary-glow); border: 1px solid var(--primary); color: var(--primary);">AI</div>
+          <div>
+            <h6 style="font-size: 12px; font-weight: 700; color: #ffffff; line-height: 1.2;">EcoSphere Assistant</h6>
+            <span style="font-size: 9px; color: #10b981; font-weight: 600;">Active Online</span>
+          </div>
+        </div>
+        <button class="theme-toggle-btn" onclick="toggleFloatingChat()" style="color: #ffffff;"><i data-lucide="x" style="width: 14px; height: 14px;"></i></button>
+      </div>
+      
+      <div class="chat-drawer-body" id="chat-drawer-messages">
+        <div class="chat-msg assistant-msg">
+          <p>Hello! I am EcoSphere AI. How can I help you analyze ESG scores or compile carbon records today?</p>
+        </div>
+      </div>
+      
+      <div class="chat-drawer-footer">
+        <input type="text" id="chat-drawer-input" placeholder="Ask AI anything..." onkeydown="handleDrawerKeyPress(event)">
+        <button class="action-icon-btn" onclick="sendDrawerMessage()" style="color: var(--primary);"><i data-lucide="send" style="width: 14px; height: 14px;"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom JS Modules -->
+  <script src="gamification.js"></script>
+  <script src="insights.js"></script>
+  <script src="avatar-voice.js"></script>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSphere AI — AI Assistant Workspace</title>
+  <meta name="description" content="Dedicated ESG AI Assistant. Ask questions, analyze ESG documents, run carbon predictions, and view inline charts.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="dashboard.css">
+  <link rel="stylesheet" href="insights.css">
+</head>
+<body id="insights-body-page">
+
+  <!-- Background Orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Dashboard Wrapper -->
+  <div class="dash-wrapper" id="insights-workspace">
+    
+    <!-- 1. Left Sidebar Navigation (Linear/Stripe Inspired) -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-brand">
+        <div class="workspace-switcher">
+          <div class="workspace-details">
+            <div class="workspace-logo">ES</div>
+            <span class="workspace-name">EcoSphere AI</span>
+          </div>
+          <i data-lucide="chevrons-up-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+        </div>
+      </div>
+      
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item">
+          <a href="dashboard.html">
+            <div class="sidebar-nav-icon"><i data-lucide="layout-dashboard"></i> <span>Overview</span></div>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="environmental.html">
+            <div class="sidebar-nav-icon"><i data-lucide="leaf"></i> <span>Climate Analytics</span></div>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="social.html">
+            <div class="sidebar-nav-icon"><i data-lucide="users"></i> <span>Social Impact</span></div>
+            <span class="sidebar-badge">120+</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="governance.html">
+            <div class="sidebar-nav-icon"><i data-lucide="gavel"></i> <span>Governance Log</span></div>
+            <span class="sidebar-badge alert">1 flag</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item active">
+          <a href="insights.html">
+            <div class="sidebar-nav-icon"><i data-lucide="sparkles"></i> <span>AI Insights</span></div>
+            <span class="sidebar-badge" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">New</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="reports.html">
+            <div class="sidebar-nav-icon"><i data-lucide="file-bar-chart-2"></i> <span>Report Center</span></div>
+            <span class="sidebar-badge" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">New</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="gamification.html">
+            <div class="sidebar-nav-icon"><i data-lucide="trophy"></i> <span>Eco League</span></div>
+            <span class="sidebar-badge" style="background: rgba(234, 179, 8, 0.15); color: #eab308;">LVL 4</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="innovations.html">
+            <div class="sidebar-nav-icon"><i data-lucide="beaker"></i> <span>Innovations Lab</span></div>
+            <span class="sidebar-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Beta</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="admin.html">
+            <div class="sidebar-nav-icon"><i data-lucide="shield-half"></i> <span>Admin Portal</span></div>
+            <span class="sidebar-badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">Admin</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <div class="sidebar-nav-icon"><i data-lucide="settings"></i> <span>Settings</span></div>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Profile at bottom -->
+      <div class="sidebar-user">
+        <div class="user-info">
+          <div class="user-avatar">JP</div>
+          <div class="user-text">
+            <h5>Joy Patel</h5>
+            <p>CSO, EcoSphere Enterprise</p>
+          </div>
+        </div>
+        <button class="user-logout-btn" onclick="window.location.href='index.html'" aria-label="Log Out to landing page">
+          <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Area -->
+    <main class="dash-main">
+      
+      <!-- Topbar Header -->
+      <div class="dash-topbar">
+        <div class="topbar-left">
+          <div class="search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="workspace-search" class="search-input" placeholder="Search conversations, model switchers or history...">
+            <span class="cmd-shortcut">⌘ K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Date Filter -->
+          <div class="date-selector">
+            <i data-lucide="calendar"></i>
+            <span>Q3 (Last 30 Days)</span>
+            <i data-lucide="chevron-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+          </div>
+
+          <div class="topbar-actions-group">
+            <!-- Theme Toggle -->
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle light/dark mode">
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Dedicated AI Workspace Grid -->
+      <div class="dash-content">
+        <div class="insights-grid">
+          
+          <!-- Column 1: Chat History sidebar -->
+          <div class="chat-history-sidebar">
+            <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="resetWorkspaceChat()">
+              <i data-lucide="plus" style="width: 14px; height: 14px;"></i> New Conversation
+            </button>
+            
+            <div class="history-list" id="history-container">
+              <div class="history-item active" onclick="loadChatHistory('scope-3')">
+                <i data-lucide="message-square" style="width: 14px; height: 14px;"></i>
+                <span>Scope 3 Logistics Review</span>
+              </div>
+              <div class="history-item" onclick="loadChatHistory('decarbon')">
+                <i data-lucide="message-square" style="width: 14px; height: 14px;"></i>
+                <span>Carbon prediction Q4</span>
+              </div>
+              <div class="history-item" onclick="loadChatHistory('anti-bribery')">
+                <i data-lucide="message-square" style="width: 14px; height: 14px;"></i>
+                <span>Anti-Bribery Audit G3.2</span>
+              </div>
+              <div class="history-item" onclick="loadChatHistory('csr')">
+                <i data-lucide="message-square" style="width: 14px; height: 14px;"></i>
+                <span>CSR Volunteer Outreach</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: central Chat workspace -->
+          <div class="chat-workspace-main glass-panel" style="padding: 24px; border-radius: 24px; position: relative;">
+            
+            <!-- Switcher bar -->
+            <div class="chat-workspace-header">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 11px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">ESG Core Model:</span>
+                <select id="model-select" class="form-control" style="padding: 4px 12px; font-size: 12px; font-weight: 600; width: 180px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); color: var(--text-primary);">
+                  <option value="ecosphere-v2">EcoSphere-v2 (ESG Engine)</option>
+                  <option value="gpt-climate">GP-4 Climate Model</option>
+                  <option value="compliance-bot">SaaS Compliance Auditor</option>
+                </select>
+              </div>
+              <div style="display: flex; gap: 12px;">
+                <span class="status-pill status-completed" style="font-size: 10px; display: inline-flex; align-items: center; gap: 4px;">
+                  <span style="width: 6px; height: 6px; border-radius: 50%; background: #10b981; display: inline-block;"></span> Eco-Model Loaded
+                </span>
+              </div>
+            </div>
+
+            <!-- Messages Stream container -->
+            <div class="chat-stream-container" id="chat-stream-container">
+              <div class="chat-msg assistant-msg">
+                <p>Hello! I am EcoSphere AI. Choose an ESG prompt below to run simulations, predict carbon, or review audit files.</p>
+              </div>
+            </div>
+
+            <!-- Quick Action Prompts tiles -->
+            <div class="quick-prompts-grid" id="quick-prompts-grid">
+              <div class="prompt-tile" onclick="triggerQuickPrompt('explain-esg')">
+                <h6>Explain ESG Scores</h6>
+                <p>Returns sub-scores analysis and inline bar charts.</p>
+              </div>
+              <div class="prompt-tile" onclick="triggerQuickPrompt('predict-carbon')">
+                <h6>Predict Carbon</h6>
+                <p>Generates transition forecasts and line charts.</p>
+              </div>
+              <div class="prompt-tile" onclick="triggerQuickPrompt('analyze-docs')">
+                <h6>Analyze Document</h6>
+                <p>Simulates policy PDF parsing and audit checklists.</p>
+              </div>
+              <div class="prompt-tile" onclick="triggerQuickPrompt('recommend-goals')">
+                <h6>Recommend Goals</h6>
+                <p>Drafts roadmap targets with code block parameters.</p>
+              </div>
+            </div>
+
+            <!-- Smart Input wrapper -->
+            <div class="chat-input-wrapper">
+              <!-- File clip -->
+              <button class="action-icon-btn" onclick="triggerFileInput()" aria-label="Attach compliance document">
+                <i data-lucide="paperclip"></i>
+              </button>
+              <input type="file" id="file-uploader" style="display: none;" onchange="handleFileUpload(event)">
+
+              <!-- Input text box -->
+              <input type="text" id="chat-input" placeholder="Ask EcoSphere AI anything about ESG compliance..." onkeydown="handleKeyPress(event)">
+
+              <!-- Voice mic -->
+              <button class="action-icon-btn" id="btn-mic" onclick="toggleVoiceAssistant()" style="color: var(--primary);" aria-label="Voice input">
+                <i data-lucide="mic"></i>
+              </button>
+
+              <!-- Send button -->
+              <button class="action-icon-btn" onclick="sendWorkspaceMessage()" style="color: var(--primary);" aria-label="Send message">
+                <i data-lucide="send"></i>
+              </button>
+            </div>
+
+            <!-- Voice waveform listening panel -->
+            <div class="voice-wave-overlay" id="voice-wave-overlay">
+              <div class="waveform-container">
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+                <div class="wave-bar"></div>
+              </div>
+              <h5 style="font-weight: 700; font-size: 15px; margin-bottom: 6px;">Voice Assistant Listening</h5>
+              <p style="font-size: 12px; color: var(--text-secondary);">Say "Draft a corporate volunteer policy"...</p>
+              
+              <button class="btn btn-secondary" style="margin-top: 24px;" onclick="toggleVoiceAssistant()">Cancel Listening</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Scripts -->
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <!-- Apache ECharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom JS Modules -->
+  <script src="insights.js"></script>
+  <script src="avatar-voice.js"></script>
+</body>
+</html>

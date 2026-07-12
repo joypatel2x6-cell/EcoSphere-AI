@@ -1,0 +1,18 @@
+{
+  "short_name": "EcoSphere AI",
+  "name": "EcoSphere AI - ESG Management Platform",
+  "description": "Premium, AI-powered ESG metrics tracking and carbon intelligence console.",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' rx='128' fill='%23030712'/><circle cx='256' cy='256' r='200' stroke='%23065f46' stroke-width='16' fill='none'/><path d='M256 56a200 200 0 0 1 80 200A200 200 0 0 1 256 456A200 200 0 0 1 176 256A200 200 0 0 1 256 56z' stroke='%2310b981' stroke-width='16' fill='none'/><path d='M56 256h400' stroke='%233b82f6' stroke-width='16' fill='none'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/dashboard.html",
+  "background_color": "#030712",
+  "theme_color": "#10b981",
+  "display": "standalone",
+  "orientation": "portrait"
+}

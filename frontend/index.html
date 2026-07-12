@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSphere AI - Advanced AI-Powered ESG Management Platform</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="EcoSphere AI is a premium, state-of-the-art ESG Management Platform powered by Artificial Intelligence. Measure, monitor, and improve your Environmental, Social, and Governance performance in real-time.">
+  <meta name="keywords" content="ESG Management, AI ESG, Carbon Monitoring, Sustainability Platform, Environmental Social Governance, Real-Time Carbon Tracking, AI Sustainability">
+  <meta name="author" content="EcoSphere AI Team">
+  <meta property="og:title" content="EcoSphere AI - Building a Sustainable Future with Artificial Intelligence">
+  <meta property="og:description" content="Real-time ESG intelligence and automated carbon accounting driven by advanced AI models. Make sustainability measurable and actionable.">
+  <meta property="og:type" content="website">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Leaflet Map CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="innovations.css">
+</head>
+<body>
+
+  <!-- Premium Preloader Screen -->
+  <div class="preloader" id="preloader">
+    <div class="loader-logo-container">
+      <div class="loader-circle"></div>
+      <svg class="loader-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10" stroke="#065f46" />
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="#10b981" />
+        <path d="M2 12h20" stroke="#3b82f6" />
+      </svg>
+    </div>
+    <div class="loader-percentage" id="loader-pct">0%</div>
+    <div class="loader-status" id="loader-status">INITIALIZING ECOSPHERE AI...</div>
+  </div>
+
+  <!-- Background Orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+  <div class="glow-orb glow-orb-3"></div>
+
+  <!-- Floating Leaves Background Animation -->
+  <svg class="floating-leaf leaf-1" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 9.8a7 7 0 0 1-9 8.2z"/><path d="M19 2L11 10"/></svg>
+  <svg class="floating-leaf leaf-2" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 9.8a7 7 0 0 1-9 8.2z"/><path d="M19 2L11 10"/></svg>
+  <svg class="floating-leaf leaf-3" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="1.5"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 3.5 1 9.8a7 7 0 0 1-9 8.2z"/><path d="M19 2L11 10"/></svg>
+
+  <!-- 1. Premium Navigation Bar -->
+  <header id="header">
+    <div class="container nav-container">
+      <a href="#home" class="logo-link">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10" stroke="#065f46" />
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="#10b981" />
+          <path d="M2 12h20" stroke="#3b82f6" />
+        </svg>
+        <span>EcoSphere <span style="color: var(--primary);">AI</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li class="nav-item active"><a href="#home">Home</a></li>
+          <li class="nav-item"><a href="#features">Features</a></li>
+          <li class="nav-item"><a href="#modules">ESG Modules</a></li>
+          <li class="nav-item"><a href="auth.html">Dashboard</a></li>
+          <li class="nav-item"><a href="#assistant">AI Assistant</a></li>
+          <li class="nav-item"><a href="#why-us">About</a></li>
+          <li class="nav-item"><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Dark Mode Toggle -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+        <a href="auth.html" class="btn btn-secondary">Login</a>
+        <a href="auth.html?mode=signup" class="btn btn-primary">Register</a>
+        
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Open Navigation Menu">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-tag">
+          <span class="hud-pulse"></span>
+          EcoSphere v2.4 Live
+        </div>
+        <h1 class="hero-title text-gradient">
+          Building a Sustainable Future with Artificial Intelligence
+        </h1>
+        <p class="hero-subtitle">
+          Measure, Monitor and Improve Environmental, Social and Governance performance through AI-powered insights. Real-time metrics that drive real-world impact.
+        </p>
+        
+        <div class="hero-buttons">
+          <a href="auth.html?mode=signup" class="btn btn-premium">Get Started <i data-lucide="arrow-right"></i></a>
+          <a href="#demo" class="btn btn-secondary">Watch Demo <i data-lucide="play"></i></a>
+        </div>
+        
+        <!-- Animated ESG Score counter -->
+        <div class="hero-counter-widget glass-panel">
+          <div class="hero-counter-circle">
+            <span id="hero-esg-val">0.0</span>
+          </div>
+          <div class="hero-counter-text">
+            <h4>Global ESG Rating</h4>
+            <p>Calculated in real-time by EcoSphere Core AI</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Interactive 3D Earth Globe Visual -->
+      <div class="hero-visual">
+        <div class="globe-overlay-hud glass-panel">
+          <span class="hud-pulse"></span>
+          REAL-TIME TELEMETRY
+        </div>
+        <canvas id="globe-canvas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. Live ESG Dashboard Preview -->
+  <section class="section dashboard-section reveal-on-scroll" id="dashboard">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">ESG Intelligence Hub</span>
+        <h2 class="section-title">Live ESG Dashboard Preview</h2>
+        <p class="section-subtitle">A high-fidelity view of planetary and organizational sustainability metrics aggregated by our platform.</p>
+      </div>
+
+      <!-- Dashboard Window -->
+      <div class="dashboard-preview-window glass-panel">
+        
+        <!-- Top Title Bar -->
+        <div class="dashboard-header-bar">
+          <div class="dashboard-dots">
+            <span class="dash-dot dash-dot-1"></span>
+            <span class="dash-dot dash-dot-2"></span>
+            <span class="dash-dot dash-dot-3"></span>
+          </div>
+          <div class="dashboard-title-text">EcoSphere AI Enterprise Suite - v2.4</div>
+          <div class="dashboard-status">
+            <span class="hud-pulse"></span> SYSTEM NOMINAL
+          </div>
+        </div>
+
+        <!-- Dashboard Structure -->
+        <div class="dashboard-main-grid">
+          
+          <!-- Sidebar -->
+          <div class="dashboard-sidebar">
+            <ul class="sidebar-menu">
+              <li class="sidebar-item active"><i data-lucide="layout-dashboard"></i> Overview</li>
+              <li class="sidebar-item"><i data-lucide="leaf"></i> Carbon Emissions</li>
+              <li class="sidebar-item"><i data-lucide="users"></i> Social Metrics</li>
+              <li class="sidebar-item"><i data-lucide="shield-check"></i> Compliance</li>
+              <li class="sidebar-item"><i data-lucide="zap"></i> Resource Analytics</li>
+              <li class="sidebar-item"><i data-lucide="settings"></i> Configurations</li>
+            </ul>
+          </div>
+
+          <!-- Main Workspace -->
+          <div class="dashboard-workspace">
+            
+            <!-- KPI Cards Row -->
+            <div class="kpi-cards-grid">
+              
+              <!-- Card 1: Overall ESG -->
+              <div class="kpi-card glass-panel">
+                <div class="kpi-card-header">
+                  <span>Overall ESG Score</span>
+                  <i data-lucide="globe" style="color: var(--primary);"></i>
+                </div>
+                <div>
+                  <div class="kpi-value text-gradient" id="dash-esg-val">94.2</div>
+                  <div class="kpi-trend trend-up">
+                    <i data-lucide="trending-up"></i> +2.4% MoM
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Environmental -->
+              <div class="kpi-card glass-panel">
+                <div class="kpi-card-header">
+                  <span>Environmental Score</span>
+                  <i data-lucide="leaf" style="color: var(--primary);"></i>
+                </div>
+                <div>
+                  <div class="kpi-value" style="color: var(--primary);">96.5</div>
+                  <div class="sparkline-track"><div class="sparkline-fill" style="width: 96.5%;"></div></div>
+                </div>
+              </div>
+
+              <!-- Card 3: Social -->
+              <div class="kpi-card glass-panel">
+                <div class="kpi-card-header">
+                  <span>Social Score</span>
+                  <i data-lucide="users" style="color: var(--blue-accent);"></i>
+                </div>
+                <div>
+                  <div class="kpi-value" style="color: var(--blue-accent);">91.0</div>
+                  <div class="sparkline-track sparkline-social"><div class="sparkline-fill" style="width: 91.0%;"></div></div>
+                </div>
+              </div>
+
+              <!-- Card 4: Governance -->
+              <div class="kpi-card glass-panel">
+                <div class="kpi-card-header">
+                  <span>Governance Score</span>
+                  <i data-lucide="shield" style="color: #a855f7;"></i>
+                </div>
+                <div>
+                  <div class="kpi-value" style="color: #a855f7;">95.1</div>
+                  <div class="sparkline-track sparkline-gov"><div class="sparkline-fill" style="width: 95.1%;"></div></div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Charts Row -->
+            <div class="dashboard-charts-grid">
+              
+              <!-- EChart Panel -->
+              <div class="chart-panel-card glass-panel">
+                <div class="chart-panel-header">
+                  <span class="chart-panel-title">Carbon Saved Trends (MT CO2e)</span>
+                  <div class="kpi-trend trend-up"><i data-lucide="zap"></i> Live Forecast</div>
+                </div>
+                <div class="chart-container" id="carbon-saved-chart"></div>
+              </div>
+
+              <!-- Leaderboard Panel -->
+              <div class="chart-panel-card glass-panel">
+                <div class="chart-panel-header">
+                  <span class="chart-panel-title">Sector Leaderboard</span>
+                  <i data-lucide="award" style="color: var(--primary);"></i>
+                </div>
+                <div class="leaderboard-list">
+                  <div class="leaderboard-item">
+                    <span class="leaderboard-rank">1</span>
+                    <div class="leaderboard-info">
+                      <span class="leaderboard-company">EcoSphere Corp</span>
+                      <span class="leaderboard-metric">Technology</span>
+                    </div>
+                    <span class="leaderboard-score-pill">98.2</span>
+                  </div>
+                  <div class="leaderboard-item">
+                    <span class="leaderboard-rank">2</span>
+                    <div class="leaderboard-info">
+                      <span class="leaderboard-company">GreenFuture Ltd</span>
+                      <span class="leaderboard-metric">Energy</span>
+                    </div>
+                    <span class="leaderboard-score-pill">96.8</span>
+                  </div>
+                  <div class="leaderboard-item">
+                    <span class="leaderboard-rank">3</span>
+                    <div class="leaderboard-info">
+                      <span class="leaderboard-company">BioLogistics</span>
+                      <span class="leaderboard-metric">Transport</span>
+                    </div>
+                    <span class="leaderboard-score-pill">94.1</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Bottom Widgets Row -->
+            <div class="dashboard-widgets-row">
+              <div class="dashboard-widget-card glass-panel">
+                <div class="widget-icon-container">
+                  <i data-lucide="users"></i>
+                </div>
+                <div class="widget-text">
+                  <h5 id="dash-employees-val">48,250</h5>
+                  <p>Active Carbon Employees</p>
+                </div>
+              </div>
+
+              <div class="dashboard-widget-card glass-panel">
+                <div class="widget-icon-container" style="color: var(--blue-accent); background: rgba(59, 130, 246, 0.1);">
+                  <i data-lucide="award"></i>
+                </div>
+                <div class="widget-text">
+                  <h5>120+ Active CSRs</h5>
+                  <p>Corporate Social Programs</p>
+                </div>
+              </div>
+
+              <div class="dashboard-widget-card glass-panel">
+                <div class="widget-icon-container" style="color: #a855f7; background: rgba(168, 85, 247, 0.1);">
+                  <i data-lucide="flame"></i>
+                </div>
+                <div class="widget-text">
+                  <h5>0 Active Challenges</h5>
+                  <p>Governance Flag Alerts</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. AI Assistant Preview -->
+  <section class="section reveal-on-scroll" id="assistant">
+    <div class="container ai-grid">
+      <div>
+        <div class="ai-badge">AI CORE MODULE</div>
+        <h2 class="section-title">Meet Your Intelligent ESG Assistant</h2>
+        <p class="hero-subtitle">
+          Get real-time insights, compliance forecasting, and automated recommendations. Ask anything about your carbon footprints, regulatory audits, or social programs.
+        </p>
+        
+        <!-- Suggestions chips -->
+        <div class="ai-chips-container">
+          <div class="ai-suggest-chip" onclick="askAiQuestion(this)">
+            <i data-lucide="sparkles"></i>
+            <span>"How is our MoM Environmental Carbon Score calculated?"</span>
+          </div>
+          <div class="ai-suggest-chip" onclick="askAiQuestion(this)">
+            <i data-lucide="line-chart"></i>
+            <span>"Predict carbon footprints based on Q4 shipping goals"</span>
+          </div>
+          <div class="ai-suggest-chip" onclick="askAiQuestion(this)">
+            <i data-lucide="gavel"></i>
+            <span>"Show ESG governance compliance flags"</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat Box Panel -->
+      <div class="ai-chat-window glass-panel">
+        <div class="ai-chat-header">
+          <div class="ai-chat-profile">
+            <div class="ai-avatar">
+              <i data-lucide="bot"></i>
+            </div>
+            <div class="ai-chat-profile-text">
+              <h4>EcoSphere Assistant</h4>
+              <p><span class="ai-pulse-dot"></span> Online & Listening</p>
+            </div>
+          </div>
+          <button class="ai-voice-btn" id="voice-btn" aria-label="Toggle voice feedback">
+            <i data-lucide="mic"></i>
+          </button>
+        </div>
+
+        <div class="ai-chat-body" id="chat-body">
+          <div class="chat-message msg-bot">
+            Hello! I am your EcoSphere ESG intelligence partner. Ask me any question about your carbon performance, CSR efforts, or regulatory adherence.
+          </div>
+        </div>
+
+        <div class="ai-chat-input-bar">
+          <input type="text" id="chat-input" placeholder="Ask AI anything..." onkeydown="handleChatSubmit(event)">
+          <button class="chat-send-btn" onclick="submitChat()" aria-label="Send message">
+            <i data-lucide="send"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ESG Features Section -->
+  <section class="section reveal-on-scroll" id="features">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Core Capabilities</span>
+        <h2 class="section-title">ESG Features Section</h2>
+        <p class="section-subtitle">A comprehensive suite of intelligence modules tailored to elevate your sustainability infrastructure.</p>
+      </div>
+
+      <div class="features-grid">
+        
+        <!-- Feature 1 -->
+        <div class="feature-card glass-panel">
+          <div class="feature-icon-wrapper">
+            <i data-lucide="leaf"></i>
+          </div>
+          <div class="feature-card-content">
+            <h3>Environmental</h3>
+            <p>Automate Greenhouse Gas Protocol Scope 1, 2, and 3 footprint tracking. Connect directly to energy grids and smart meters.</p>
+            <a href="#" class="feature-link">Explore Module <i data-lucide="chevron-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-panel">
+          <div class="feature-icon-wrapper" style="color: var(--blue-accent); background: rgba(59, 130, 246, 0.08);">
+            <i data-lucide="users"></i>
+          </div>
+          <div class="feature-card-content">
+            <h3>Social Integrity</h3>
+            <p>Monitor diversity equity indicators, employee engagement scores, safety parameters, and corporate social responsibility progress.</p>
+            <a href="#" class="feature-link" style="color: var(--blue-accent);">Explore Module <i data-lucide="chevron-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-panel">
+          <div class="feature-icon-wrapper" style="color: #a855f7; background: rgba(168, 85, 247, 0.08);">
+            <i data-lucide="shield-alert"></i>
+          </div>
+          <div class="feature-card-content">
+            <h3>Governance</h3>
+            <p>Ensure regulatory compliance alignment with CSRD, SEC ESG Rules, and GRI standards using machine learning auditors.</p>
+            <a href="#" class="feature-link" style="color: #a855f7;">Explore Module <i data-lucide="chevron-right"></i></a>
+          </div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-panel">
+          <div class="feature-icon-wrapper" style="color: #eab308; background: rgba(234, 179, 8, 0.08);">
+            <i data-lucide="gamepad-2"></i>
+          </div>
+          <div class="feature-card-content">
+            <h3>Gamification</h3>
+            <p>Engage workforce cohorts with interactive climate carbon quests, milestones, custom score badges, and reward systems.</p>
+            <a href="#" class="feature-link" style="color: #eab308;">Explore Module <i data-lucide="chevron-right"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Why Choose EcoSphere AI -->
+  <section class="section why-section reveal-on-scroll" id="why-us">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Value Proposition</span>
+        <h2 class="section-title">Why Choose EcoSphere AI</h2>
+        <p class="section-subtitle">We merge data excellence, autonomous processes, and behavioral science to yield elite environmental compliance.</p>
+      </div>
+
+      <div class="why-grid">
+        
+        <!-- Card 1 -->
+        <div class="why-card glass-panel">
+          <div class="why-icon"><i data-lucide="cpu"></i></div>
+          <div class="why-text">
+            <h4>AI Automation</h4>
+            <p>Zero manual data scraping. Our LLM-powered parsers extract carbon billing and supply chain footprints automatically.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="why-card glass-panel">
+          <div class="why-icon"><i data-lucide="history"></i></div>
+          <div class="why-text">
+            <h4>Real-Time Analytics</h4>
+            <p>No quarterly delays. View your organizational scope performance down to the hour with dynamic streaming pipelines.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="why-card glass-panel">
+          <div class="why-icon"><i data-lucide="award"></i></div>
+          <div class="why-text">
+            <h4>Carbon Gamification</h4>
+            <p>Drive grass-roots employee actions with carbon-saving challenges, reward schemes, and division scoreboards.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="why-card glass-panel">
+          <div class="why-icon"><i data-lucide="radar"></i></div>
+          <div class="why-text">
+            <h4>Predictive Intelligence</h4>
+            <p>Run scenario simulator trials to predict how expanding warehouses or hiring plans affect emissions profiles.</p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="why-card glass-panel">
+          <div class="why-icon"><i data-lucide="droplet"></i></div>
+          <div class="why-text">
+            <h4>Carbon Monitoring</h4>
+            <p>Precise tracing across direct heating, logistics fuel, flight logs, and partner supply chains (Scopes 1-3).</p>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="why-card glass-panel">
+          <div class="why-icon"><i data-lucide="file-text"></i></div>
+          <div class="why-text">
+            <h4>Smart Reports</h4>
+            <p>Generate one-click audit-ready reports optimized for SEC filings, CSRD mandates, and GRESB disclosures.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Statistics Counter -->
+  <section class="section stats-section reveal-on-scroll">
+    <div class="container stats-grid">
+      <div class="stat-item">
+        <div class="stat-number" data-target="100000">0</div>
+        <div class="stat-label">Carbon Transactions</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="500">0</div>
+        <div class="stat-label">Enterprise Companies</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="10000000">0</div>
+        <div class="stat-label">kg Carbon Saved</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="50000">0</div>
+        <div class="stat-label">Active Employees</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Testimonials -->
+  <section class="section reveal-on-scroll">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Client Reviews</span>
+        <h2 class="section-title">What Leaders Say</h2>
+        <p class="section-subtitle">Leading chief sustainability officers and compliance heads depend on EcoSphere AI daily.</p>
+      </div>
+
+      <div class="testimonials-container glass-panel">
+        <div class="testimonial-track" id="testimonial-track">
+          
+          <!-- Slide 1 -->
+          <div class="testimonial-slide">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--primary)" opacity="0.3"><path d="M11.122 18h-8.12v-6.958c0-3.333 1.944-5.042 5.833-5.042v1.958c-2.31 0-2.833.684-2.833 2.5h5.12V18zm10 0h-8.12v-6.958c0-3.333 1.944-5.042 5.833-5.042v1.958c-2.31 0-2.833.684-2.833 2.5h5.12V18z"/></svg>
+            <p class="testimonial-quote">"EcoSphere AI transformed our regulatory auditing. We automated SEC reporting within weeks, saving hundreds of engineering hours."</p>
+            <div class="testimonial-author">
+              <h4>Sarah Jenkins</h4>
+              <p>CSO, GreenCorp Global</p>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="testimonial-slide">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--primary)" opacity="0.3"><path d="M11.122 18h-8.12v-6.958c0-3.333 1.944-5.042 5.833-5.042v1.958c-2.31 0-2.833.684-2.833 2.5h5.12V18zm10 0h-8.12v-6.958c0-3.333 1.944-5.042 5.833-5.042v1.958c-2.31 0-2.833.684-2.833 2.5h5.12V18z"/></svg>
+            <p class="testimonial-quote">"The gamified climate actions increased our workforce carbon savings compliance by 45%. Highly recommended for modern tech enterprises."</p>
+            <div class="testimonial-author">
+              <h4>David Vance</h4>
+              <p>VP Governance, CloudFuture Inc.</p>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="testimonial-slide">
+            <svg viewBox="0 0 24 24" width="48" height="48" fill="var(--primary)" opacity="0.3"><path d="M11.122 18h-8.12v-6.958c0-3.333 1.944-5.042 5.833-5.042v1.958c-2.31 0-2.833.684-2.833 2.5h5.12V18zm10 0h-8.12v-6.958c0-3.333 1.944-5.042 5.833-5.042v1.958c-2.31 0-2.833.684-2.833 2.5h5.12V18z"/></svg>
+            <p class="testimonial-quote">"Having real-time scope forecasts gives us a massive edge. We can model supply-chain carbon issues before committing to suppliers."</p>
+            <div class="testimonial-author">
+              <h4>Aiko Tanaka</h4>
+              <p>Head of Compliance, Apex Logistics</p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="testimonials-controls" id="testimonial-dots">
+          <span class="test-dot active" onclick="setTestimonialSlide(0)"></span>
+          <span class="test-dot" onclick="setTestimonialSlide(1)"></span>
+          <span class="test-dot" onclick="setTestimonialSlide(2)"></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. Contact Section -->
+  <section class="section contact-section reveal-on-scroll" id="contact">
+    <div class="container contact-grid">
+      
+      <!-- Contact Form -->
+      <div class="contact-form-panel glass-panel">
+        <h3>Initiate Your ESG Upgrade</h3>
+        <form onsubmit="handleContactSubmit(event)">
+          <div class="form-group">
+            <label for="contact-name">Full Name</label>
+            <input type="text" id="contact-name" class="form-control" placeholder="Jane Doe" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Corporate Email</label>
+            <input type="email" id="contact-email" class="form-control" placeholder="jane@company.com" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-company">Enterprise Name</label>
+            <input type="text" id="contact-company" class="form-control" placeholder="Acme Corp" required>
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Inquiry Details</label>
+            <textarea id="contact-message" class="form-control" rows="4" placeholder="Tell us about your carbon targets or compliance timeline..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-premium" style="width: 100%; justify-content: center;">Submit RFP Request <i data-lucide="arrow-right"></i></button>
+        </form>
+
+        <div class="social-links">
+          <a href="#" class="social-icon" aria-label="LinkedIn"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+          <a href="#" class="social-icon" aria-label="Twitter/X"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path></svg></a>
+          <a href="#" class="social-icon" aria-label="GitHub"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a>
+          <a href="#" class="social-icon" aria-label="Youtube"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg></a>
+        </div>
+      </div>
+
+      <!-- Interactive Map Panel -->
+      <div class="contact-map-panel">
+        <div id="map-container"></div>
+        <div class="map-placeholder-info glass-panel">
+          <h4>EcoSphere AI Headquarters</h4>
+          <p>Silicon Valley Campus: 400 Innovation Way, San Jose, CA 95134</p>
+          <p style="color: var(--primary); margin-top: 6px; font-weight: 500;">Headquarters powered by 100% solar grids</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 11. Footer -->
+  <footer>
+    <div class="container footer-grid">
+      
+      <div class="footer-brand">
+        <a href="#home" class="logo-link">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10" stroke="#065f46" />
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke="#10b981" />
+            <path d="M2 12h20" stroke="#3b82f6" />
+          </svg>
+          <span>EcoSphere <span style="color: var(--primary);">AI</span></span>
+        </a>
+        <p>Decentralized AI audits, automated carbon records, and transparent ESG intelligence pipelines driving the next generation of net-zero compliance.</p>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Solutions</h4>
+        <ul class="footer-links">
+          <li><a href="#features">Carbon Audit</a></li>
+          <li><a href="#features">Scope Tracker</a></li>
+          <li><a href="#features">CSR Rewards</a></li>
+          <li><a href="#features">GRI Disclosures</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>Platform</h4>
+        <ul class="footer-links">
+          <li><a href="#home">Features</a></li>
+          <li><a href="#dashboard">Live Demo</a></li>
+          <li><a href="#why-us">Enterprise Security</a></li>
+          <li><a href="#contact">Pricing Request</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <h4>EcoSphere Dispatch</h4>
+        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">Subscribe to receive regulatory summaries and sustainability logs.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+          <input type="email" placeholder="executive@company.com" required>
+          <button type="submit" class="btn btn-primary btn-icon" aria-label="Subscribe"><i data-lucide="arrow-right"></i></button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; 2026 EcoSphere AI Inc. All rights reserved.</p>
+      <div class="footer-legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">SEC Audits</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <!-- Three.js (For Globe) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  
+  <!-- GSAP (For Smooth Scrolling & ScrollTrigger animations) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  
+  <!-- Apache ECharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Leaflet Map JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
+  <!-- Custom JS Modules -->
+  <script src="globe.js"></script>
+  <script src="app.js"></script>
+  <script src="avatar-voice.js"></script>
+
+  <!-- Preloader & PWA Register Script -->
+  <script>
+    // 1. Service Worker registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((reg) => {
+          console.log('[PWA] Service Worker registered: ', reg.scope);
+        }).catch((err) => {
+          console.error('[PWA] Service Worker registration failed: ', err);
+        });
+      });
+    }
+
+    // 2. Preloader Animation
+    (function() {
+      const pct = document.getElementById('loader-pct');
+      const status = document.getElementById('loader-status');
+      const preloader = document.getElementById('preloader');
+      let currentVal = 0;
+
+      const statuses = [
+        { limit: 20, text: "INITIALIZING ECOSPHERE AI CORE..." },
+        { limit: 45, text: "LOADING WEBGL GLOBE ASSETS..." },
+        { limit: 70, text: "SYNCHRONIZING EMISSION REGISTRIES..." },
+        { limit: 90, text: "CALIBRATING FORECAST MODEL ENGINES..." },
+        { limit: 100, text: "ECOSPHERE HUB ONLINE" }
+      ];
+
+      function updateLoader() {
+        if (currentVal < 100) {
+          currentVal += Math.floor(Math.random() * 8) + 2;
+          if (currentVal > 100) currentVal = 100;
+          pct.textContent = currentVal + '%';
+
+          const match = statuses.find(s => currentVal <= s.limit);
+          if (match) status.textContent = match.text;
+
+          setTimeout(updateLoader, 60 + Math.random() * 80);
+        } else {
+          // Fade out preloader
+          gsap.to(preloader, {
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            onComplete: () => {
+              preloader.style.display = 'none';
+            }
+          });
+        }
+      }
+      setTimeout(updateLoader, 200);
+    })();
+  </script>
+</body>
+</html>

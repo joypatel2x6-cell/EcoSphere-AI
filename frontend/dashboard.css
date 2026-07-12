@@ -1,0 +1,1076 @@
+/* EcoSphere AI - SaaS Dashboard Stylesheet (Linear/Stripe/Notion AI Style) */
+
+@import url('styles.css');
+
+:root {
+  /* High-density dark layout overrides */
+  --sidebar-w: 260px;
+  --sidebar-bg: #090d16;
+  --topbar-h: 70px;
+  
+  --linear-zinc: #09090b;
+  --stripe-card: rgba(11, 15, 27, 0.6);
+  --notion-badge: rgba(59, 130, 246, 0.15);
+}
+
+html.light {
+  --sidebar-bg: #f8fafc;
+  --stripe-card: rgba(255, 255, 255, 0.7);
+}
+
+/* Dashboard Wrapper */
+.dash-wrapper {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* 1. Sidebar Styles (Stripe/Linear Style) */
+.dash-sidebar {
+  background-color: var(--sidebar-bg);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: background-color 0.4s ease;
+}
+
+.sidebar-brand {
+  height: var(--topbar-h);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.workspace-switcher {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  transition: background 0.2s ease;
+}
+
+.workspace-switcher:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.workspace-details {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.workspace-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--blue-accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 11px;
+}
+
+.workspace-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sidebar-nav-list {
+  list-style: none;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.sidebar-nav-item a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav-item a:hover,
+.sidebar-nav-item.active a {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+html.light .sidebar-nav-item a:hover,
+html.light .sidebar-nav-item.active a {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+.sidebar-nav-item.active a {
+  border-left: 3px solid var(--primary);
+  border-radius: 0 8px 8px 0;
+  padding-left: 11px;
+  font-weight: 600;
+}
+
+.sidebar-nav-icon {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sidebar-nav-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.sidebar-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 20px;
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--primary);
+}
+
+.sidebar-badge.alert {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+/* User profile panel at bottom */
+.sidebar-user {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #000000;
+  font-size: 13px;
+}
+
+.user-text h5 {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.user-text p {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.user-logout-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s ease;
+}
+
+.user-logout-btn:hover {
+  color: #ef4444;
+}
+
+/* 2. Topbar Header (Search & Actions Bar) */
+.dash-main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.dash-topbar {
+  height: var(--topbar-h);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(3, 7, 18, 0.25);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  position: sticky;
+  top: 0;
+  z-index: 99;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 40%;
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+}
+
+.search-container svg {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-muted);
+  width: 16px;
+  height: 16px;
+}
+
+.search-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 8px 16px 8px 40px;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  border-color: var(--primary);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+html.light .search-input {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.cmd-shortcut {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.date-selector {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+html.light .date-selector {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.topbar-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.action-icon-btn {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.action-icon-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ef4444;
+  box-shadow: 0 0 6px #ef4444;
+}
+
+/* Notifications Dropdown Drawer */
+.notifications-dropdown {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 320px;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow-premium);
+  border-radius: 12px;
+  display: none;
+  flex-direction: column;
+  z-index: 200;
+  animation: message-fade 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.notifications-dropdown.active {
+  display: flex;
+}
+
+.notif-header {
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notif-item {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  gap: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.notif-item:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+html.light .notif-item:hover {
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.notif-item.unread {
+  background: rgba(16, 185, 129, 0.03);
+}
+
+.notif-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notif-content h6 {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.notif-content p {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* 3. Dashboard Container Layout */
+.dash-content {
+  padding: 32px;
+  padding-bottom: 120px !important; /* Prevents floating elements from overlapping content */
+  max-width: 1600px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Row Layout structures */
+.dash-row-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.dash-row-grid-primary {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+}
+
+.dash-row-grid-secondary {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 20px;
+}
+
+.dash-row-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Premium KPI Card elements */
+.dash-kpi-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 140px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.dash-kpi-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--border-subtle);
+  transition: background-color 0.3s ease;
+}
+
+.dash-kpi-card:hover::after {
+  background-color: var(--primary);
+}
+
+.dash-kpi-card:nth-child(2):hover::after {
+  background-color: var(--primary);
+}
+.dash-kpi-card:nth-child(3):hover::after {
+  background-color: var(--blue-accent);
+}
+.dash-kpi-card:nth-child(4):hover::after {
+  background-color: #a855f7;
+}
+
+.dash-kpi-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.dash-kpi-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+.dash-kpi-header svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dash-kpi-body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.dash-kpi-number {
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.dash-kpi-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+/* 4. Notion AI Recommendations Widget */
+.notion-ai-card {
+  padding: 24px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.notion-ai-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.notion-ai-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.notion-ai-title svg {
+  color: #a855f7;
+  width: 20px;
+  height: 20px;
+}
+
+.notion-badge {
+  background: var(--notion-badge);
+  color: var(--blue-accent);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.notion-ai-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  flex: 1;
+  padding-right: 4px;
+}
+
+.notion-ai-item {
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.notion-ai-item:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--card-border);
+}
+
+.notion-item-text h6 {
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.notion-item-text p {
+  font-size: 11.5px;
+  color: var(--text-secondary);
+}
+
+.notion-action-trigger {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.notion-action-trigger:hover {
+  background: var(--primary);
+  color: #000000;
+}
+
+.notion-action-trigger.approved {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-muted);
+  border-color: var(--border-subtle);
+  cursor: not-allowed;
+}
+
+/* 5. Carbon Prediction Slider (Stripe Style) */
+.prediction-slider-card {
+  padding: 24px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.slider-metrics-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 24px;
+  flex: 1;
+  align-items: center;
+}
+
+.slider-container-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.slider-label-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+
+.custom-range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  background: var(--border-subtle);
+  outline: none;
+  cursor: pointer;
+}
+
+.custom-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--primary);
+  border: 3px solid #ffffff;
+  box-shadow: 0 0 10px var(--primary-glow);
+  transition: transform 0.1s ease;
+}
+
+.custom-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+.slider-gauge-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slider-gauge-box h4 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.slider-gauge-box p {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* 6. Weather & Telemetry Widget */
+.weather-telemetry-card {
+  padding: 24px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.weather-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weather-city {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.weather-time {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.weather-main-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0;
+}
+
+.weather-temp-box {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.weather-temp {
+  font-size: 40px;
+  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+}
+
+.weather-icon-animated {
+  font-size: 40px;
+  filter: drop-shadow(0 0 10px rgba(234, 179, 8, 0.3));
+  animation: pulse 3s infinite alternate;
+}
+
+.weather-telemetry-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 16px;
+}
+
+.weather-telemetry-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.weather-telemetry-label {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.weather-telemetry-val {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* 7. Upcoming Challenges Widget */
+.challenges-card {
+  padding: 24px;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.challenges-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.challenge-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.challenge-info h6 {
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.challenge-info p {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  margin-top: 2px;
+}
+
+.challenge-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+/* 8. Recent Activities Log & Reports */
+.recent-logs-card {
+  padding: 24px;
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.recent-reports-card {
+  padding: 24px;
+  height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logs-table-container {
+  flex: 1;
+  overflow-y: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+}
+
+.logs-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.logs-table th, .logs-table td {
+  padding: 10px 14px;
+  font-size: 12.5px;
+}
+
+.logs-table th {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+html.light .logs-table th {
+  background: rgba(0, 0, 0, 0.01);
+}
+
+.logs-table tr {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.15s ease;
+}
+
+.logs-table tr:hover {
+  background: rgba(255, 255, 255, 0.015);
+}
+
+html.light .logs-table tr:hover {
+  background: rgba(0, 0, 0, 0.005);
+}
+
+/* Status Pill classes */
+.status-pill {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 12px;
+  width: max-content;
+  display: inline-flex;
+}
+
+.status-completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--primary);
+}
+
+.status-pending {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+/* Document reports icon layouts */
+.reports-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.report-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.01);
+  transition: all 0.2s ease;
+}
+
+.report-item:hover {
+  border-color: var(--primary);
+  background: rgba(16, 185, 129, 0.02);
+}
+
+.report-meta-box {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.report-file-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report-file-text h6 {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.report-file-text p {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+}
+
+.report-download-btn {
+  background: none;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.report-download-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* 9. Glassmorphism Quick Modal Trigger */
+.glass-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  background: rgba(3, 7, 18, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.glass-modal.active {
+  display: flex;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 500px;
+  animation: message-fade 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.modal-header {
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+/* Loader indicator */
+.modal-progress-bar {
+  width: 100%;
+  height: 6px;
+  background: var(--border-subtle);
+  border-radius: 3px;
+  margin-top: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-progress-fill {
+  width: 0;
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--blue-accent) 100%);
+  border-radius: 3px;
+  transition: width 2.5s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .dash-row-grid-primary {
+    grid-template-columns: 1fr;
+  }
+  .dash-row-grid-secondary {
+    grid-template-columns: 1fr;
+  }
+  .dash-row-grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1024px) {
+  .dash-row-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .dash-wrapper {
+    grid-template-columns: 1fr;
+  }
+  .dash-sidebar {
+    display: none; /* In production a mobile topnav or hamburger is standard */
+  }
+  .dash-row-grid-4 {
+    grid-template-columns: 1fr;
+  }
+}

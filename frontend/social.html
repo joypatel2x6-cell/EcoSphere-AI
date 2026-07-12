@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSphere AI - Social ESG Module</title>
+  <meta name="description" content="EcoSphere Social module. Track corporate social responsibility, volunteer schedules, employee wellness indices, and training compliance.">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="social.css">
+  <link rel="stylesheet" href="insights.css">
+</head>
+<body>
+
+  <!-- Background Orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Dashboard Wrapper -->
+  <div class="dash-wrapper">
+    
+    <!-- 1. Left Sidebar Navigation (Linear/Stripe Inspired) -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-brand">
+        <div class="workspace-switcher">
+          <div class="workspace-details">
+            <div class="workspace-logo">ES</div>
+            <span class="workspace-name">EcoSphere AI</span>
+          </div>
+          <i data-lucide="chevrons-up-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+        </div>
+      </div>
+      
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item">
+          <a href="dashboard.html">
+            <div class="sidebar-nav-icon"><i data-lucide="layout-dashboard"></i> <span>Overview</span></div>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="environmental.html">
+            <div class="sidebar-nav-icon"><i data-lucide="leaf"></i> <span>Climate Analytics</span></div>
+          </a>
+        </li>
+        <li class="sidebar-nav-item active">
+          <a href="social.html">
+            <div class="sidebar-nav-icon"><i data-lucide="users"></i> <span>Social Impact</span></div>
+            <span class="sidebar-badge">120+</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="governance.html">
+            <div class="sidebar-nav-icon"><i data-lucide="gavel"></i> <span>Governance Log</span></div>
+            <span class="sidebar-badge alert">1 flag</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="insights.html">
+            <div class="sidebar-nav-icon"><i data-lucide="sparkles"></i> <span>AI Insights</span></div>
+            <span class="sidebar-badge" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">New</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="reports.html">
+            <div class="sidebar-nav-icon"><i data-lucide="file-bar-chart-2"></i> <span>Report Center</span></div>
+            <span class="sidebar-badge" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">New</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="gamification.html">
+            <div class="sidebar-nav-icon"><i data-lucide="trophy"></i> <span>Eco League</span></div>
+            <span class="sidebar-badge" style="background: rgba(234, 179, 8, 0.15); color: #eab308;">LVL 4</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="innovations.html">
+            <div class="sidebar-nav-icon"><i data-lucide="beaker"></i> <span>Innovations Lab</span></div>
+            <span class="sidebar-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Beta</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="admin.html">
+            <div class="sidebar-nav-icon"><i data-lucide="shield-half"></i> <span>Admin Portal</span></div>
+            <span class="sidebar-badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">Admin</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <div class="sidebar-nav-icon"><i data-lucide="settings"></i> <span>Settings</span></div>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Profile at bottom -->
+      <div class="sidebar-user">
+        <div class="user-info">
+          <div class="user-avatar">JP</div>
+          <div class="user-text">
+            <h5>Joy Patel</h5>
+            <p>CSO, EcoSphere Enterprise</p>
+          </div>
+        </div>
+        <button class="user-logout-btn" onclick="window.location.href='index.html'" aria-label="Log Out to landing page">
+          <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Area -->
+    <main class="dash-main">
+      
+      <!-- Topbar Header -->
+      <div class="dash-topbar">
+        <div class="topbar-left">
+          <!-- Command Search bar -->
+          <div class="search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="social-search" class="search-input" placeholder="Search volunteer programs, metrics or logs...">
+            <span class="cmd-shortcut">⌘ K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Date filter -->
+          <div class="date-selector">
+            <i data-lucide="calendar"></i>
+            <span>Q3 (Last 30 Days)</span>
+            <i data-lucide="chevron-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+          </div>
+
+          <!-- Quick Actions Button -->
+          <button class="btn btn-primary" onclick="openQuickActionModal()">Quick Actions <i data-lucide="zap" style="width: 14px; height: 14px; fill: currentColor;"></i></button>
+
+          <!-- Topbar Actions -->
+          <div class="topbar-actions-group">
+            <!-- Theme Toggle -->
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle light/dark mode">
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+
+            <!-- Notifications button -->
+            <button class="action-icon-btn" id="notif-toggle-btn" aria-label="Show system notifications">
+              <i data-lucide="bell"></i>
+              <span class="notification-badge"></span>
+              
+              <!-- Notifications Dropdown List -->
+              <div class="notifications-dropdown glass-panel" id="notifications-box">
+                <div class="notif-header">
+                  <span>Notifications</span>
+                  <a href="#" style="color: var(--primary); font-size: 11px; font-weight: 600;">Clear All</a>
+                </div>
+                <div class="notif-item unread">
+                  <div class="notif-icon" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;"><i data-lucide="flame" style="width: 14px; height: 14px;"></i></div>
+                  <div class="notif-content">
+                    <h6>Governance Flag Alert</h6>
+                    <p>Submodule G3.2 anti-bribery policies requires audit updates.</p>
+                  </div>
+                </div>
+                <div class="notif-item unread">
+                  <div class="notif-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--primary);"><i data-lucide="sparkles" style="width: 14px; height: 14px;"></i></div>
+                  <div class="notif-content">
+                    <h6>New AI Recommendation</h6>
+                    <p>Boiler operation updates can save 480 MT CO2e.</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Dashboard Grid Content Workspace -->
+      <div class="dash-content">
+        
+        <!-- Row 1: KPI Cards with Progress Rings (4 columns) -->
+        <div class="dash-row-grid-4">
+          
+          <!-- Card 1: Diversity Index -->
+          <div class="dash-kpi-card glass-panel" style="height: auto;">
+            <div class="kpi-ring-wrapper">
+              <div class="progress-ring-container ring-green">
+                <svg class="progress-ring">
+                  <circle class="progress-ring-circle-bg" cx="32" cy="32" r="30"/>
+                  <circle class="progress-ring-circle" id="ring-diversity" cx="32" cy="32" r="30"/>
+                </svg>
+                <span class="progress-ring-text" id="ring-val-diversity">52%</span>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Diversity Index</span>
+                <h4 style="font-size: 20px; font-weight: 700; margin-top: 4px;">Inclusion Metric</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: CSR Participation -->
+          <div class="dash-kpi-card glass-panel" style="height: auto;">
+            <div class="kpi-ring-wrapper">
+              <div class="progress-ring-container">
+                <svg class="progress-ring">
+                  <circle class="progress-ring-circle-bg" cx="32" cy="32" r="30"/>
+                  <circle class="progress-ring-circle" id="ring-participation" cx="32" cy="32" r="30"/>
+                </svg>
+                <span class="progress-ring-text" id="ring-val-participation">84%</span>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">CSR Participation</span>
+                <h4 style="font-size: 20px; font-weight: 700; margin-top: 4px;">Active Volunteers</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Employee Wellness -->
+          <div class="dash-kpi-card glass-panel" style="height: auto;">
+            <div class="kpi-ring-wrapper">
+              <div class="progress-ring-container ring-purple">
+                <svg class="progress-ring">
+                  <circle class="progress-ring-circle-bg" cx="32" cy="32" r="30"/>
+                  <circle class="progress-ring-circle" id="ring-wellness" cx="32" cy="32" r="30"/>
+                </svg>
+                <span class="progress-ring-text" id="ring-val-wellness">82%</span>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Employee Wellness</span>
+                <h4 style="font-size: 20px; font-weight: 700; margin-top: 4px;">8.2/10 Index</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Training Completion -->
+          <div class="dash-kpi-card glass-panel" style="height: auto;">
+            <div class="kpi-ring-wrapper">
+              <div class="progress-ring-container ring-yellow">
+                <svg class="progress-ring">
+                  <circle class="progress-ring-circle-bg" cx="32" cy="32" r="30"/>
+                  <circle class="progress-ring-circle" id="ring-training" cx="32" cy="32" r="30"/>
+                </svg>
+                <span class="progress-ring-text" id="ring-val-training">96%</span>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">ESG Training Rate</span>
+                <h4 style="font-size: 20px; font-weight: 700; margin-top: 4px;">Audited Certificate</h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Row 2: Volunteer Hours Area Chart & Diversity Radar (60/40) -->
+        <div class="dash-row-grid-primary">
+          
+          <!-- EChart Line Chart -->
+          <div class="chart-panel-card glass-panel" style="height: 400px;">
+            <div class="chart-panel-header">
+              <span class="chart-panel-title">Cumulative Volunteer Hours (CSR Actuals vs Path)</span>
+              <i data-lucide="line-chart" style="color: var(--primary); width: 18px; height: 18px;"></i>
+            </div>
+            <div class="chart-container" id="volunteer-hours-chart"></div>
+          </div>
+
+          <!-- EChart Radar Chart -->
+          <div class="chart-panel-card glass-panel" style="height: 400px;">
+            <div class="chart-panel-header">
+              <span class="chart-panel-title">Diversity & Inclusion Metrics Matrix</span>
+              <i data-lucide="shield" style="color: var(--primary); width: 18px; height: 18px;"></i>
+            </div>
+            <div class="chart-container" id="diversity-radar-chart"></div>
+          </div>
+
+        </div>
+
+        <!-- Row 3: CSR Calendar & Interactive Timeline (40/60) -->
+        <div class="dash-row-grid-secondary">
+          
+          <!-- CSR Calendar Grid -->
+          <div class="calendar-card glass-panel">
+            <div class="chart-panel-header">
+              <span class="chart-panel-title">CSR Volunteering Schedule (July 2026)</span>
+              <i data-lucide="calendar" style="color: var(--primary); width: 18px; height: 18px;"></i>
+            </div>
+            
+            <div class="calendar-grid" id="calendar-days-container">
+              <!-- Calendar Header -->
+              <div class="calendar-header-day">M</div>
+              <div class="calendar-header-day">T</div>
+              <div class="calendar-header-day">W</div>
+              <div class="calendar-header-day">T</div>
+              <div class="calendar-header-day">F</div>
+              <div class="calendar-header-day">S</div>
+              <div class="calendar-header-day">S</div>
+              
+              <!-- Days & events populated by social.js -->
+            </div>
+          </div>
+
+          <!-- Interactive Timeline Card -->
+          <div class="timeline-card glass-panel">
+            <div class="chart-panel-header">
+              <span class="chart-panel-title">Corporate CSR & Community Milestones</span>
+              <i data-lucide="history" style="color: var(--primary); width: 18px; height: 18px;"></i>
+            </div>
+            
+            <div class="timeline-container">
+              <div class="timeline-line"></div>
+              
+              <!-- Timeline item 1 -->
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content-card">
+                  <div class="timeline-meta">
+                    <span>January 10, 2026</span>
+                    <span class="sidebar-badge">+420 Hrs</span>
+                  </div>
+                  <h6>Urban Forestry Canopy Restoration</h6>
+                  <p>In partnership with San Jose Forestry Association. 85 employees planted 150 native oak saplings, offsetting future logistics emissions.</p>
+                </div>
+              </div>
+
+              <!-- Timeline item 2 -->
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content-card">
+                  <div class="timeline-meta">
+                    <span>March 15, 2026</span>
+                    <span class="sidebar-badge" style="background: rgba(59,130,246,0.15); color: var(--primary);">+680 Hrs</span>
+                  </div>
+                  <h6>Community School Microgrid Installation</h6>
+                  <p>Retrofitted solar microgrid battery grids for San Jose Primary School, ensuring 100% clean power capabilities.</p>
+                </div>
+              </div>
+
+              <!-- Timeline item 3 -->
+              <div class="timeline-item">
+                <div class="timeline-marker"></div>
+                <div class="timeline-content-card">
+                  <div class="timeline-meta">
+                    <span>June 20, 2026</span>
+                    <span class="sidebar-badge" style="background: rgba(234,179,8,0.15); color: #eab308;">+310 Hrs</span>
+                  </div>
+                  <h6>Enterprise Regional Food Bank Packing</h6>
+                  <p>Volunteered packaging logistics grid lines, organizing 5,000 lbs of meals for underrepresented local sectors.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Row 4: AI Sentiment & Photo Gallery (50/50) -->
+        <div class="dash-row-grid-primary" style="grid-template-columns: 1fr 1fr;">
+          
+          <!-- Sentiment Feed Card -->
+          <div class="notion-ai-card glass-panel" style="height: 380px;">
+            <div class="notion-ai-header">
+              <div class="notion-ai-title">
+                <i data-lucide="sparkles"></i>
+                <span>AI Workforce Sentiment Analysis</span>
+              </div>
+              <span class="notion-badge" style="background: rgba(59, 130, 246, 0.15); color: var(--primary);">Social Pulse</span>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 80px 1fr; gap: 20px; align-items: center; padding-bottom: 16px; border-bottom: 1px solid var(--border-subtle); margin-bottom: 12px;">
+              <div style="text-align: center;">
+                <div class="sentiment-face-wrapper" id="sentiment-face">😊</div>
+                <span style="font-size: 11px; font-weight: 700; color: var(--primary);" id="sentiment-percentage">82% Positive</span>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; font-size: 11px;">
+                  <span>Positive Sentiment</span>
+                  <span id="sentiment-bar-pct">82%</span>
+                </div>
+                <div class="sentiment-bar-track">
+                  <div class="sentiment-bar-fill" id="sentiment-bar" style="width: 82%; background-color: var(--primary);"></div>
+                </div>
+                <p style="font-size: 11.5px; color: var(--text-secondary);" id="sentiment-summary">
+                  Key satisfaction drivers: solar grid installations visibility, paid CSR volunteer hours, and internal wellness challenge rewards.
+                </p>
+              </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 11px; color: var(--text-muted);">Channels scanned: Slack, HR Logs, Anonymous surveys</span>
+              <button class="notion-action-trigger" id="sentiment-scan-btn" onclick="runSentimentScan()">Scan Feed <i data-lucide="cpu" style="width: 12px; height: 12px; display: inline; vertical-align: middle;"></i></button>
+            </div>
+          </div>
+
+          <!-- CSR Photo Gallery -->
+          <div class="gallery-card glass-panel">
+            <div class="chart-panel-header">
+              <span class="chart-panel-title">EcoSphere Active CSR Photo Log</span>
+              <i data-lucide="image" style="color: var(--primary); width: 18px; height: 18px;"></i>
+            </div>
+            
+            <div class="gallery-grid">
+              <!-- Item 1 -->
+              <div class="gallery-item">
+                <img src="images/csr_tree_planting.png" class="gallery-image" alt="Tree planting event">
+                <div class="gallery-overlay-text">
+                  <h6>Canopy Restoration</h6>
+                  <p>San Jose Urban Forest</p>
+                </div>
+              </div>
+              <!-- Item 2 -->
+              <div class="gallery-item">
+                <img src="images/csr_solar_school.png" class="gallery-image" alt="Solar school installation">
+                <div class="gallery-overlay-text">
+                  <h6>School Microgrid</h6>
+                  <p>Renewable School Grids</p>
+                </div>
+              </div>
+              <!-- Item 3 -->
+              <div class="gallery-item">
+                <img src="images/csr_food_drive.png" class="gallery-image" alt="Food drive volunteering">
+                <div class="gallery-overlay-text">
+                  <h6>Harvest Food Drive</h6>
+                  <p>Regional Food Bank</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Row 5: Social Leaderboard & Exporters -->
+        <div class="recent-logs-card glass-panel" style="height: auto;">
+          <div class="chart-panel-header">
+            <span class="chart-panel-title">Department CSR Engagement & Training Disclosures</span>
+            
+            <div class="topbar-actions-group">
+              <button class="btn btn-secondary" onclick="exportSocialReport('pdf')" id="export-pdf-btn">
+                <span class="btn-loader-icon"></span>
+                <i data-lucide="file-text" style="width: 14px; height: 14px;"></i> Export PDF
+              </button>
+              <button class="btn btn-secondary" onclick="exportSocialReport('excel')" id="export-excel-btn">
+                <span class="btn-loader-icon"></span>
+                <i data-lucide="file-spreadsheet" style="width: 14px; height: 14px;"></i> Export Excel
+              </button>
+            </div>
+          </div>
+
+          <div class="logs-table-container">
+            <table class="logs-table">
+              <thead>
+                <tr>
+                  <th>Department Division</th>
+                  <th>Headcount Employees</th>
+                  <th>ESG Training Rate</th>
+                  <th>CSR Volunteer Hours</th>
+                  <th>Wellness Score</th>
+                  <th>Involvement Status</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-table-body">
+                <!-- Loaded dynamically by social.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- CSR Audit Modal (Quick Actions) -->
+  <div class="glass-modal" id="quick-action-modal">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <h4 style="font-weight: 700;">EcoSphere CSR Audit Compiler</h4>
+        <button class="theme-toggle-btn" onclick="closeQuickActionModal()"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body" id="modal-body-content">
+        <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px;">
+          Trigger EcoSphere AI Core to run an instant Scope 1-3 audit sweep across all department ledgers and compile an audit-ready CSR report.
+        </p>
+        <div class="form-group">
+          <label style="font-size: 11px; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 8px;">Target Framework</label>
+          <select class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); color: var(--text-primary);">
+            <option>CSRD Directive (EU Mandate)</option>
+            <option>SEC Climate Disclosure Rule</option>
+            <option>GRI Disclosure Framework</option>
+            <option>GRESB Real Estate Standard</option>
+          </select>
+        </div>
+        <button class="btn btn-premium" style="width: 100%; justify-content: center; margin-top: 24px;" onclick="runSimulatedAudit()">Compile Disclosures <i data-lucide="sparkles"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating AI Assistant Widget -->
+  <div class="floating-chat-widget" id="floating-chat-widget">
+    <button class="chat-widget-fab" id="chat-widget-fab" onclick="toggleFloatingChat()" aria-label="Open EcoSphere AI chat">
+      <i data-lucide="sparkles"></i>
+    </button>
+    
+    <div class="chat-widget-drawer glass-panel" id="chat-widget-drawer">
+      <div class="chat-drawer-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div class="user-avatar" style="width: 28px; height: 28px; font-size: 11px; display: flex; align-items: center; justify-content: center; background: var(--primary-glow); border: 1px solid var(--primary); color: var(--primary);">AI</div>
+          <div>
+            <h6 style="font-size: 12px; font-weight: 700; color: #ffffff; line-height: 1.2;">EcoSphere Assistant</h6>
+            <span style="font-size: 9px; color: #10b981; font-weight: 600;">Active Online</span>
+          </div>
+        </div>
+        <button class="theme-toggle-btn" onclick="toggleFloatingChat()" style="color: #ffffff;"><i data-lucide="x" style="width: 14px; height: 14px;"></i></button>
+      </div>
+      
+      <div class="chat-drawer-body" id="chat-drawer-messages">
+        <div class="chat-msg assistant-msg">
+          <p>Hello! I am EcoSphere AI. How can I help you analyze ESG scores or compile carbon records today?</p>
+        </div>
+      </div>
+      
+      <div class="chat-drawer-footer">
+        <input type="text" id="chat-drawer-input" placeholder="Ask AI anything..." onkeydown="handleDrawerKeyPress(event)">
+        <button class="action-icon-btn" onclick="sendDrawerMessage()" style="color: var(--primary);"><i data-lucide="send" style="width: 14px; height: 14px;"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <!-- Apache ECharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom JS Modules -->
+  <script src="social.js"></script>
+  <script src="insights.js"></script>
+  <script src="avatar-voice.js"></script>
+</body>
+</html>

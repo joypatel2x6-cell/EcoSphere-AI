@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoSphere AI - Environmental Management Suite</title>
+  <meta name="description" content="EcoSphere Environmental module. Track scope carbon transactions, water consumption, grid weather telemetry and simulated file reports.">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="environmental.css">
+  <link rel="stylesheet" href="insights.css">
+</head>
+<body>
+
+  <!-- Background Orbs -->
+  <div class="glow-orb glow-orb-1"></div>
+  <div class="glow-orb glow-orb-2"></div>
+
+  <!-- Dashboard Wrapper -->
+  <div class="dash-wrapper">
+    
+    <!-- 1. Left Sidebar Navigation (Linear/Stripe Inspired) -->
+    <aside class="dash-sidebar">
+      <div class="sidebar-brand">
+        <div class="workspace-switcher">
+          <div class="workspace-details">
+            <div class="workspace-logo">ES</div>
+            <span class="workspace-name">EcoSphere AI</span>
+          </div>
+          <i data-lucide="chevrons-up-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+        </div>
+      </div>
+      
+      <ul class="sidebar-nav-list">
+        <li class="sidebar-nav-item">
+          <a href="dashboard.html">
+            <div class="sidebar-nav-icon"><i data-lucide="layout-dashboard"></i> <span>Overview</span></div>
+          </a>
+        </li>
+        <li class="sidebar-nav-item active">
+          <a href="environmental.html">
+            <div class="sidebar-nav-icon"><i data-lucide="leaf"></i> <span>Climate Analytics</span></div>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="social.html">
+            <div class="sidebar-nav-icon"><i data-lucide="users"></i> <span>Social Impact</span></div>
+            <span class="sidebar-badge">120+</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="governance.html">
+            <div class="sidebar-nav-icon"><i data-lucide="gavel"></i> <span>Governance Log</span></div>
+            <span class="sidebar-badge alert">1 flag</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="insights.html">
+            <div class="sidebar-nav-icon"><i data-lucide="sparkles"></i> <span>AI Insights</span></div>
+            <span class="sidebar-badge" style="background: rgba(168, 85, 247, 0.15); color: #a855f7;">New</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="reports.html">
+            <div class="sidebar-nav-icon"><i data-lucide="file-bar-chart-2"></i> <span>Report Center</span></div>
+            <span class="sidebar-badge" style="background: rgba(59, 130, 246, 0.15); color: #3b82f6;">New</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="gamification.html">
+            <div class="sidebar-nav-icon"><i data-lucide="trophy"></i> <span>Eco League</span></div>
+            <span class="sidebar-badge" style="background: rgba(234, 179, 8, 0.15); color: #eab308;">LVL 4</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="innovations.html">
+            <div class="sidebar-nav-icon"><i data-lucide="beaker"></i> <span>Innovations Lab</span></div>
+            <span class="sidebar-badge" style="background: rgba(16, 185, 129, 0.15); color: #10b981;">Beta</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="admin.html">
+            <div class="sidebar-nav-icon"><i data-lucide="shield-half"></i> <span>Admin Portal</span></div>
+            <span class="sidebar-badge" style="background: rgba(239, 68, 68, 0.15); color: #ef4444;">Admin</span>
+          </a>
+        </li>
+        <li class="sidebar-nav-item">
+          <a href="#">
+            <div class="sidebar-nav-icon"><i data-lucide="settings"></i> <span>Settings</span></div>
+          </a>
+        </li>
+      </ul>
+
+      <!-- User Profile at bottom -->
+      <div class="sidebar-user">
+        <div class="user-info">
+          <div class="user-avatar">JP</div>
+          <div class="user-text">
+            <h5>Joy Patel</h5>
+            <p>CSO, EcoSphere Enterprise</p>
+          </div>
+        </div>
+        <button class="user-logout-btn" onclick="window.location.href='index.html'" aria-label="Log Out to landing page">
+          <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- 2. Main Content Area -->
+    <main class="dash-main">
+      
+      <!-- Topbar Header -->
+      <div class="dash-topbar">
+        <div class="topbar-left">
+          <!-- Command Search bar (Linear Style) -->
+          <div class="search-container">
+            <i data-lucide="search"></i>
+            <input type="text" id="environmental-search" class="search-input" placeholder="Search carbon logs or emission items...">
+            <span class="cmd-shortcut">⌘ K</span>
+          </div>
+        </div>
+
+        <div class="topbar-right">
+          <!-- Date filter -->
+          <div class="date-selector">
+            <i data-lucide="calendar"></i>
+            <span>Q3 (Last 30 Days)</span>
+            <i data-lucide="chevron-down" style="width: 14px; height: 14px; color: var(--text-muted);"></i>
+          </div>
+
+          <!-- Quick Actions Button -->
+          <button class="btn btn-primary" onclick="openQuickActionModal()">Quick Actions <i data-lucide="zap" style="width: 14px; height: 14px; fill: currentColor;"></i></button>
+
+          <!-- Topbar Actions -->
+          <div class="topbar-actions-group">
+            <!-- Theme Toggle -->
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle light/dark mode">
+              <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+              <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+            </button>
+
+            <!-- Notifications button -->
+            <button class="action-icon-btn" id="notif-toggle-btn" aria-label="Show system notifications">
+              <i data-lucide="bell"></i>
+              <span class="notification-badge"></span>
+              
+              <!-- Notifications Dropdown List (Stripe style) -->
+              <div class="notifications-dropdown glass-panel" id="notifications-box">
+                <div class="notif-header">
+                  <span>Notifications</span>
+                  <a href="#" style="color: var(--primary); font-size: 11px; font-weight: 600;">Clear All</a>
+                </div>
+                <div class="notif-item unread">
+                  <div class="notif-icon" style="background: rgba(239, 68, 68, 0.1); color: #ef4444;"><i data-lucide="flame" style="width: 14px; height: 14px;"></i></div>
+                  <div class="notif-content">
+                    <h6>Governance Flag Alert</h6>
+                    <p>Submodule G3.2 anti-bribery policies requires audit updates.</p>
+                  </div>
+                </div>
+                <div class="notif-item unread">
+                  <div class="notif-icon" style="background: rgba(16, 185, 129, 0.1); color: var(--primary);"><i data-lucide="sparkles" style="width: 14px; height: 14px;"></i></div>
+                  <div class="notif-content">
+                    <h6>New AI Recommendation</h6>
+                    <p>Boiler operation updates can save 480 MT CO2e.</p>
+                  </div>
+                </div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Dashboard Grid Content Workspace -->
+      <div class="dash-content">
+        
+        <!-- Row 1: KPI Cards with Progress Rings (4 columns) -->
+        <div class="dash-row-grid-4">
+          
+          <!-- Card 1: Renewable Energy % -->
+          <div class="dash-kpi-card glass-panel" style="height: auto;">
+            <div class="kpi-ring-wrapper">
+              <div class="progress-ring-container">
+                <svg class="progress-ring">
+                  <circle class="progress-ring-circle-bg" cx="32" cy="32" r="30"/>
+                  <circle class="progress-ring-circle" id="ring-renewable" cx="32" cy="32" r="30"/>
+                </svg>
+                <span class="progress-ring-text" id="ring-val-renewable">85%</span>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Renewable Energy</span>
+                <h4 style="font-size: 20px; font-weight: 700; margin-top: 4px;">Solar Microgrids</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Carbon Reduction progress -->
+          <div class="dash-kpi-card glass-panel" style="height: auto;">
+            <div class="kpi-ring-wrapper">
+              <div class="progress-ring-container ring-social">
+                <svg class="progress-ring">
+                  <circle class="progress-ring-circle-bg" cx="32" cy="32" r="30"/>
+                  <circle class="progress-ring-circle" id="ring-carbon" cx="32" cy="32" r="30"/>
+                </svg>
+                <span class="progress-ring-text" id="ring-val-carbon">78%</span>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Reduction Target</span>
+                <h4 style="font-size: 20px; font-weight: 700; margin-top: 4px;">4,820 MT Offset</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Electricity Budget usage -->
+          <div class="dash-kpi-card glass-panel" style="height: auto;">
+            <div class="kpi-ring-wrapper">
+              <div class="progress-ring-container ring-gov">
+                <svg class="progress-ring">
+                  <circle class="progress-ring-circle-bg" cx="32" cy="32" r="30"/>
+                  <circle class="progress-ring-circle" id="ring-elec" cx="32" cy="32" r="30"/>
+                </svg>
+                <span class="progress-ring-text" id="ring-val-elec">64%</span>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Electricity Threshold</span>
+                <h4 style="font-size: 20px; font-weight: 700; margin-top: 4px;">1.2M kWh Budget</h4>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Water Usage -->
+          <div class="dash-kpi-card glass-panel" style="height: auto;">
+            <div class="kpi-ring-wrapper">
+              <div class="progress-ring-container ring-waste">
+                <svg class="progress-ring">
+                  <circle class="progress-ring-circle-bg" cx="32" cy="32" r="30"/>
+                  <circle class="progress-ring-circle" id="ring-water" cx="32" cy="32" r="30"/>
+                </svg>
+                <span class="progress-ring-text" id="ring-val-water">90%</span>
+              </div>
+              <div>
+                <span style="font-size: 12px; color: var(--text-secondary); font-weight: 500;">Water Conservation</span>
+                <h4 style="font-size: 20px; font-weight: 700; margin-top: 4px;">420k Gal. Recycled</h4>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Row 2: Carbon Calculator & Emissions distribution Pie (45/55) -->
+        <div class="dash-row-grid-primary">
+          
+          <!-- Interactive Carbon Calculator Card -->
+          <div class="calculator-card glass-panel">
+            <div class="chart-panel-header">
+              <span class="chart-panel-title">Interactive Scope Carbon Calculator</span>
+              <i data-lucide="calculator" style="color: var(--primary); width: 18px; height: 18px;"></i>
+            </div>
+            
+            <div class="calculator-grid">
+              <!-- Inputs form -->
+              <form class="calculator-form" onsubmit="calculateCarbonFootprint(event)">
+                <div class="calculator-inputs-grid">
+                  <div class="form-group" style="margin-bottom: 10px;">
+                    <label style="font-size: 10px; margin-bottom: 4px;">Fleet Fuel (Gal)</label>
+                    <input type="number" id="calc-fuel" class="form-control" placeholder="e.g. 1200" value="850">
+                  </div>
+                  <div class="form-group" style="margin-bottom: 10px;">
+                    <label style="font-size: 10px; margin-bottom: 4px;">Electricity (kWh)</label>
+                    <input type="number" id="calc-elec" class="form-control" placeholder="e.g. 15000" value="12200">
+                  </div>
+                  <div class="form-group" style="margin-bottom: 10px;">
+                    <label style="font-size: 10px; margin-bottom: 4px;">Purchases ($)</label>
+                    <input type="number" id="calc-purchase" class="form-control" placeholder="e.g. 25000" value="18400">
+                  </div>
+                  <div class="form-group" style="margin-bottom: 10px;">
+                    <label style="font-size: 10px; margin-bottom: 4px;">General Expenses ($)</label>
+                    <input type="number" id="calc-expense" class="form-control" placeholder="e.g. 9800" value="4500">
+                  </div>
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 14px;">
+                  <label style="font-size: 10px; margin-bottom: 4px;">Recycled Waste (lbs)</label>
+                  <input type="number" id="calc-waste" class="form-control" placeholder="e.g. 800" value="350">
+                </div>
+
+                <button type="submit" class="btn btn-premium" style="width: 100%; justify-content: center;">Audit & Log Transaction <i data-lucide="plus"></i></button>
+              </form>
+
+              <!-- Dynamic calculations readout -->
+              <div class="calculator-result-panel">
+                <span style="font-size: 10.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Calculated Footprint</span>
+                <div class="calculator-result-val">
+                  <span style="font-size: 12px; color: var(--text-secondary);">Scope 1, 2, 3 Emissions</span>
+                  <h4 id="calc-result-co2">14.62 MT</h4>
+                </div>
+                <p style="font-size: 11px; color: var(--text-muted); line-height: 1.4;">Based on official GHG protocol conversion rules.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emissions Distribution Pie Chart -->
+          <div class="chart-panel-card glass-panel" style="height: 480px;">
+            <div class="chart-panel-header">
+              <span class="chart-panel-title">Emissions Source Distribution (Scope MT CO2e)</span>
+              <i data-lucide="pie-chart" style="color: var(--primary); width: 18px; height: 18px;"></i>
+            </div>
+            <div class="chart-container" id="emissions-pie-chart"></div>
+          </div>
+
+        </div>
+
+        <!-- Row 3: Daily Energy grid intensity heatmap & AI predictions (60/40) -->
+        <div class="dash-row-grid-primary">
+          
+          <!-- Heat Map Card -->
+          <div class="heat-map-card glass-panel" style="height: 380px;">
+            <div class="chart-panel-header">
+              <span class="chart-panel-title">Daily Energy Grid Intensity Heat Map (kW/h Load)</span>
+              <div style="display: flex; gap: 8px; font-size: 10px; align-items: center; color: var(--text-muted);">
+                <span>Low</span>
+                <span style="width: 8px; height: 8px; background: rgba(16, 185, 129, 0.15); border-radius: 2px;"></span>
+                <span style="width: 8px; height: 8px; background: rgba(16, 185, 129, 0.4); border-radius: 2px;"></span>
+                <span style="width: 8px; height: 8px; background: rgba(16, 185, 129, 0.7); border-radius: 2px;"></span>
+                <span style="width: 8px; height: 8px; background: var(--primary); border-radius: 2px;"></span>
+                <span>Peak</span>
+              </div>
+            </div>
+            
+            <!-- Custom HTML Heatmap Grid representing 24h x 7 days -->
+            <div class="custom-grid-heatmap">
+              <div class="heatmap-days-col">
+                <span>Mon</span>
+                <span>Wed</span>
+                <span>Fri</span>
+                <span>Sun</span>
+              </div>
+              <div class="heatmap-cells-grid" id="heatmap-cells-container">
+                <!-- Cells will be procedurally loaded by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- AI predictions & recommendations -->
+          <div class="notion-ai-card glass-panel" style="height: 380px;">
+            <div class="notion-ai-header">
+              <div class="notion-ai-title">
+                <i data-lucide="cpu" style="color: var(--primary);"></i>
+                <span>AI Carbon Prediction Engine</span>
+              </div>
+              <span class="notion-badge">Real-Time Forecast</span>
+            </div>
+            
+            <div style="padding: 10px 0; border-bottom: 1px solid var(--border-subtle); margin-bottom: 12px;">
+              <h5 style="font-size: 14px; font-weight: 600;">Predicted Q4 Carbon Ceiling</h5>
+              <div style="display: flex; align-items: baseline; gap: 6px; margin-top: 4px;">
+                <span style="font-size: 28px; font-weight: 800; color: #ef4444;" id="predict-ceiling-val">12,450 MT</span>
+                <span style="font-size: 11px; color: var(--text-secondary); font-weight: 500;">(Target: 11,500 MT)</span>
+              </div>
+            </div>
+
+            <div class="notion-ai-list">
+              <div class="notion-ai-item">
+                <div class="notion-item-text">
+                  <h6>Peak load shifting recommendation</h6>
+                  <p>Shift R&D server backups to 02:00 AM off-peak cycles.</p>
+                </div>
+                <span class="sidebar-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--primary);">-120 MT</span>
+              </div>
+
+              <div class="notion-ai-item">
+                <div class="notion-item-text">
+                  <h6>Grid Battery charge scheduling</h6>
+                  <p>Charge microgrid batteries from solar cells between 12-15h.</p>
+                </div>
+                <span class="sidebar-badge" style="background: rgba(16, 185, 129, 0.15); color: var(--primary);">-240 MT</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Row 4: Carbon Transactions table -->
+        <div class="recent-logs-card glass-panel" style="height: auto;">
+          <div class="chart-panel-header">
+            <span class="chart-panel-title">Environmental Carbon Ledger & Transactions</span>
+            
+            <div class="topbar-actions-group">
+              <!-- Search inside table -->
+              <div class="search-container" style="width: 220px;">
+                <i data-lucide="search" style="left: 10px; width: 13px; height: 13px;"></i>
+                <input type="text" id="table-search" class="search-input" placeholder="Filter ledger..." style="padding: 6px 12px 6px 30px; font-size: 12px;">
+              </div>
+
+              <!-- Exporters -->
+              <button class="btn btn-secondary" onclick="exportDataFile('pdf')" id="export-pdf-btn">
+                <span class="btn-loader-icon"></span>
+                <i data-lucide="file-text" style="width: 14px; height: 14px;"></i> Export PDF
+              </button>
+              <button class="btn btn-secondary" onclick="exportDataFile('excel')" id="export-excel-btn">
+                <span class="btn-loader-icon"></span>
+                <i data-lucide="file-spreadsheet" style="width: 14px; height: 14px;"></i> Export Excel
+              </button>
+            </div>
+          </div>
+
+          <div class="logs-table-container">
+            <table class="logs-table">
+              <thead>
+                <tr>
+                  <th>Log Timestamp</th>
+                  <th>Transaction ID</th>
+                  <th>Category Scope</th>
+                  <th>Inputs Logged</th>
+                  <th>Conversion Factor</th>
+                  <th>Calculated Carbon</th>
+                  <th>Audit Status</th>
+                </tr>
+              </thead>
+              <tbody id="trans-table-body">
+                <!-- Data loaded dynamically by environmental.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- CSR Audit Modal (Quick Actions) -->
+  <div class="glass-modal" id="quick-action-modal">
+    <div class="modal-card glass-panel">
+      <div class="modal-header">
+        <h4 style="font-weight: 700;">EcoSphere CSR Audit Compiler</h4>
+        <button class="theme-toggle-btn" onclick="closeQuickActionModal()"><i data-lucide="x"></i></button>
+      </div>
+      <div class="modal-body" id="modal-body-content">
+        <p style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 20px;">
+          Trigger EcoSphere AI Core to run an instant Scope 1-3 audit sweep across all department ledgers and compile an audit-ready CSR report.
+        </p>
+        <div class="form-group">
+          <label style="font-size: 11px; font-weight: 600; color: var(--text-secondary); display: block; margin-bottom: 8px;">Target Framework</label>
+          <select class="form-control" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); color: var(--text-primary);">
+            <option>CSRD Directive (EU Mandate)</option>
+            <option>SEC Climate Disclosure Rule</option>
+            <option>GRI Disclosure Framework</option>
+            <option>GRESB Real Estate Standard</option>
+          </select>
+        </div>
+        <button class="btn btn-premium" style="width: 100%; justify-content: center; margin-top: 24px;" onclick="runSimulatedAudit()">Compile Disclosures <i data-lucide="sparkles"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating AI Assistant Widget -->
+  <div class="floating-chat-widget" id="floating-chat-widget">
+    <button class="chat-widget-fab" id="chat-widget-fab" onclick="toggleFloatingChat()" aria-label="Open EcoSphere AI chat">
+      <i data-lucide="sparkles"></i>
+    </button>
+    
+    <div class="chat-widget-drawer glass-panel" id="chat-widget-drawer">
+      <div class="chat-drawer-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <div class="user-avatar" style="width: 28px; height: 28px; font-size: 11px; display: flex; align-items: center; justify-content: center; background: var(--primary-glow); border: 1px solid var(--primary); color: var(--primary);">AI</div>
+          <div>
+            <h6 style="font-size: 12px; font-weight: 700; color: #ffffff; line-height: 1.2;">EcoSphere Assistant</h6>
+            <span style="font-size: 9px; color: #10b981; font-weight: 600;">Active Online</span>
+          </div>
+        </div>
+        <button class="theme-toggle-btn" onclick="toggleFloatingChat()" style="color: #ffffff;"><i data-lucide="x" style="width: 14px; height: 14px;"></i></button>
+      </div>
+      
+      <div class="chat-drawer-body" id="chat-drawer-messages">
+        <div class="chat-msg assistant-msg">
+          <p>Hello! I am EcoSphere AI. How can I help you analyze ESG scores or compile carbon records today?</p>
+        </div>
+      </div>
+      
+      <div class="chat-drawer-footer">
+        <input type="text" id="chat-drawer-input" placeholder="Ask AI anything..." onkeydown="handleDrawerKeyPress(event)">
+        <button class="action-icon-btn" onclick="sendDrawerMessage()" style="color: var(--primary);"><i data-lucide="send" style="width: 14px; height: 14px;"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  <!-- Apache ECharts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Custom JS Modules -->
+  <script src="environmental.js"></script>
+  <script src="insights.js"></script>
+  <script src="avatar-voice.js"></script>
+</body>
+</html>
