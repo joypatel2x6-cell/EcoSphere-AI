@@ -10,32 +10,44 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Icons
   if (typeof lucide !== 'undefined') lucide.createIcons();
 
-  // 2. Initialize ECharts Carbon Forecast
+  // 2. Restore saved theme (same pattern as all other pages)
+  const htmlRoot = document.documentElement;
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  if (savedTheme === 'light') {
+    htmlRoot.classList.add('light');
+  } else {
+    htmlRoot.classList.remove('light');
+  }
+
+  // 3. Wire theme-toggle button
+  const themeToggleBtn = document.getElementById('theme-toggle');
+  if (themeToggleBtn) {
+    themeToggleBtn.addEventListener('click', () => {
+      htmlRoot.classList.toggle('light');
+      const isLight = htmlRoot.classList.contains('light');
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+      // Re-render chart so its colors update with the new theme
+      setTimeout(initCarbonForecastChart, 100);
+    });
+  }
+
+  // 4. Initialize ECharts Carbon Forecast
   initCarbonForecastChart();
 
-  // 3. Setup Interactive Sliders for ESG Predictor
+  // 5. Setup Interactive Sliders for ESG Predictor
   setupPredictorSliders();
 
-  // 4. Setup Forest Plantation canvas
+  // 6. Setup Forest Plantation canvas
   initForestCanvas();
 
-  // 5. Setup Interactive Particle Background
+  // 7. Setup Interactive Particle Background
   initParticleBackground();
 
-  // 6. Setup Offline Sync and PWA triggers
+  // 8. Setup Offline Sync and PWA triggers
   setupPwaAndOffline();
 });
 
-// --- Theme Toggler Sync ---
-const themeToggle = document.getElementById('theme-toggle');
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    document.documentElement.classList.toggle('light');
-    const isLight = document.documentElement.classList.contains('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
-    setTimeout(initCarbonForecastChart, 100);
-  });
-}
+// --- Theme toggle is now handled inside DOMContentLoaded above ---
 
 // --- 1. ECharts Dynamic Carbon Emissions Forecast ---
 function initCarbonForecastChart() {
