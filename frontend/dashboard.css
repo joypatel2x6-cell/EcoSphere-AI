@@ -228,6 +228,11 @@ html.light .sidebar-nav-item.active a {
   position: sticky;
   top: 0;
   z-index: 99;
+  transition: background 0.4s ease;
+}
+
+html.light .dash-topbar {
+  background: rgba(248, 250, 252, 0.85);
 }
 
 .topbar-left {
@@ -269,7 +274,19 @@ html.light .sidebar-nav-item.active a {
 }
 
 html.light .search-input {
-  background: rgba(0, 0, 0, 0.02);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #0f172a;
+}
+
+html.light .search-input:focus {
+  background: #ffffff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.08);
+}
+
+html.light .search-input::placeholder {
+  color: #94a3b8;
 }
 
 .cmd-shortcut {
@@ -284,6 +301,12 @@ html.light .search-input {
   padding: 2px 6px;
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.01);
+}
+
+html.light .cmd-shortcut {
+  background: rgba(0, 0, 0, 0.03);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #94a3b8;
 }
 
 .topbar-right {
@@ -304,10 +327,18 @@ html.light .search-input {
   display: flex;
   align-items: center;
   gap: 8px;
+  transition: all 0.2s ease;
 }
 
 html.light .date-selector {
-  background: rgba(0, 0, 0, 0.02);
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: #0f172a;
+}
+
+html.light .date-selector:hover {
+  background: #ffffff;
+  border-color: var(--primary);
 }
 
 .topbar-actions-group {

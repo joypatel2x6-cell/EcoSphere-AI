@@ -18,10 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // 1. Theme Configuration
+// On the dedicated Insights page: restore theme AND bind toggle button.
+// On other pages: only restore saved theme — the page's own JS handles the toggle.
 function initInsightsTheme() {
-  const toggleBtn = document.getElementById('theme-toggle');
   const htmlRoot = document.documentElement;
 
+  // Always restore saved theme from localStorage
   const saved = localStorage.getItem('theme') || 'dark';
   if (saved === 'light') {
     htmlRoot.classList.add('light');
@@ -29,6 +31,12 @@ function initInsightsTheme() {
     htmlRoot.classList.remove('light');
   }
 
+  // Only bind the click listener on the AI Insights page itself
+  // (identified by body#insights-body-page). Other pages handle their own toggle.
+  const isInsightsPage = document.body.id === 'insights-body-page';
+  if (!isInsightsPage) return;
+
+  const toggleBtn = document.getElementById('theme-toggle');
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
       htmlRoot.classList.toggle('light');
