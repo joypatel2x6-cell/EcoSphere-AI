@@ -215,7 +215,15 @@ document.addEventListener('DOMContentLoaded', () => {
   renderOverviewActivity();
   simulateHealthMetrics();
   initAnalyticsCharts();
+
+  // Read query params or URL hash to switch section on load (e.g. settings)
+  const urlParams = new URLSearchParams(window.location.search);
+  const sectionParam = urlParams.get('section') || (window.location.hash ? window.location.hash.substring(1) : null);
+  if (sectionParam) {
+    switchSection(sectionParam);
+  }
 });
+
 
 // ── Theme ────────────────────────────────────────────────────
 function initTheme() {
