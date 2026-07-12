@@ -1,7 +1,6 @@
-/* EcoSphere AI - AI Assistant Suite Stylesheet (ChatGPT Inspired Premium Dark Vibe) */
+/* EcoSphere AI - AI Assistant Suite Stylesheet — Premium Dark/Light Theme-Aware */
 
-/* Insights-specific dash-content fill — ONLY for the AI chat page */
-/* Other pages scroll normally; only the chat workspace needs fixed-height overflow:hidden */
+/* ─── Insights page layout ──────────────────────────────────────────────────── */
 #insights-body-page .dash-main {
   display: flex;
   flex-direction: column;
@@ -11,19 +10,19 @@
 #insights-body-page .dash-main .dash-content {
   flex: 1;
   min-height: 0;
-  padding: 24px 32px;
+  padding: 16px 24px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-/* Message fade-in */
+/* ─── Message fade-in animation ─────────────────────────────────────────────── */
 @keyframes message-fade {
   from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* 1. Cross-Page Floating Chatbot FAB & Drawer */
+/* ─── 1. Floating Chatbot FAB & Drawer (cross-page) ─────────────────────────── */
 .floating-chat-widget {
   position: fixed;
   bottom: 24px;
@@ -37,34 +36,31 @@
   height: 56px;
   border-radius: 50%;
   background: linear-gradient(135deg, #a855f7 0%, #0070d1 100%);
-  color: #ffffff;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(168, 85, 247, 0.4);
+  box-shadow: 0 8px 24px rgba(168,85,247,0.4);
   border: none;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
   outline: none;
 }
-
 .chat-widget-fab:hover {
   transform: scale(1.08) translateY(-2px);
-  box-shadow: 0 12px 28px rgba(168, 85, 247, 0.5);
+  box-shadow: 0 12px 28px rgba(168,85,247,0.5);
 }
-
 .chat-widget-fab i {
   width: 24px;
   height: 24px;
-  filter: drop-shadow(0 0 4px rgba(255,255,255,0.4));
   animation: widget-float 2s infinite alternate ease-in-out;
 }
-
 @keyframes widget-float {
   from { transform: translateY(0); }
-  to { transform: translateY(-3px); }
+  to   { transform: translateY(-3px); }
 }
 
+/* Drawer */
 .chat-widget-drawer {
   position: absolute;
   bottom: 72px;
@@ -73,19 +69,23 @@
   height: 480px;
   border-radius: 20px;
   border: 1px solid var(--border-subtle);
-  background: rgba(15, 23, 42, 0.95);
+  background: rgba(15,23,42,0.96);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.5);
   display: none;
   flex-direction: column;
   overflow: hidden;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.1, 0.8, 0.1, 1);
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.1,0.8,0.1,1);
   z-index: 1999;
 }
-
+html.light .chat-widget-drawer {
+  background: rgba(255,255,255,0.97);
+  border-color: rgba(0,0,0,0.1);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+}
 .chat-widget-drawer.active {
   display: flex;
   opacity: 1;
@@ -94,11 +94,14 @@
 
 .chat-drawer-header {
   padding: 14px 18px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255,255,255,0.02);
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+html.light .chat-drawer-header {
+  background: rgba(0,0,0,0.02);
 }
 
 .chat-drawer-body {
@@ -115,12 +118,14 @@
   border-top: 1px solid var(--border-subtle);
   display: flex;
   gap: 8px;
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0,0,0,0.15);
 }
-
+html.light .chat-drawer-footer {
+  background: rgba(0,0,0,0.04);
+}
 .chat-drawer-footer input {
   flex: 1;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255,255,255,0.03);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
   padding: 8px 12px;
@@ -128,63 +133,76 @@
   font-size: 12.5px;
   outline: none;
 }
-
+html.light .chat-drawer-footer input {
+  background: rgba(0,0,0,0.04);
+  color: #1e293b;
+}
 .chat-drawer-footer input:focus {
   border-color: var(--primary);
 }
 
-/* 2. Chat Bubble Layouts (Common to Floating drawer & Dedicated page) */
+/* ─── 2. Chat Bubble Layouts ─────────────────────────────────────────────────── */
 .chat-msg {
-  max-width: 80%;
-  padding: 10px 14px;
-  border-radius: 16px;
+  max-width: 82%;
+  padding: 11px 15px;
+  border-radius: 18px;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.6;
   animation: message-fade 0.3s ease forwards;
 }
-
 .user-msg {
   background: var(--primary);
-  color: #ffffff;
+  color: #fff;
   align-self: flex-end;
   border-bottom-right-radius: 4px;
-  box-shadow: 0 2px 10px var(--primary-glow);
+  box-shadow: 0 2px 12px var(--primary-glow, rgba(16,185,129,0.3));
 }
-
 .assistant-msg {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255,255,255,0.04);
   border: 1px solid var(--border-subtle);
   color: var(--text-primary);
   align-self: flex-start;
   border-bottom-left-radius: 4px;
 }
 
+/* Light mode chat bubbles */
+html.light .user-msg {
+  background: var(--primary);
+  color: #fff;
+}
 html.light .assistant-msg {
-  background: rgba(0,0,0,0.015);
+  background: rgba(241,245,249,0.95);
+  border: 1px solid rgba(0,0,0,0.08);
+  color: #1e293b;
 }
 
-/* 3. Dedicated AI Workspace Layout (`insights.html`) */
+/* ─── 3. Insights Grid Layout ─────────────────────────────────────────────────── */
 .insights-grid {
   display: grid;
-  grid-template-columns: 260px 1fr;
+  grid-template-columns: 240px 1fr;
   gap: 20px;
   flex: 1;
   min-height: 0;
   overflow: hidden;
 }
 
+/* ─── 4. Chat History Sidebar ─────────────────────────────────────────────────── */
 .chat-history-sidebar {
   border-right: 1px solid var(--border-subtle);
-  padding-right: 20px;
+  padding-right: 16px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
+  overflow: hidden;
+}
+html.light .chat-history-sidebar {
+  border-right-color: rgba(0,0,0,0.08);
 }
 
 .history-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
   overflow-y: auto;
 }
@@ -193,27 +211,40 @@ html.light .assistant-msg {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 14px;
+  padding: 10px 12px;
   border-radius: 12px;
   font-size: 12.5px;
   cursor: pointer;
   color: var(--text-secondary);
   transition: all 0.2s ease;
+  border: 1px solid transparent;
 }
-
-.history-item:hover, .history-item.active {
-  background: rgba(255, 255, 255, 0.02);
+.history-item:hover,
+.history-item.active {
+  background: rgba(16,185,129,0.07);
+  border-color: rgba(16,185,129,0.15);
   color: var(--text-primary);
 }
-
-html.light .history-item:hover, html.light .history-item.active {
-  background: rgba(0, 0, 0, 0.015);
+html.light .history-item:hover,
+html.light .history-item.active {
+  background: rgba(16,185,129,0.06);
+  border-color: rgba(16,185,129,0.18);
+  color: #1e293b;
 }
 
+/* ─── 5. Main Chat Workspace Panel ───────────────────────────────────────────── */
 .chat-workspace-main {
   display: flex;
   flex-direction: column;
   height: 100%;
+  /* inherit glass-panel styles + theme-aware overrides */
+}
+
+/* Light mode override for the main glass panel */
+html.light .chat-workspace-main.glass-panel {
+  background: rgba(255,255,255,0.92) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  color: #1e293b !important;
 }
 
 .chat-workspace-header {
@@ -222,68 +253,98 @@ html.light .history-item:hover, html.light .history-item.active {
   align-items: center;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--border-subtle);
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
+/* ─── 6. Chat Stream Container ───────────────────────────────────────────────── */
 .chat-stream-container {
   flex: 1;
   overflow-y: auto;
-  padding-right: 8px;
+  padding-right: 6px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 16px;
+  margin-bottom: 16px;
+  scroll-behavior: smooth;
 }
+/* Scrollbar */
+.chat-stream-container::-webkit-scrollbar { width: 4px; }
+.chat-stream-container::-webkit-scrollbar-track { background: transparent; }
+.chat-stream-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+html.light .chat-stream-container::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); }
 
-/* 4. Quick Actions Tiles Grid */
+/* ─── 7. Quick Prompt Tiles ──────────────────────────────────────────────────── */
 .quick-prompts-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(4,1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+@media (max-width: 900px) {
+  .quick-prompts-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 520px) {
+  .quick-prompts-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
 }
 
 .prompt-tile {
-  background: rgba(255, 255, 255, 0.01);
+  background: rgba(255,255,255,0.02);
   border: 1px solid var(--border-subtle);
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 14px;
   text-align: left;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
-
 .prompt-tile:hover {
   border-color: var(--primary);
-  background: rgba(168, 85, 247, 0.02);
+  background: rgba(16,185,129,0.04);
   transform: translateY(-2px);
 }
-
+html.light .prompt-tile {
+  background: rgba(248,250,252,0.9);
+  border-color: rgba(0,0,0,0.08);
+}
+html.light .prompt-tile:hover {
+  background: rgba(16,185,129,0.06);
+  border-color: var(--primary);
+}
 .prompt-tile h6 {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 700;
   margin-bottom: 4px;
+  color: var(--text-primary);
 }
-
 .prompt-tile p {
   font-size: 10.5px;
   color: var(--text-secondary);
   line-height: 1.4;
 }
 
-/* 5. Smart Chat Input Box Area */
+/* ─── 8. Chat Input Wrapper ──────────────────────────────────────────────────── */
 .chat-input-wrapper {
-  background: rgba(255, 255, 255, 0.015);
+  background: rgba(255,255,255,0.03);
   border: 1px solid var(--border-subtle);
   border-radius: 20px;
-  padding: 12px 18px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  transition: border-color 0.2s, background 0.2s;
 }
-
+.chat-input-wrapper:focus-within {
+  border-color: var(--primary);
+  background: rgba(16,185,129,0.03);
+}
 html.light .chat-input-wrapper {
-  background: rgba(0, 0, 0, 0.01);
+  background: rgba(241,245,249,0.9);
+  border-color: rgba(0,0,0,0.1);
+}
+html.light .chat-input-wrapper:focus-within {
+  border-color: var(--primary);
+  background: rgba(16,185,129,0.04);
 }
 
 .chat-input-wrapper input {
@@ -291,27 +352,62 @@ html.light .chat-input-wrapper {
   background: transparent;
   border: none;
   color: var(--text-primary);
-  font-size: 13.5px;
+  font-size: 13px;
   outline: none;
+  font-family: 'Inter', sans-serif;
 }
+html.light .chat-input-wrapper input {
+  color: #1e293b;
+}
+.chat-input-wrapper input::placeholder { color: var(--text-muted); }
 
-/* 6. Voice Waveform Overlay Panel */
+/* action icon buttons inside wrapper */
+.action-icon-btn {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s, background 0.2s;
+}
+.action-icon-btn:hover {
+  color: var(--primary);
+  background: rgba(16,185,129,0.08);
+}
+html.light .action-icon-btn:hover {
+  color: var(--primary);
+  background: rgba(16,185,129,0.1);
+}
+.action-icon-btn i { width: 18px; height: 18px; }
+
+/* ─── 9. Voice Wave Overlay ──────────────────────────────────────────────────── */
 .voice-wave-overlay {
   position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(15, 23, 42, 0.95);
-  backdrop-filter: blur(15px);
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(10,15,30,0.93);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   border-radius: 20px;
   display: none;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  z-index: 100;
+  z-index: 200;
+  color: #fff;
+  padding: 32px;
+  text-align: center;
 }
-
+html.light .voice-wave-overlay {
+  background: rgba(241,245,249,0.96);
+  color: #1e293b;
+}
+html.light .voice-wave-overlay p {
+  color: #64748b;
+}
 .voice-wave-overlay.active {
   display: flex;
 }
@@ -320,18 +416,16 @@ html.light .chat-input-wrapper {
   display: flex;
   align-items: center;
   gap: 6px;
-  height: 48px;
-  margin-bottom: 16px;
+  height: 52px;
+  margin-bottom: 20px;
 }
-
 .wave-bar {
   width: 4px;
   height: 10px;
-  background-color: var(--primary);
-  border-radius: 2px;
+  background: var(--primary);
+  border-radius: 3px;
   animation: wave-bounce 0.8s infinite alternate ease-in-out;
 }
-
 .wave-bar:nth-child(2) { animation-delay: 0.1s; }
 .wave-bar:nth-child(3) { animation-delay: 0.2s; }
 .wave-bar:nth-child(4) { animation-delay: 0.3s; }
@@ -339,49 +433,179 @@ html.light .chat-input-wrapper {
 .wave-bar:nth-child(6) { animation-delay: 0.3s; }
 .wave-bar:nth-child(7) { animation-delay: 0.2s; }
 .wave-bar:nth-child(8) { animation-delay: 0.1s; }
-
 @keyframes wave-bounce {
   from { height: 10px; }
-  to { height: 48px; }
+  to   { height: 48px; }
 }
 
-/* 7. Markdown Codes Blocks & Inside Chat charts */
+/* ─── 10. Inline EChart containers ──────────────────────────────────────────── */
 .inline-chart-container {
   width: 100%;
   height: 180px;
-  border-radius: 8px;
+  border-radius: 10px;
   border: 1px solid var(--border-subtle);
-  background: rgba(0, 0, 0, 0.15);
+  background: rgba(0,0,0,0.1);
   margin-top: 12px;
 }
+html.light .inline-chart-container {
+  background: rgba(241,245,249,0.7);
+  border-color: rgba(0,0,0,0.08);
+}
 
+/* ─── 11. Code blocks ─────────────────────────────────────────────────────────── */
 .code-block-markdown {
   background: rgba(0,0,0,0.3) !important;
   border: 1px solid var(--border-subtle);
-  border-radius: 8px;
-  padding: 10px 14px;
+  border-radius: 10px;
+  padding: 12px 16px;
   font-family: 'Space Mono', monospace;
   font-size: 11.5px;
   color: #10b981;
   margin-top: 8px;
   overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+html.light .code-block-markdown {
+  background: rgba(15,23,42,0.06) !important;
+  color: #047857;
+  border-color: rgba(0,0,0,0.08);
 }
 .code-keyword { color: #a855f7; }
-.code-string { color: #3b82f6; }
-.code-number { color: #eab308; }
+.code-string  { color: #3b82f6; }
+.code-number  { color: #eab308; }
 
-/* Document upload parsing loader */
+/* ─── 12. Upload progress card ───────────────────────────────────────────────── */
 .upload-progress-card {
   padding: 12px;
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255,255,255,0.02);
   border: 1px solid var(--border-subtle);
   border-radius: 12px;
-  margin-top: 12px;
+  margin-top: 8px;
+}
+html.light .upload-progress-card {
+  background: rgba(0,0,0,0.03);
+}
+.modal-progress-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+html.light .modal-progress-bar {
+  background: rgba(0,0,0,0.07);
 }
 .upload-progress-fill {
   height: 4px;
-  background-color: var(--primary);
+  background: var(--primary);
   width: 0%;
   transition: width 1.5s ease;
   border-radius: 2px;
 }
+
+/* ─── 13. Model select dropdown ──────────────────────────────────────────────── */
+#model-select {
+  appearance: none;
+  padding: 5px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  width: 200px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+#model-select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+html.light #model-select {
+  background: rgba(241,245,249,0.9);
+  color: #1e293b;
+  border-color: rgba(0,0,0,0.1);
+}
+
+/* ─── 14. Responsive breakpoints ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .insights-grid {
+    grid-template-columns: 210px 1fr;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Stack sidebar on top of chat on mobile */
+  #insights-body-page .dash-main {
+    height: auto;
+    overflow: auto;
+  }
+  #insights-body-page .dash-main .dash-content {
+    overflow: auto;
+    padding: 12px;
+  }
+  .insights-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    height: auto;
+    overflow: visible;
+  }
+  .chat-history-sidebar {
+    border-right: none;
+    border-bottom: 1px solid var(--border-subtle);
+    padding-right: 0;
+    padding-bottom: 14px;
+  }
+  .chat-workspace-main {
+    height: 70vh;
+  }
+  .quick-prompts-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .chat-widget-drawer {
+    width: calc(100vw - 32px);
+    right: -8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .quick-prompts-grid {
+    grid-template-columns: 1fr;
+  }
+  .chat-workspace-main {
+    height: 60vh;
+  }
+  #insights-body-page .dash-main .dash-content {
+    padding: 8px;
+  }
+}
+
+/* ─── 15. Typing indicator dots animation ────────────────────────────────────── */
+.typing-dots {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+.typing-dots span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--primary);
+  display: inline-block;
+  animation: dot-bounce 1.2s infinite ease-in-out;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+  40%            { transform: scale(1); opacity: 1; }
+}
+
+/* ─── 16. Message text styling ───────────────────────────────────────────────── */
+.assistant-msg p { margin: 0 0 4px; }
+.assistant-msg ul,
+.assistant-msg ol { margin: 6px 0 6px 18px; padding: 0; }
+.assistant-msg li { margin-bottom: 4px; }
+.assistant-msg strong { color: var(--primary); font-weight: 700; }
+html.light .assistant-msg strong { color: #059669; }
