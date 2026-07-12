@@ -219,7 +219,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Read query params or URL hash to switch section on load (e.g. settings)
   const urlParams = new URLSearchParams(window.location.search);
   const sectionParam = urlParams.get('section') || (window.location.hash ? window.location.hash.substring(1) : null);
+  console.log('[EcoSphere Admin] URL section parameter detected:', sectionParam);
   if (sectionParam) {
+    console.log('[EcoSphere Admin] Auto-switching to section:', sectionParam);
     switchSection(sectionParam);
   }
 });

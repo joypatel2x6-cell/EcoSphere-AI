@@ -1,6 +1,6 @@
 // EcoSphere AI - Service Worker (PWA & Offline Mode Support)
 
-const CACHE_NAME = 'ecosphere-ai-v5';
+const CACHE_NAME = 'ecosphere-ai-v6';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -74,8 +74,8 @@ self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
   const isScript = url.pathname.endsWith('.js') || url.pathname.endsWith('.css');
 
-  if (isScript) {
-    // Network-first: always try to get the latest code, fallback to cache if offline
+  if (isScript || url.pathname.endsWith('.html') || url.pathname === '/') {
+    // Network-first: always try to get the latest code/pages, fallback to cache if offline
     e.respondWith(
       fetch(e.request).then((networkResponse) => {
         const cloned = networkResponse.clone();
@@ -84,15 +84,11 @@ self.addEventListener('fetch', (e) => {
       }).catch(() => caches.match(e.request))
     );
   } else {
-    // Cache-first for HTML and other assets (offline support)
+    // Cache-first for other assets like images
     e.respondWith(
       caches.match(e.request).then((cachedResponse) => {
         if (cachedResponse) return cachedResponse;
-        return fetch(e.request).catch(() => {
-          if (e.request.headers.get('accept')?.includes('text/html')) {
-            return caches.match('/dashboard.html');
-          }
-        });
+        return fetch(e.request);
       })
     );
   }
